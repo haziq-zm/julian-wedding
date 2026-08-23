@@ -12,9 +12,11 @@ import { GallerySection } from './components/wedding/GallerySection'
 import { RSVPSection } from './components/wedding/RSVPSection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { SectionScallop } from './components/ornaments/SectionScallop'
+import { LenisScrollProvider } from './components/lenis/LenisScrollProvider'
 import './App.css'
 import './ornate.css'
 import './mobile.css'
+import './lenis-scroll.css'
 
 export default function App() {
   const year = wedding.date.getFullYear()
@@ -46,24 +48,25 @@ export default function App() {
   }
 
   return (
-    <div className={`page ${opened ? 'page--open' : 'page--sealed'}`}>
-      <div className="paper-grain" aria-hidden />
+    <LenisScrollProvider enabled={opened}>
+      <div className={`page ${opened ? 'page--open' : 'page--sealed'}`}>
+        <div className="paper-grain" aria-hidden />
 
-      <InvitationCover
+        <InvitationCover
         partnerOne={wedding.partnerOne}
         partnerTwo={wedding.partnerTwo}
         monogram={wedding.monogram}
         dateLabel={wedding.dateLabel}
         blessing={wedding.blessing}
         onOpened={handleOpened}
-      />
+        />
 
-      <div
-        className={`details ${opened ? 'details--visible' : ''}`}
-        aria-hidden={!opened}
-        {...(!opened ? { inert: true as const } : {})}
-      >
-        <WeddingHero
+        <div
+          className={`details ${opened ? 'details--visible' : ''}`}
+          aria-hidden={!opened}
+          {...(!opened ? { inert: true as const } : {})}
+        >
+          <WeddingHero
           partnerOne={wedding.partnerOne}
           partnerTwo={wedding.partnerTwo}
           dateLabel={wedding.dateLabel}
@@ -149,6 +152,7 @@ export default function App() {
           year={year}
         />
       </div>
-    </div>
+      </div>
+    </LenisScrollProvider>
   )
 }

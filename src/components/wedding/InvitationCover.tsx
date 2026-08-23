@@ -79,7 +79,7 @@ export function InvitationCover({
   const animating = phase !== 'sealed'
 
   return (
-    <section className={`cover cover--${phase}`} aria-labelledby={titleId}>
+    <section className={`cover cover--${phase}`} aria-labelledby={titleId} data-lenis-prevent>
       <div className="cover-bg" aria-hidden>
         <JaliPattern className="cover-jali" />
         <div className="cover-vignette" />

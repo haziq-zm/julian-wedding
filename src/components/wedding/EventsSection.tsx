@@ -1,3 +1,4 @@
+import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralCorner } from '../ornaments/FloralCorner'
@@ -32,8 +33,11 @@ export function EventsSection({ events, dateLabel, venue }: Props) {
 
       <div className="events-grid">
         {events.map((event) => (
-          <article
+          <LenisScrollElement
             key={event.id}
+            as="article"
+            effect="scale-in"
+            speed={event.id === 'ceremony' ? 0.18 : 0.24}
             className={`event-card event-card--${event.accent}`}
           >
             <IslamicArch className="event-arch event-arch--sil" variant="silhouette" />
@@ -52,7 +56,7 @@ export function EventsSection({ events, dateLabel, venue }: Props) {
               <p className="event-venue">{venue}</p>
               <p className="event-detail">{event.detail}</p>
             </div>
-          </article>
+          </LenisScrollElement>
         ))}
       </div>
 

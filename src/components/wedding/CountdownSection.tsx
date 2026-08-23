@@ -1,4 +1,5 @@
 import { Countdown } from '../Countdown'
+import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { OrnamentalFrame } from '../ornaments/OrnamentalFrame'
 import { SectionHeader } from '../ornaments/SectionHeader'
@@ -17,11 +18,13 @@ export function CountdownSection({ target, dateLabel, timeLabel }: Props) {
 
       <SectionHeader eyebrow="Counting the Days" title="Until We Wed" light />
 
-      <OrnamentalFrame variant="olive" className="count-frame">
-        <Countdown target={target} />
-        <p className="count-date">{dateLabel}</p>
-        <p className="count-time">{timeLabel}</p>
-      </OrnamentalFrame>
+      <LenisScrollElement effect="fade-up" className="count-frame-wrap">
+        <OrnamentalFrame variant="olive" className="count-frame">
+          <Countdown target={target} />
+          <p className="count-date">{dateLabel}</p>
+          <p className="count-time">{timeLabel}</p>
+        </OrnamentalFrame>
+      </LenisScrollElement>
     </section>
   )
 }

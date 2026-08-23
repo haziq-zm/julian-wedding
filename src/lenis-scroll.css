@@ -1,0 +1,20 @@
+.lenis-scroll-el {
+  will-change: transform, opacity;
+}
+
+.lenis-scroll-el--fade-up,
+.lenis-scroll-el--scale-in {
+  opacity: 0.2;
+}
+
+.lenis-scroll-el--parallax {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lenis-scroll-el {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}

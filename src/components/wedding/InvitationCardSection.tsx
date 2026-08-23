@@ -1,3 +1,4 @@
+import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
@@ -37,7 +38,7 @@ export function InvitationCardSection({
 
       <SectionHeader eyebrow="Keepsake" title="The Invitation" light />
 
-      <article className="invite-card">
+      <LenisScrollElement as="article" effect="scale-in" speed={0.22} className="invite-card">
         <IslamicArch className="invite-arch invite-arch--sil" variant="silhouette" />
         <IslamicArch className="invite-arch invite-arch--line" />
         <FloralCorner className="invite-floral invite-floral--tl" corner="tl" />
@@ -62,7 +63,7 @@ export function InvitationCardSection({
             <p className="invite-address">{address}</p>
           </div>
         </div>
-      </article>
+      </LenisScrollElement>
 
       <CarpetBorder className="card-sec-carpet" />
     </section>

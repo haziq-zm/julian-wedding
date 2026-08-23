@@ -163,7 +163,7 @@ export function ScratchCard({ location }: Props) {
 
   return (
     <div className={`scratch ${revealed ? 'scratch--revealed' : ''}`}>
-      <div className="scratch-surface" aria-label="Scratch card revealing venue">
+      <div className="scratch-surface" aria-label="Scratch card revealing venue" data-lenis-prevent>
         <div className="scratch-prize">
           <p className="scratch-eyebrow">You&apos;re invited to</p>
           <h3 className="scratch-venue">{location.venue}</h3>

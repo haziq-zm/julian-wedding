@@ -1,3 +1,4 @@
+import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { GoldDivider } from '../ornaments/GoldDivider'
@@ -28,7 +29,7 @@ export function CoupleSection({
 
       <SectionHeader eyebrow={title} title={lead} />
 
-      <div className="story-layout">
+      <LenisScrollElement className="story-layout" effect="fade-up">
         <div className="story-portrait">
           <IslamicArch className="story-portrait-arch" variant="silhouette" />
           <IslamicArch className="story-portrait-frame" />
@@ -49,7 +50,7 @@ export function CoupleSection({
             <span className="story-milestone-date">{dateLabel}</span>
           </div>
         </OrnamentalFrame>
-      </div>
+      </LenisScrollElement>
     </section>
   )
 }

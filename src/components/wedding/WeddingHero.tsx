@@ -1,3 +1,4 @@
+import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
@@ -31,7 +32,7 @@ export function WeddingHero({
       <Lantern className="wh-lantern wh-lantern--r" size="md" />
       <Lantern className="wh-lantern wh-lantern--c" size="sm" />
 
-      <div className="wh-arch-wrap">
+      <LenisScrollElement className="wh-arch-wrap" effect="fade-up">
         <IslamicArch className="wh-arch wh-arch--back" variant="silhouette" />
         <IslamicArch className="wh-arch wh-arch--front" />
         <FloralCorner className="wh-floral wh-floral--tl" corner="tl" />
@@ -54,7 +55,7 @@ export function WeddingHero({
             Enter Celebration
           </a>
         </OrnamentalFrame>
-      </div>
+      </LenisScrollElement>
 
       <CarpetBorder className="wh-carpet" />
     </section>
