@@ -6,8 +6,8 @@ export const wedding = {
     'Together with their families, invite you to celebrate their marriage',
   blessing:
     'With the blessings of our families, we invite you to share in our joy',
-  date: new Date('2026-12-12T16:00:00'),
-  dateLabel: 'Saturday, December 12, 2026',
+  date: new Date('2026-10-10T16:00:00'),
+  dateLabel: 'Saturday, October 10, 2026',
   timeLabel: 'Ceremony begins at 4:00 in the afternoon',
   story: {
     title: 'Our Story',
@@ -15,9 +15,9 @@ export const wedding = {
     body: 'What began as a quiet conversation grew into a shared life of laughter, faith, and devotion. Surrounded by family and friends, we look forward to beginning this next chapter together.',
   },
   location: {
-    venue: 'The Willow Conservatory',
-    address: '128 Meadow Lane, Sonoma Valley, CA',
-    mapUrl: 'https://maps.google.com/?q=Sonoma+Valley',
+    venue: 'Hanji Danter',
+    address: 'Anantnag',
+    mapUrl: 'https://maps.app.goo.gl/kWVTZBiBgtMey7je8',
     note: 'Garden ceremony followed by dinner under the lanterns',
   },
   featuredEvents: [
@@ -44,7 +44,7 @@ export const wedding = {
     { time: '9:00 PM', title: 'First Dance', detail: 'Then we celebrate until late' },
   ],
   rsvp: {
-    deadline: 'November 1, 2026',
+    deadline: 'September 10, 2026',
     email: 'rsvp@jauharandjennifer.love',
   },
 } as const

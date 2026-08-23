@@ -19,7 +19,6 @@ type Props = {
   onOpened: () => void
 }
 
-const SETTLE_MS = 500
 const UNROLL_FALLBACK_MS = 3400
 
 export function InvitationCover({
@@ -62,12 +61,10 @@ export function InvitationCover({
     }
   }, [phase])
 
-  /* Unlock page scroll after the scroll settles — separate effect so
-     cleanup from the unrolling effect doesn't cancel this timer */
+  /* Unlock page scroll as soon as the unroll begins */
   useEffect(() => {
-    if (phase !== 'open') return
-    const id = window.setTimeout(onOpened, SETTLE_MS)
-    return () => window.clearTimeout(id)
+    if (phase !== 'unrolling') return
+    onOpened()
   }, [phase, onOpened])
 
   const open = () => {
@@ -146,12 +143,6 @@ export function InvitationCover({
                   <GoldDivider className="scroll-divider" />
                   <p className="scroll-date">{dateLabel}</p>
                   <p className="scroll-blessing">{blessing}</p>
-                  <p
-                    className={`scroll-continue ${phase === 'open' ? 'scroll-continue--visible' : ''}`}
-                    aria-hidden={phase !== 'open'}
-                  >
-                    Swipe up to continue
-                  </p>
                 </div>
               </div>
             </div>
@@ -166,6 +157,13 @@ export function InvitationCover({
           <div className="scroll-shadow" aria-hidden />
         </div>
       </div>
+
+      <p
+        className={`scroll-continue ${animating ? 'scroll-continue--visible' : ''}`}
+        aria-hidden={!animating}
+      >
+        Swipe up to continue
+      </p>
 
       {phase === 'sealed' && (
         <button
