@@ -1,7 +1,7 @@
 export const wedding = {
-  partnerOne: 'Aria',
-  partnerTwo: 'Julian',
-  monogram: 'A&J',
+  partnerOne: 'Jauhar',
+  partnerTwo: 'Jennifer',
+  monogram: 'J&J',
   tagline:
     'Together with their families, invite you to celebrate their marriage',
   blessing:
@@ -45,6 +45,6 @@ export const wedding = {
   ],
   rsvp: {
     deadline: 'November 1, 2026',
-    email: 'rsvp@ariaandjulian.love',
+    email: 'rsvp@jauharandjennifer.love',
   },
 } as const
