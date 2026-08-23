@@ -879,7 +879,7 @@ select {
     linear-gradient(180deg, var(--olive-deep), var(--olive));
   color: var(--ivory);
   text-align: center;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .wh::before {

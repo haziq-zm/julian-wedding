@@ -167,15 +167,26 @@
 .section-scallop {
   display: block;
   width: 100%;
-  height: 2.5rem;
+  height: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 3;
+  line-height: 0;
+  flex-shrink: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.section-scallop:not(.section-scallop--flip) {
+  margin-top: -1px;
   margin-bottom: -1px;
-  color: var(--cream);
 }
 
 .section-scallop--flip {
   transform: scaleY(-1);
   margin-top: -1px;
-  margin-bottom: 0;
+  margin-bottom: -1px;
 }
 
 .scallop--to-ivory {
@@ -415,11 +426,13 @@
 .wh-carpet {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: 100vw;
   height: 18px;
   color: var(--gold);
   opacity: 0.35;
+  pointer-events: none;
 }
 
 /* ═══ STORY ═══ */

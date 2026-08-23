@@ -230,7 +230,7 @@ body {
 
 /* —— Section scallops —— */
 .section-scallop {
-  height: 1.75rem;
+  height: clamp(1.85rem, 4.5vw, 2.75rem);
 }
 
 /* —— Footer —— */
@@ -320,7 +320,7 @@ body {
   }
 
   .section-scallop {
-    height: 2.5rem;
+    height: clamp(2rem, 5vw, 3rem);
   }
 }
 
