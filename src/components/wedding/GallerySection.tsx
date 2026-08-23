@@ -7,10 +7,7 @@ import { GoldDivider } from '../ornaments/GoldDivider'
 import { IslamicArch } from '../ornaments/IslamicArch'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { SectionHeader } from '../ornaments/SectionHeader'
-import { WeddingMonogram } from '../ornaments/WeddingMonogram'
-
 type Props = {
-  monogram: string
   dateLabel: string
   venue: string
   address: string
@@ -19,7 +16,6 @@ type Props = {
 }
 
 export function GallerySection({
-  monogram,
   dateLabel,
   venue,
   address,
@@ -45,7 +41,7 @@ export function GallerySection({
           <FloralCorner className="gallery-floral gallery-floral--br" corner="br" />
           <GeometricRosette className="gallery-rosette" />
           <div className="gallery-piece-inner">
-            <WeddingMonogram initials={monogram} />
+            <GeometricRosette className="gallery-rosette gallery-rosette--inner" />
             <p className="gallery-label">The Cover</p>
             <p className="gallery-names">
               {partnerOne} & {partnerTwo}
@@ -85,9 +81,11 @@ export function GallerySection({
         >
           <FloralCorner className="gallery-floral gallery-floral--tl" corner="tl" />
           <FloralCorner className="gallery-floral gallery-floral--br" corner="br" />
-          <WeddingMonogram initials={monogram} />
-          <p className="gallery-label">Monogram</p>
-          <p className="gallery-quote">{monogram}</p>
+          <EightPointStar className="gallery-star gallery-star--tall" />
+          <p className="gallery-label">The Couple</p>
+          <p className="gallery-quote">
+            {partnerOne} & {partnerTwo}
+          </p>
         </LenisScrollElement>
 
         <LenisScrollElement

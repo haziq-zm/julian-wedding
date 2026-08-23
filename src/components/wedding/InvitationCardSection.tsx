@@ -7,12 +7,9 @@ import { GoldDivider } from '../ornaments/GoldDivider'
 import { IslamicArch } from '../ornaments/IslamicArch'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { SectionHeader } from '../ornaments/SectionHeader'
-import { WeddingMonogram } from '../ornaments/WeddingMonogram'
-
 type Props = {
   partnerOne: string
   partnerTwo: string
-  monogram: string
   dateLabel: string
   timeLabel: string
   venue: string
@@ -23,7 +20,6 @@ type Props = {
 export function InvitationCardSection({
   partnerOne,
   partnerTwo,
-  monogram,
   dateLabel,
   timeLabel,
   venue,
@@ -49,7 +45,6 @@ export function InvitationCardSection({
 
         <div className="invite-inner">
           <GeometricRosette className="invite-rosette" />
-          <WeddingMonogram initials={monogram} className="invite-mono" />
           <p className="invite-kicker">You Are Cordially Invited</p>
           <h3 className="invite-names">
             {partnerOne} <span>&</span> {partnerTwo}

@@ -326,20 +326,10 @@
   );
 }
 
-.scroll-seal-mono {
-  width: 2.8rem;
-  height: 2.8rem;
-  margin: 0;
+.scroll-seal-star {
+  width: 1.5rem;
+  height: 1.5rem;
   color: rgba(255, 236, 220, 0.95);
-}
-
-.scroll-seal-mono .monogram-ring {
-  display: none;
-}
-
-.scroll-seal-mono .monogram-text {
-  font-size: 0.75rem;
-  color: inherit;
 }
 
 .scroll-parchment-border {
@@ -493,6 +483,33 @@
   z-index: 1;
   text-align: center;
   padding: 2rem 1rem;
+}
+
+.story-portrait-star {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto 0.75rem;
+  color: var(--gold);
+  display: block;
+}
+
+.flower-scroll-3d {
+  width: min(100%, 14rem);
+  height: min(52vw, 14rem);
+  margin: 0 auto;
+  pointer-events: none;
+  touch-action: none;
+}
+
+.flower-scroll-3d canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.flower-scroll-3d--loading {
+  background:
+    radial-gradient(circle at 50% 50%, rgba(181, 150, 85, 0.18), transparent 70%);
 }
 
 .story-portrait-caption {

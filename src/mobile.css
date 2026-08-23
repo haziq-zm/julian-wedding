@@ -122,6 +122,10 @@ body {
   max-width: 14rem;
 }
 
+.flower-scroll-3d {
+  height: min(56vw, 13rem);
+}
+
 .story-body {
   font-size: 0.92rem;
 }

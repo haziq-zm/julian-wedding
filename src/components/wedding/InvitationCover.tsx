@@ -2,18 +2,17 @@ import { useEffect, useId, useRef, useState } from 'react'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
+import { EightPointStar } from '../ornaments/EightPointStar'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
-import { WeddingMonogram } from '../ornaments/WeddingMonogram'
 
 type Phase = 'sealed' | 'unrolling' | 'open'
 
 type Props = {
   partnerOne: string
   partnerTwo: string
-  monogram: string
   dateLabel: string
   blessing: string
   onOpened: () => void
@@ -24,7 +23,6 @@ const UNROLL_FALLBACK_MS = 3400
 export function InvitationCover({
   partnerOne,
   partnerTwo,
-  monogram,
   dateLabel,
   blessing,
   onOpened,
@@ -116,7 +114,7 @@ export function InvitationCover({
                 <div className="scroll-cylinder-shine" />
                 <div className="scroll-cylinder-texture" />
                 <div className="scroll-seal">
-                  <WeddingMonogram initials={monogram} className="scroll-seal-mono" />
+                  <EightPointStar className="scroll-seal-star" />
                 </div>
               </div>
               <div className="scroll-cylinder-edge" />
@@ -133,7 +131,6 @@ export function InvitationCover({
 
                 <div className="scroll-content">
                   <GeometricRosette className="scroll-content-rosette" />
-                  <WeddingMonogram initials={monogram} className="scroll-mono" />
                   <p className="scroll-eyebrow">The Wedding Of</p>
                   <h1 id={titleId} className="scroll-names">
                     <span>{partnerOne}</span>

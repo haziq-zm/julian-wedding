@@ -5,19 +5,16 @@ import { FloralSpray } from '../ornaments/FloralSpray'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
-import { WeddingMonogram } from '../ornaments/WeddingMonogram'
 
 type Props = {
   partnerOne: string
   partnerTwo: string
-  monogram: string
   year: number
 }
 
 export function WeddingFooter({
   partnerOne,
   partnerTwo,
-  monogram,
   year,
 }: Props) {
   return (
@@ -30,7 +27,6 @@ export function WeddingFooter({
       <EightPointStar className="wfooter-star" />
       <FloralCorner className="wfooter-floral wfooter-floral--tl" corner="tl" />
       <FloralCorner className="wfooter-floral wfooter-floral--br" corner="br" />
-      <WeddingMonogram initials={monogram} className="wfooter-mono" />
       <GoldDivider className="wfooter-divider" />
       <p className="wfooter-names">
         {partnerOne} & {partnerTwo}

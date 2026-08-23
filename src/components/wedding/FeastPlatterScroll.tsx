@@ -72,7 +72,7 @@ export function FeastPlatterScroll() {
         />
       </div>
       <p className="feast-scroll-caption">
-        Shared tables, fragrant rice, and celebration until late
+        Shared wazwan, fragrant rice, and celebration until late
       </p>
     </div>
   )

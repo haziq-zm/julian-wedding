@@ -1,7 +1,6 @@
 export const wedding = {
   partnerOne: 'Jauhar',
   partnerTwo: 'Jennifer',
-  monogram: 'J&J',
   tagline:
     'Together with their families, invite you to celebrate their marriage',
   blessing:
@@ -25,22 +24,22 @@ export const wedding = {
       id: 'ceremony',
       label: 'The Ceremony',
       time: '4:00 PM',
-      detail: 'Among the willows — an intimate gathering of family and friends',
+      detail: 'Among the willows and walnuts an intimate gathering of family and friends',
       accent: 'olive' as const,
     },
     {
       id: 'reception',
       label: 'The Reception',
       time: '6:30 PM',
-      detail: 'Shared tables, soft light, dinner and toasts beneath lantern glow',
+      detail: 'Shared tramis, soft light, dinner and toasts beneath lantern glow',
       accent: 'burgundy' as const,
     },
   ],
   schedule: [
     { time: '3:30 PM', title: 'Guest Arrival', detail: 'Drinks & garden stroll' },
-    { time: '4:00 PM', title: 'Ceremony', detail: 'Among the willows' },
+    { time: '4:00 PM', title: 'Ceremony', detail: 'Among the willows and walnuts' },
     { time: '5:00 PM', title: 'Cocktail Hour', detail: 'Live strings on the terrace' },
-    { time: '6:30 PM', title: 'Dinner & Toasts', detail: 'Shared tables, soft light' },
+    { time: '6:30 PM', title: 'Dinner & Toasts', detail: 'Shared tramis, soft light' },
     { time: '9:00 PM', title: 'First Dance', detail: 'Then we celebrate until late' },
   ],
   rsvp: {

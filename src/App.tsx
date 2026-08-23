@@ -55,7 +55,6 @@ export default function App() {
         <InvitationCover
         partnerOne={wedding.partnerOne}
         partnerTwo={wedding.partnerTwo}
-        monogram={wedding.monogram}
         dateLabel={wedding.dateLabel}
         blessing={wedding.blessing}
         onOpened={handleOpened}
@@ -79,7 +78,6 @@ export default function App() {
           title={wedding.story.title}
           lead={wedding.story.lead}
           body={wedding.story.body}
-          monogram={wedding.monogram}
           dateLabel={wedding.dateLabel}
         />
 
@@ -112,7 +110,6 @@ export default function App() {
         <InvitationCardSection
           partnerOne={wedding.partnerOne}
           partnerTwo={wedding.partnerTwo}
-          monogram={wedding.monogram}
           dateLabel={wedding.dateLabel}
           timeLabel={wedding.timeLabel}
           venue={wedding.location.venue}
@@ -123,7 +120,6 @@ export default function App() {
         <SectionScallop className="scallop--to-ivory" flip />
 
         <GallerySection
-          monogram={wedding.monogram}
           dateLabel={wedding.dateLabel}
           venue={wedding.location.venue}
           address={wedding.location.address}
@@ -148,7 +144,6 @@ export default function App() {
         <WeddingFooter
           partnerOne={wedding.partnerOne}
           partnerTwo={wedding.partnerTwo}
-          monogram={wedding.monogram}
           year={year}
         />
       </div>

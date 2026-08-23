@@ -1,6 +1,5 @@
 import { useLenis } from 'lenis/react'
 import {
-  type ElementType,
   type ReactNode,
   useEffect,
   useRef,
@@ -14,7 +13,7 @@ type Props = {
   effect?: Effect
   /** Parallax intensity — higher = more movement */
   speed?: number
-  as?: ElementType
+  as?: 'div' | 'article'
 }
 
 function applyEffect(
@@ -48,9 +47,11 @@ export function LenisScrollElement({
   className = '',
   effect = 'fade-up',
   speed = 0.2,
-  as: Tag = 'div',
+  as = 'div',
 }: Props) {
-  const ref = useRef<HTMLElement>(null)
+  const divRef = useRef<HTMLDivElement>(null)
+  const articleRef = useRef<HTMLElement>(null)
+  const ref = as === 'article' ? articleRef : divRef
 
   useLenis(() => {
     const el = ref.current
@@ -68,12 +69,19 @@ export function LenisScrollElement({
     return () => cancelAnimationFrame(id)
   }, [effect, speed])
 
+  const classNames = `lenis-scroll-el lenis-scroll-el--${effect} ${className}`.trim()
+
+  if (as === 'article') {
+    return (
+      <article ref={articleRef} className={classNames}>
+        {children}
+      </article>
+    )
+  }
+
   return (
-    <Tag
-      ref={ref}
-      className={`lenis-scroll-el lenis-scroll-el--${effect} ${className}`.trim()}
-    >
+    <div ref={divRef} className={classNames}>
       {children}
-    </Tag>
+    </div>
   )
 }

@@ -1,3 +1,4 @@
+import { Suspense, lazy } from 'react'
 import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
@@ -6,13 +7,17 @@ import { IslamicArch } from '../ornaments/IslamicArch'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { OrnamentalFrame } from '../ornaments/OrnamentalFrame'
 import { SectionHeader } from '../ornaments/SectionHeader'
-import { WeddingMonogram } from '../ornaments/WeddingMonogram'
+
+const FlowerScroll3D = lazy(() =>
+  import('./FlowerScroll3D').then((module) => ({
+    default: module.FlowerScroll3D,
+  })),
+)
 
 type Props = {
   title: string
   lead: string
   body: string
-  monogram: string
   dateLabel: string
 }
 
@@ -20,7 +25,6 @@ export function CoupleSection({
   title,
   lead,
   body,
-  monogram,
   dateLabel,
 }: Props) {
   return (
@@ -36,7 +40,9 @@ export function CoupleSection({
           <FloralCorner className="story-portrait-floral story-portrait-floral--tl" corner="tl" />
           <FloralCorner className="story-portrait-floral story-portrait-floral--br" corner="br" />
           <div className="story-portrait-inner">
-            <WeddingMonogram initials={monogram} />
+            <Suspense fallback={<div className="flower-scroll-3d flower-scroll-3d--loading" />}>
+              <FlowerScroll3D />
+            </Suspense>
             <p className="story-portrait-caption">Two hearts, one journey</p>
           </div>
         </div>
