@@ -1,21 +1,23 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { wedding } from './config'
-import { Countdown } from './components/Countdown'
-import { FloralDecor } from './components/FloralDecor'
-import { InvitationScroll } from './components/InvitationScroll'
-import { ScratchCard } from './components/ScratchCard'
+import { InvitationCover } from './components/wedding/InvitationCover'
+import { WeddingHero } from './components/wedding/WeddingHero'
+import { CoupleSection } from './components/wedding/CoupleSection'
+import { CountdownSection } from './components/wedding/CountdownSection'
+import { EventsSection } from './components/wedding/EventsSection'
+import { VenueSection } from './components/wedding/VenueSection'
+import { WeddingTimeline } from './components/wedding/WeddingTimeline'
+import { InvitationCardSection } from './components/wedding/InvitationCardSection'
+import { GallerySection } from './components/wedding/GallerySection'
+import { RSVPSection } from './components/wedding/RSVPSection'
+import { WeddingFooter } from './components/wedding/WeddingFooter'
+import { SectionScallop } from './components/ornaments/SectionScallop'
 import './App.css'
-
-function formatDateParts(date: Date) {
-  return {
-    month: date.toLocaleString('en-US', { month: 'long' }),
-    day: date.getDate(),
-    year: date.getFullYear(),
-  }
-}
+import './ornate.css'
+import './mobile.css'
 
 export default function App() {
-  const { month, day, year } = formatDateParts(wedding.date)
+  const year = wedding.date.getFullYear()
   const [opened, setOpened] = useState(false)
   const [rsvpName, setRsvpName] = useState('')
   const [rsvpGuests, setRsvpGuests] = useState('1')
@@ -27,8 +29,15 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    document.body.classList.toggle('scroll-locked', !opened)
-    return () => document.body.classList.remove('scroll-locked')
+    if (!opened) {
+      document.body.classList.add('scroll-locked')
+      return () => {
+        document.body.classList.remove('scroll-locked')
+      }
+    }
+
+    document.body.classList.remove('scroll-locked')
+    return undefined
   }, [opened])
 
   const onRsvp = (e: FormEvent) => {
@@ -38,144 +47,107 @@ export default function App() {
 
   return (
     <div className={`page ${opened ? 'page--open' : 'page--sealed'}`}>
-      <div className="atmosphere" aria-hidden />
+      <div className="paper-grain" aria-hidden />
 
-      <InvitationScroll
+      <InvitationCover
         partnerOne={wedding.partnerOne}
         partnerTwo={wedding.partnerTwo}
+        monogram={wedding.monogram}
         dateLabel={wedding.dateLabel}
-        tagline={wedding.tagline}
+        blessing={wedding.blessing}
         onOpened={handleOpened}
       />
 
       <div
         className={`details ${opened ? 'details--visible' : ''}`}
         aria-hidden={!opened}
-        inert={!opened ? true : undefined}
+        {...(!opened ? { inert: true as const } : {})}
       >
-        <header className="hero hero--compact">
-          <FloralDecor className="hero-floral hero-floral--tl" />
-          <FloralDecor className="hero-floral hero-floral--br" />
-          <p className="hero-invite">The celebration</p>
-          <h2 className="hero-compact-title">
-            {wedding.partnerOne} & {wedding.partnerTwo}
-          </h2>
-          <p className="hero-date">
-            {month} {day}, {year}
-          </p>
-          <a className="hero-cta" href="#countdown">
-            See the details
-          </a>
-        </header>
+        <WeddingHero
+          partnerOne={wedding.partnerOne}
+          partnerTwo={wedding.partnerTwo}
+          dateLabel={wedding.dateLabel}
+          blessing={wedding.blessing}
+        />
 
-        <section id="countdown" className="section section-countdown">
-          <p className="section-eyebrow">Counting down</p>
-          <h2 className="section-title">Until we say I do</h2>
-          <FloralDecor className="section-divider" variant="divider" />
-          <Countdown target={wedding.date} />
-          <p className="section-support">{wedding.dateLabel}</p>
-          <p className="section-muted">{wedding.timeLabel}</p>
-        </section>
+        <SectionScallop className="scallop--to-ivory" />
 
-        <section className="section section-location">
-          <p className="section-eyebrow">The place</p>
-          <h2 className="section-title">Scratch to reveal</h2>
-          <FloralDecor className="section-divider" variant="divider" />
-          <p className="section-support">
-            A little surprise before you find us — scratch the foil below.
-          </p>
-          <ScratchCard location={wedding.location} />
-        </section>
+        <CoupleSection
+          title={wedding.story.title}
+          lead={wedding.story.lead}
+          body={wedding.story.body}
+          monogram={wedding.monogram}
+          dateLabel={wedding.dateLabel}
+        />
 
-        <section className="section section-schedule">
-          <p className="section-eyebrow">The day</p>
-          <h2 className="section-title">Our timeline</h2>
-          <FloralDecor className="section-divider" variant="divider" />
-          <ol className="timeline">
-            {wedding.schedule.map((item) => (
-              <li key={item.title} className="timeline-item">
-                <time className="timeline-time">{item.time}</time>
-                <div className="timeline-body">
-                  <h3 className="timeline-title">{item.title}</h3>
-                  <p className="timeline-detail">{item.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
+        <SectionScallop className="scallop--to-olive" flip />
 
-        <section className="section section-rsvp">
-          <FloralDecor className="rsvp-spray" variant="spray" />
-          <p className="section-eyebrow">Kindly reply</p>
-          <h2 className="section-title">Will you join us?</h2>
-          <FloralDecor className="section-divider" variant="divider" />
-          <p className="section-support">
-            Please respond by {wedding.rsvp.deadline}
-          </p>
+        <CountdownSection
+          target={wedding.date}
+          dateLabel={wedding.dateLabel}
+          timeLabel={wedding.timeLabel}
+        />
 
-          {rsvpSent ? (
-            <p className="rsvp-thanks" role="status">
-              Thank you, {rsvpName || 'friend'} — we&apos;ve received your reply.
-            </p>
-          ) : (
-            <form className="rsvp-form" onSubmit={onRsvp}>
-              <label className="field">
-                <span>Your name</span>
-                <input
-                  required
-                  value={rsvpName}
-                  onChange={(e) => setRsvpName(e.target.value)}
-                  placeholder="Full name"
-                  autoComplete="name"
-                />
-              </label>
-              <label className="field">
-                <span>Number of guests</span>
-                <select
-                  value={rsvpGuests}
-                  onChange={(e) => setRsvpGuests(e.target.value)}
-                >
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <option key={n} value={n}>
-                      {n}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <fieldset className="field field-choice">
-                <legend>Attendance</legend>
-                <label>
-                  <input
-                    type="radio"
-                    name="attend"
-                    checked={rsvpAttend === 'yes'}
-                    onChange={() => setRsvpAttend('yes')}
-                  />
-                  Joyfully accept
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="attend"
-                    checked={rsvpAttend === 'no'}
-                    onChange={() => setRsvpAttend('no')}
-                  />
-                  Regretfully decline
-                </label>
-              </fieldset>
-              <button type="submit" className="rsvp-submit">
-                Send RSVP
-              </button>
-            </form>
-          )}
-        </section>
+        <SectionScallop className="scallop--to-parchment" flip />
 
-        <footer className="footer">
-          <p className="footer-names">
-            {wedding.partnerOne} & {wedding.partnerTwo}
-          </p>
-          <p className="footer-note">With love — {year}</p>
-        </footer>
+        <EventsSection
+          events={wedding.featuredEvents}
+          dateLabel={wedding.dateLabel}
+          venue={wedding.location.venue}
+        />
+
+        <SectionScallop className="scallop--to-olive" flip />
+
+        <VenueSection location={wedding.location} />
+
+        <SectionScallop className="scallop--to-ivory" flip />
+
+        <WeddingTimeline schedule={wedding.schedule} />
+
+        <SectionScallop className="scallop--to-deep" flip />
+
+        <InvitationCardSection
+          partnerOne={wedding.partnerOne}
+          partnerTwo={wedding.partnerTwo}
+          monogram={wedding.monogram}
+          dateLabel={wedding.dateLabel}
+          timeLabel={wedding.timeLabel}
+          venue={wedding.location.venue}
+          address={wedding.location.address}
+          blessing={wedding.blessing}
+        />
+
+        <SectionScallop className="scallop--to-ivory" flip />
+
+        <GallerySection
+          monogram={wedding.monogram}
+          dateLabel={wedding.dateLabel}
+          venue={wedding.location.venue}
+          address={wedding.location.address}
+          partnerOne={wedding.partnerOne}
+          partnerTwo={wedding.partnerTwo}
+        />
+
+        <SectionScallop className="scallop--to-parchment" flip />
+
+        <RSVPSection
+          deadline={wedding.rsvp.deadline}
+          rsvpName={rsvpName}
+          rsvpGuests={rsvpGuests}
+          rsvpAttend={rsvpAttend}
+          rsvpSent={rsvpSent}
+          onNameChange={setRsvpName}
+          onGuestsChange={setRsvpGuests}
+          onAttendChange={setRsvpAttend}
+          onSubmit={onRsvp}
+        />
+
+        <WeddingFooter
+          partnerOne={wedding.partnerOne}
+          partnerTwo={wedding.partnerTwo}
+          monogram={wedding.monogram}
+          year={year}
+        />
       </div>
     </div>
   )

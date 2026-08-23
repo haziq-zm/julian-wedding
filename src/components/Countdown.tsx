@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { EightPointStar } from './ornaments/EightPointStar'
 
 type TimeLeft = {
   days: number
@@ -49,6 +50,7 @@ export function Countdown({ target }: Props) {
     <div className="countdown" role="timer" aria-live="polite">
       {units.map(({ label, value }) => (
         <div key={label} className="countdown-unit">
+          <EightPointStar className="countdown-star" />
           <span className="countdown-value">
             {String(value).padStart(2, '0')}
           </span>

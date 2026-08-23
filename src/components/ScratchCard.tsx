@@ -12,11 +12,13 @@ type Props = {
   location: LocationInfo
 }
 
-const REVEAL_THRESHOLD = 0.48
+const REVEAL_THRESHOLD = 0.38
+const BRUSH = 42
 
 export function ScratchCard({ location }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const sizeRef = useRef({ w: 0, h: 0 })
+  const lastPointRef = useRef<{ x: number; y: number } | null>(null)
   const wrappingRef = useRef(false)
   const revealedRef = useRef(false)
   const [revealed, setRevealed] = useState(false)
@@ -24,15 +26,16 @@ export function ScratchCard({ location }: Props) {
 
   const paintCover = useCallback((ctx: CanvasRenderingContext2D, w: number, h: number) => {
     const gradient = ctx.createLinearGradient(0, 0, w, h)
-    gradient.addColorStop(0, '#9BB0A0')
-    gradient.addColorStop(0.45, '#C4A574')
-    gradient.addColorStop(1, '#B8A090')
+    gradient.addColorStop(0, '#4B5135')
+    gradient.addColorStop(0.4, '#B59655')
+    gradient.addColorStop(0.7, '#806633')
+    gradient.addColorStop(1, '#343A25')
     ctx.globalCompositeOperation = 'source-over'
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, w, h)
 
     for (let i = 0; i < 90; i++) {
-      ctx.fillStyle = `rgba(255,255,255,${0.08 + Math.random() * 0.18})`
+      ctx.fillStyle = `rgba(244,239,228,${0.06 + Math.random() * 0.16})`
       ctx.beginPath()
       ctx.arc(
         Math.random() * w,
@@ -44,11 +47,11 @@ export function ScratchCard({ location }: Props) {
       ctx.fill()
     }
 
-    ctx.fillStyle = 'rgba(47, 74, 60, 0.75)'
-    ctx.font = '500 15px Outfit, sans-serif'
+    ctx.fillStyle = 'rgba(244, 239, 228, 0.88)'
+    ctx.font = `500 ${w < 340 ? 12 : 14}px Cinzel, serif`
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    ctx.fillText('Scratch to reveal the venue', w / 2, h / 2)
+    ctx.fillText('Scratch with your finger', w / 2, h / 2)
   }, [])
 
   const resizeCanvas = useCallback(() => {
@@ -97,11 +100,12 @@ export function ScratchCard({ location }: Props) {
       setRevealed(true)
       const { w, h } = sizeRef.current
       ctx.clearRect(0, 0, w, h)
+      if (navigator.vibrate) navigator.vibrate(18)
       confetti({
-        particleCount: 90,
-        spread: 70,
-        origin: { y: 0.65 },
-        colors: ['#2F4A3C', '#C4A574', '#E8C9B8', '#E8EDE8'],
+        particleCount: 70,
+        spread: 65,
+        origin: { y: 0.7 },
+        colors: ['#4B5135', '#B59655', '#641F24', '#F4EFE4'],
       })
     }
   }, [])
@@ -116,9 +120,22 @@ export function ScratchCard({ location }: Props) {
       const x = clientX - rect.left
       const y = clientY - rect.top
       ctx.globalCompositeOperation = 'destination-out'
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      ctx.lineWidth = BRUSH * 2
+
+      const last = lastPointRef.current
+      if (last) {
+        ctx.beginPath()
+        ctx.moveTo(last.x, last.y)
+        ctx.lineTo(x, y)
+        ctx.stroke()
+      }
+
       ctx.beginPath()
-      ctx.arc(x, y, 28, 0, Math.PI * 2)
+      ctx.arc(x, y, BRUSH, 0, Math.PI * 2)
       ctx.fill()
+      lastPointRef.current = { x, y }
       setHintVisible(false)
       checkReveal()
     },
@@ -126,18 +143,22 @@ export function ScratchCard({ location }: Props) {
   )
 
   const onPointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
     wrappingRef.current = true
+    lastPointRef.current = null
     e.currentTarget.setPointerCapture(e.pointerId)
     scratchAt(e.clientX, e.clientY)
   }
 
   const onPointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!wrappingRef.current) return
+    e.preventDefault()
     scratchAt(e.clientX, e.clientY)
   }
 
   const onPointerUp = () => {
     wrappingRef.current = false
+    lastPointRef.current = null
   }
 
   return (
@@ -169,7 +190,7 @@ export function ScratchCard({ location }: Props) {
         )}
       </div>
       {hintVisible && !revealed && (
-        <p className="scratch-hint">Use your finger or mouse to scratch</p>
+        <p className="scratch-hint">Swipe your finger across the foil</p>
       )}
       {revealed && (
         <p className="scratch-hint scratch-hint--done">Venue revealed — see you there</p>

@@ -1,6 +1,6 @@
 # Aria & Julian — Wedding Invitation
 
-A React wedding invitation web app with a live countdown, botanical visuals, scratch-to-reveal venue, day timeline, and RSVP form.
+Luxury Indian-Islamic wedding invitation (React + Vite) with olive, ivory, and antique gold design.
 
 ## Run
 
@@ -11,4 +11,11 @@ npm run dev
 
 ## Customize
 
-Edit couple names, date, venue, schedule, and RSVP details in [`src/config.ts`](src/config.ts).
+Edit couple details, events, schedule, and RSVP copy in [`src/config.ts`](src/config.ts).
+
+## Features
+
+- Ornate invitation cover (tap to open)
+- Countdown, ceremony & reception panels, scratch-to-reveal venue
+- Wedding program timeline, invitation card, stationery gallery, RSVP
+- Mobile-first navigation with full-screen menu
