@@ -150,6 +150,15 @@ body {
 }
 
 /* —— Events —— */
+.feast-scroll {
+  max-width: min(92vw, 20rem);
+  margin-top: 1rem;
+}
+
+.feast-scroll-image {
+  filter: drop-shadow(0 12px 20px rgba(52, 58, 37, 0.2));
+}
+
 .event-card {
   min-height: auto;
   padding: 2rem 1rem 1.5rem;
@@ -321,6 +330,10 @@ body {
 
   .section-scallop {
     height: clamp(2rem, 5vw, 3rem);
+  }
+
+  .feast-scroll {
+    max-width: min(88vw, 24rem);
   }
 }
 

@@ -1,3 +1,4 @@
+import { FeastPlatterScroll } from './FeastPlatterScroll'
 import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { EightPointStar } from '../ornaments/EightPointStar'
@@ -30,6 +31,8 @@ export function EventsSection({ events, dateLabel, venue }: Props) {
       <Lantern className="events-lantern events-lantern--r" size="sm" />
 
       <SectionHeader eyebrow="The Celebrations" title="Events" />
+
+      <FeastPlatterScroll />
 
       <div className="events-grid">
         {events.map((event) => (

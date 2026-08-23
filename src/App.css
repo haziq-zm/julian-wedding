@@ -1163,6 +1163,67 @@ select {
   margin: 2rem auto 0;
 }
 
+.feast-scroll {
+  position: relative;
+  z-index: 2;
+  max-width: min(88vw, 22rem);
+  margin: 1.25rem auto 0.25rem;
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+.feast-scroll-eyebrow {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.feast-scroll-divider {
+  width: 6rem;
+  margin: 0.65rem auto 0;
+  color: var(--gold);
+}
+
+.feast-scroll-stage {
+  position: relative;
+  margin: 0.5rem auto 0;
+}
+
+.feast-scroll-glow {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 150, 85, 0.42), transparent 72%);
+  filter: blur(14px);
+  pointer-events: none;
+}
+
+.feast-scroll-image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-origin: center center;
+  filter: drop-shadow(0 16px 24px rgba(52, 58, 37, 0.22));
+  will-change: transform;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.feast-scroll-caption {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 4.2vw, 1.15rem);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
 .event-card {
   position: relative;
   min-height: 280px;

@@ -17,4 +17,8 @@
     transform: none !important;
     will-change: auto;
   }
+
+  .feast-scroll-image {
+    transform: none !important;
+  }
 }
