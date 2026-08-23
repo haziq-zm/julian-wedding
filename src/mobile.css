@@ -164,7 +164,7 @@ body {
 }
 
 .event-card {
-  min-height: auto;
+  min-height: 16.5rem;
   padding: 2rem 1rem 1.5rem;
 }
 
@@ -349,10 +349,6 @@ body {
 
   .story-panel {
     text-align: left;
-  }
-
-  .events-grid {
-    grid-template-columns: 1fr 1fr;
   }
 }
 

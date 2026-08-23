@@ -1160,9 +1160,17 @@ select {
 
 .events-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
   max-width: 52rem;
   margin: 2rem auto 0;
+}
+
+@media (min-width: 720px) {
+  .events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .feast-scroll {
@@ -1228,11 +1236,16 @@ select {
 
 .event-card {
   position: relative;
-  min-height: 280px;
-  padding: 2.25rem 1.4rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 17.5rem;
+  height: 100%;
+  padding: 2.25rem 1.25rem 1.75rem;
   background: var(--cream);
   border: 1px solid rgba(181, 150, 85, 0.45);
   text-align: center;
+  box-sizing: border-box;
 }
 
 .event-card--burgundy {
@@ -1271,6 +1284,11 @@ select {
 .event-inner {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
 }
 
 .event-label {
@@ -1300,23 +1318,16 @@ select {
   color: var(--gold);
 }
 
-.event-date,
-.event-venue {
+.event-date {
   margin: 0.25rem 0 0;
   font-size: 0.88rem;
   color: var(--ink-soft);
 }
 
-.event-venue {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--olive);
-}
-
 .event-detail {
-  margin: 0.85rem 0 0;
+  margin: 0.65rem 0 0;
   font-size: 0.88rem;
+  line-height: 1.5;
   color: var(--ink-soft);
 }
 

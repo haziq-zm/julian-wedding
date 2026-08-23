@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { wedding } from './config'
 import { InvitationCover } from './components/wedding/InvitationCover'
 import { WeddingHero } from './components/wedding/WeddingHero'
@@ -9,7 +9,6 @@ import { VenueSection } from './components/wedding/VenueSection'
 import { WeddingTimeline } from './components/wedding/WeddingTimeline'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
-import { RSVPSection } from './components/wedding/RSVPSection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { SectionScallop } from './components/ornaments/SectionScallop'
 import { LenisScrollProvider } from './components/lenis/LenisScrollProvider'
@@ -21,10 +20,6 @@ import './lenis-scroll.css'
 export default function App() {
   const year = wedding.date.getFullYear()
   const [opened, setOpened] = useState(false)
-  const [rsvpName, setRsvpName] = useState('')
-  const [rsvpGuests, setRsvpGuests] = useState('1')
-  const [rsvpAttend, setRsvpAttend] = useState<'yes' | 'no'>('yes')
-  const [rsvpSent, setRsvpSent] = useState(false)
 
   const handleOpened = useCallback(() => {
     setOpened(true)
@@ -41,11 +36,6 @@ export default function App() {
     document.body.classList.remove('scroll-locked')
     return undefined
   }, [opened])
-
-  const onRsvp = (e: FormEvent) => {
-    e.preventDefault()
-    setRsvpSent(true)
-  }
 
   return (
     <LenisScrollProvider enabled={opened}>
@@ -94,7 +84,6 @@ export default function App() {
         <EventsSection
           events={wedding.featuredEvents}
           dateLabel={wedding.dateLabel}
-          venue={wedding.location.venue}
         />
 
         <SectionScallop className="scallop--to-olive" flip />
@@ -127,19 +116,7 @@ export default function App() {
           partnerTwo={wedding.partnerTwo}
         />
 
-        <SectionScallop className="scallop--to-parchment" flip />
-
-        <RSVPSection
-          deadline={wedding.rsvp.deadline}
-          rsvpName={rsvpName}
-          rsvpGuests={rsvpGuests}
-          rsvpAttend={rsvpAttend}
-          rsvpSent={rsvpSent}
-          onNameChange={setRsvpName}
-          onGuestsChange={setRsvpGuests}
-          onAttendChange={setRsvpAttend}
-          onSubmit={onRsvp}
-        />
+        <SectionScallop className="scallop--to-deep" flip />
 
         <WeddingFooter
           partnerOne={wedding.partnerOne}

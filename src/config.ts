@@ -42,8 +42,4 @@ export const wedding = {
     { time: '6:30 PM', title: 'Dinner & Toasts', detail: 'Shared tramis, soft light' },
     { time: '9:00 PM', title: 'First Dance', detail: 'Then we celebrate until late' },
   ],
-  rsvp: {
-    deadline: 'September 10, 2026',
-    email: 'rsvp@jauharandjennifer.love',
-  },
 } as const

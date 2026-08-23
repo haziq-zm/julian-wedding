@@ -642,11 +642,6 @@
   bottom: 0.35rem;
 }
 
-.event-card {
-  min-height: 320px;
-  padding-top: 2.5rem;
-}
-
 /* ═══ VENUE ═══ */
 .venue-spray {
   position: absolute;

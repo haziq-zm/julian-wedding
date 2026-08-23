@@ -20,10 +20,9 @@ type EventItem = {
 type Props = {
   events: readonly EventItem[]
   dateLabel: string
-  venue: string
 }
 
-export function EventsSection({ events, dateLabel, venue }: Props) {
+export function EventsSection({ events, dateLabel }: Props) {
   return (
     <section id="events" className="events section-band section-band--parchment">
       <JaliPattern className="events-jali" />
@@ -39,8 +38,7 @@ export function EventsSection({ events, dateLabel, venue }: Props) {
           <LenisScrollElement
             key={event.id}
             as="article"
-            effect="scale-in"
-            speed={event.id === 'ceremony' ? 0.18 : 0.24}
+            effect="fade-up"
             className={`event-card event-card--${event.accent}`}
           >
             <IslamicArch className="event-arch event-arch--sil" variant="silhouette" />
@@ -56,7 +54,6 @@ export function EventsSection({ events, dateLabel, venue }: Props) {
               <p className="event-time">{event.time}</p>
               <GoldDivider className="event-divider" />
               <p className="event-date">{dateLabel}</p>
-              <p className="event-venue">{venue}</p>
               <p className="event-detail">{event.detail}</p>
             </div>
           </LenisScrollElement>

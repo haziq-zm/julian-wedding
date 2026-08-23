@@ -11,6 +11,16 @@
   will-change: transform;
 }
 
+.events-grid .lenis-scroll-el {
+  display: flex;
+  height: 100%;
+  transform: none !important;
+}
+
+.events-grid .lenis-scroll-el--fade-up {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .lenis-scroll-el {
     opacity: 1 !important;
