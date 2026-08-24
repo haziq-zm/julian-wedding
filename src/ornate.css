@@ -4,7 +4,7 @@
 
 /* —— Shared jaali overlays —— */
 .cover-jali,
-.wh-jali,
+.welcome-jali,
 .story-jali,
 .count-jali,
 .events-jali,
@@ -33,7 +33,7 @@
 .count-jali,
 .venue-jali,
 .card-sec-jali,
-.wh-jali,
+.welcome-jali,
 .wfooter-jali {
   color: var(--gold);
   opacity: 0.08;
@@ -207,7 +207,7 @@
 
 /* ═══ COVER ENRICHMENTS ═══ */
 .cover-vignette,
-.wh-vignette,
+.welcome-vignette,
 .venue-vignette,
 .count-vignette {
   position: absolute;
@@ -347,82 +347,10 @@
   display: block;
 }
 
-/* ═══ HERO ENRICHMENTS ═══ */
-.wh-spray {
-  position: absolute;
-  width: min(30vw, 130px);
-  opacity: 0.32;
-  color: var(--sand);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.wh-spray--l {
-  left: 0;
-  top: 15%;
-}
-
-.wh-spray--r {
-  right: 0;
-  top: 18%;
-}
-
-.wh-lantern--c {
-  left: 50%;
-  translate: -50% 0;
-  top: 6%;
-  opacity: 0.45;
-}
-
-.wh-arch--back {
-  opacity: 0.12;
+/* ═══ WELCOME ENRICHMENTS ═══ */
+.welcome-jali {
   color: var(--gold);
-  transform: scale(1.06);
-}
-
-.wh-arch--front {
-  opacity: 0.5;
-}
-
-.wh-floral--bl,
-.wh-floral--br {
-  width: 70px;
-  opacity: 0.35;
-}
-
-.wh-floral--bl {
-  bottom: 8%;
-  left: 0;
-}
-
-.wh-floral--br {
-  right: 0;
-  bottom: 8%;
-}
-
-.wh-frame {
-  max-width: 26rem;
-  margin: 0 auto;
-}
-
-.wh-rosette {
-  width: 1.3rem;
-  height: 1.3rem;
-  margin: 0 auto 0.75rem;
-  color: var(--gold);
-  display: block;
-}
-
-.wh-carpet {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  translate: -50% 0;
-  width: 100vw;
-  height: 18px;
-  color: var(--gold);
-  opacity: 0.35;
-  pointer-events: none;
+  opacity: 0.07;
 }
 
 /* ═══ STORY ═══ */
@@ -491,25 +419,6 @@
   margin: 0 auto 0.75rem;
   color: var(--gold);
   display: block;
-}
-
-.flower-scroll-3d {
-  width: min(100%, 14rem);
-  height: min(52vw, 14rem);
-  margin: 0 auto;
-  pointer-events: none;
-  touch-action: none;
-}
-
-.flower-scroll-3d canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.flower-scroll-3d--loading {
-  background:
-    radial-gradient(circle at 50% 50%, rgba(181, 150, 85, 0.18), transparent 70%);
 }
 
 .story-portrait-caption {
@@ -990,7 +899,7 @@
     var(--olive-deep);
 }
 
-.wh {
+.welcome {
   background:
     radial-gradient(ellipse 55% 45% at 50% 25%, rgba(181, 150, 85, 0.16), transparent 60%),
     radial-gradient(ellipse 40% 35% at 80% 80%, rgba(100, 31, 36, 0.12), transparent 50%),

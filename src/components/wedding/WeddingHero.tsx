@@ -1,63 +1,55 @@
 import { LenisScrollElement } from '../lenis/LenisScrollElement'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { FloralCorner } from '../ornaments/FloralCorner'
+import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralSpray } from '../ornaments/FloralSpray'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { GoldDivider } from '../ornaments/GoldDivider'
-import { IslamicArch } from '../ornaments/IslamicArch'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
-import { OrnamentalFrame } from '../ornaments/OrnamentalFrame'
 
 type Props = {
   partnerOne: string
   partnerTwo: string
-  dateLabel: string
-  blessing: string
+  venue: string
+  address: string
 }
 
 export function WeddingHero({
   partnerOne,
   partnerTwo,
-  dateLabel,
-  blessing,
+  venue,
+  address,
 }: Props) {
   return (
-    <section id="home" className="wh hero-section">
-      <JaliPattern className="wh-jali" />
-      <div className="wh-vignette" aria-hidden />
-      <FloralSpray className="wh-spray wh-spray--l" side="left" />
-      <FloralSpray className="wh-spray wh-spray--r" side="right" />
-      <Lantern className="wh-lantern wh-lantern--l" size="md" />
-      <Lantern className="wh-lantern wh-lantern--r" size="md" />
-      <Lantern className="wh-lantern wh-lantern--c" size="sm" />
+    <section id="home" className="welcome section-band section-band--olive">
+      <JaliPattern className="welcome-jali" />
+      <div className="welcome-vignette" aria-hidden />
+      <FloralSpray className="welcome-spray welcome-spray--l" side="left" />
+      <FloralSpray className="welcome-spray welcome-spray--r" side="right" />
+      <Lantern className="welcome-lantern welcome-lantern--l" size="md" />
+      <Lantern className="welcome-lantern welcome-lantern--r" size="md" />
 
-      <LenisScrollElement className="wh-arch-wrap" effect="fade-up">
-        <IslamicArch className="wh-arch wh-arch--back" variant="silhouette" />
-        <IslamicArch className="wh-arch wh-arch--front" />
-        <FloralCorner className="wh-floral wh-floral--tl" corner="tl" />
-        <FloralCorner className="wh-floral wh-floral--tr" corner="tr" />
-        <FloralCorner className="wh-floral wh-floral--bl" corner="bl" />
-        <FloralCorner className="wh-floral wh-floral--br" corner="br" />
-
-        <OrnamentalFrame variant="olive" className="wh-frame">
-          <GeometricRosette className="wh-rosette" />
-          <p className="eyebrow eyebrow--light">The Wedding Of</p>
-          <h2 className="wh-names">
-            <span>{partnerOne}</span>
-            <span className="wh-amp">&</span>
-            <span>{partnerTwo}</span>
-          </h2>
-          <GoldDivider className="ornament-divider ornament-divider--light" />
-          <p className="wh-date">{dateLabel}</p>
-          <p className="wh-blessing">{blessing}</p>
-          <a className="btn-invite" href="#countdown">
-            Enter Celebration
-          </a>
-        </OrnamentalFrame>
+      <LenisScrollElement className="welcome-inner" effect="fade-up">
+        <EightPointStar className="welcome-star" />
+        <p className="eyebrow eyebrow--light">Bismillah</p>
+        <GeometricRosette className="welcome-rosette" />
+        <h2 className="welcome-title">You are most welcome</h2>
+        <GoldDivider className="ornament-divider ornament-divider--light" />
+        <p className="welcome-lead">
+          Into a celebration of faith, family, and the joining of{' '}
+          {partnerOne} & {partnerTwo}
+        </p>
+        <p className="welcome-place">
+          <span>{venue}</span>
+          <span className="welcome-place-dot" aria-hidden />
+          <span>{address}</span>
+        </p>
+        <a className="welcome-link" href="#story">
+          Continue to our story
+        </a>
       </LenisScrollElement>
 
-      <CarpetBorder className="wh-carpet" />
+      <CarpetBorder className="welcome-carpet" />
     </section>
   )
 }

@@ -46,22 +46,29 @@ body {
   font-size: clamp(1.65rem, 8vw, 2.2rem);
 }
 
-.cover-open-btn {
-  width: min(18rem, 88vw);
-  min-height: 56px;
-  font-size: 0.68rem;
+.scroll-pull-hint {
+  margin-top: 5.25rem;
+  font-size: 0.58rem;
+}
+
+.scroll-pull-handle {
+  width: 3.4rem;
+  height: 4.15rem;
+}
+
+.scroll-pull-cord {
+  height: 3rem;
 }
 
 .cover-lantern,
-.wh-lantern,
+.welcome-lantern,
 .events-lantern,
-.venue-lantern,
-.wh-lantern--c {
+.venue-lantern {
   display: none;
 }
 
 .cover-spray,
-.wh-spray,
+.welcome-spray,
 .venue-spray,
 .card-sec-spray,
 .wfooter-spray,
@@ -69,30 +76,12 @@ body {
   display: none;
 }
 
-/* —— Hero —— */
-.wh {
-  min-height: auto;
-  padding-top: max(2.5rem, env(safe-area-inset-top));
-  padding-bottom: 2.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+/* —— Welcome —— */
+.welcome-title {
+  font-size: clamp(1.9rem, 8vw, 2.6rem);
 }
 
-.wh-arch-wrap {
-  width: 100%;
-  padding: 2.5rem 0.75rem 2rem;
-}
-
-.wh-names {
-  font-size: clamp(2.2rem, 11vw, 3.2rem);
-}
-
-.wh-floral {
-  width: 52px;
-  opacity: 0.3;
-}
-
-.wh-carpet {
+.welcome-carpet {
   height: 14px;
 }
 
@@ -120,10 +109,6 @@ body {
 .story-portrait {
   min-height: 240px;
   max-width: 14rem;
-}
-
-.flower-scroll-3d {
-  height: min(56vw, 13rem);
 }
 
 .story-body {
@@ -236,7 +221,7 @@ body {
   width: 44px;
 }
 
-.btn-invite,
+.welcome-link,
 .rsvp-submit {
   min-height: 52px;
 }
@@ -261,9 +246,8 @@ body {
 
 /* —— Reduce motion load on phones —— */
 @media (hover: none) and (pointer: coarse) {
-  .cover-open-btn:hover,
   .gallery-piece:hover,
-  .btn-invite:hover {
+  .welcome-link:hover {
     transform: none;
   }
 
@@ -272,7 +256,7 @@ body {
     opacity: 0.28;
   }
 
-  .cover-open-btn {
+  .scroll-pull-tab {
     animation: none;
   }
 }
@@ -291,28 +275,19 @@ body {
   }
 
   .cover-lantern,
-  .wh-lantern,
+  .welcome-lantern,
   .events-lantern,
   .venue-lantern {
     display: block;
   }
 
   .cover-spray,
-  .wh-spray,
+  .welcome-spray,
   .venue-spray,
   .card-sec-spray,
   .wfooter-spray,
   .sec-header-spray {
     display: block;
-  }
-
-  .wh {
-    min-height: 92svh;
-    padding: max(3rem, env(safe-area-inset-top)) 1.25rem 3rem;
-  }
-
-  .wh-arch-wrap {
-    padding: 3.5rem 1.5rem 2.5rem;
   }
 
   .ornate-frame {
@@ -321,11 +296,7 @@ body {
 
   .scroll-scene {
     width: min(92vw, 400px);
-  }
-
-  .cover-open-btn {
-    width: auto;
-    min-width: min(16rem, 72vw);
+    margin-bottom: 6rem;
   }
 
   .wfooter-floral {

@@ -56,11 +56,11 @@ export default function App() {
           {...(!opened ? { inert: true as const } : {})}
         >
           <WeddingHero
-          partnerOne={wedding.partnerOne}
-          partnerTwo={wedding.partnerTwo}
-          dateLabel={wedding.dateLabel}
-          blessing={wedding.blessing}
-        />
+            partnerOne={wedding.partnerOne}
+            partnerTwo={wedding.partnerTwo}
+            venue={wedding.location.venue}
+            address={wedding.location.address}
+          />
 
         <SectionScallop className="scallop--to-ivory" />
 
