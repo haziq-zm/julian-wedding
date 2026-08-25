@@ -6,7 +6,6 @@ import { CoupleSection } from './components/wedding/CoupleSection'
 import { CountdownSection } from './components/wedding/CountdownSection'
 import { EventsSection } from './components/wedding/EventsSection'
 import { VenueSection } from './components/wedding/VenueSection'
-import { WeddingTimeline } from './components/wedding/WeddingTimeline'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
@@ -55,12 +54,7 @@ export default function App() {
           aria-hidden={!opened}
           {...(!opened ? { inert: true as const } : {})}
         >
-          <WeddingHero
-            partnerOne={wedding.partnerOne}
-            partnerTwo={wedding.partnerTwo}
-            venue={wedding.location.venue}
-            address={wedding.location.address}
-          />
+          <WeddingHero />
 
         <SectionScallop className="scallop--to-ivory" />
 
@@ -81,18 +75,11 @@ export default function App() {
 
         <SectionScallop className="scallop--to-parchment" flip />
 
-        <EventsSection
-          events={wedding.featuredEvents}
-          dateLabel={wedding.dateLabel}
-        />
+        <EventsSection />
 
         <SectionScallop className="scallop--to-olive" flip />
 
         <VenueSection location={wedding.location} />
-
-        <SectionScallop className="scallop--to-ivory" flip />
-
-        <WeddingTimeline schedule={wedding.schedule} />
 
         <SectionScallop className="scallop--to-deep" flip />
 

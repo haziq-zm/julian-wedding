@@ -106,11 +106,6 @@ body {
   gap: 1.5rem;
 }
 
-.story-portrait {
-  min-height: 240px;
-  max-width: 14rem;
-}
-
 .story-body {
   font-size: 0.92rem;
 }
@@ -142,6 +137,18 @@ body {
 .feast-scroll {
   max-width: min(92vw, 20rem);
   margin-top: 1rem;
+}
+
+.kahwa-scroll,
+.event-model-scroll {
+  max-width: min(92vw, 16.5rem);
+  margin-top: 1.1rem;
+}
+
+.kahwa-scroll-stage,
+.event-model-stage {
+  min-height: 19rem;
+  max-height: 24rem;
 }
 
 .feast-scroll-image {
@@ -310,16 +317,24 @@ body {
   .feast-scroll {
     max-width: min(88vw, 24rem);
   }
+
+  .kahwa-scroll,
+  .event-model-scroll {
+    max-width: min(88vw, 20rem);
+  }
+
+  .kahwa-scroll-stage,
+  .event-model-stage {
+    min-height: 22rem;
+    max-height: 28rem;
+  }
 }
 
 @media (min-width: 720px) {
-  .story-layout {
-    grid-template-columns: 0.9fr 1.1fr;
-    text-align: left;
-  }
-
   .story-panel {
-    text-align: left;
+    text-align: center;
+    max-width: 36rem;
+    margin-inline: auto;
   }
 }
 

@@ -9,6 +9,7 @@ import {
   type PointerEvent,
 } from 'react'
 import confetti from 'canvas-confetti'
+import { useLenis } from 'lenis/react'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
@@ -31,6 +32,8 @@ type Props = {
 const PULL_THRESHOLD = 0.34
 const MAX_PULL_PX = 320
 const SETTLE_MS = 900
+const SCROLL_CUE_DELAY_MS = 2000
+const SCROLL_PEEK_PX = 88
 const CONFETTI_COLORS = ['#4B5135', '#B59655', '#641F24', '#F4EFE4', '#C9AB6A']
 
 function celebrateOpen() {
@@ -76,10 +79,13 @@ export function InvitationCover({
 }: Props) {
   const [phase, setPhase] = useState<Phase>('sealed')
   const [pull, setPull] = useState(0)
+  const [scrollCue, setScrollCue] = useState(false)
   const openedRef = useRef(false)
   const confettiFiredRef = useRef(false)
+  const scrollCueStartedRef = useRef(false)
   const pullRef = useRef(0)
   const animFrameRef = useRef(0)
+  const scrollCueTimerRef = useRef(0)
   const dragRef = useRef<{
     active: boolean
     startY: number
@@ -88,6 +94,7 @@ export function InvitationCover({
     moved: boolean
   }>({ active: false, startY: 0, startPull: 0, startTime: 0, moved: false })
   const titleId = useId()
+  const lenis = useLenis()
 
   const setPullValue = useCallback((value: number) => {
     const next = Math.min(1, Math.max(0, value))
@@ -101,12 +108,22 @@ export function InvitationCover({
     celebrateOpen()
   }, [])
 
+  const scheduleScrollCue = useCallback(() => {
+    if (scrollCueStartedRef.current) return
+    scrollCueStartedRef.current = true
+    window.clearTimeout(scrollCueTimerRef.current)
+    scrollCueTimerRef.current = window.setTimeout(() => {
+      setScrollCue(true)
+    }, SCROLL_CUE_DELAY_MS)
+  }, [])
+
   const commitOpen = useCallback(() => {
     if (phase === 'unrolling' || phase === 'open') return
     if (navigator.vibrate) navigator.vibrate(12)
 
     cancelAnimationFrame(animFrameRef.current)
     setPhase('unrolling')
+    scheduleScrollCue()
 
     const from = pullRef.current
     if (from >= 0.92) {
@@ -132,11 +149,70 @@ export function InvitationCover({
     }
 
     animFrameRef.current = requestAnimationFrame(tick)
-  }, [phase, setPullValue, fireConfetti])
+  }, [phase, setPullValue, fireConfetti, scheduleScrollCue])
 
   useEffect(() => {
-    return () => cancelAnimationFrame(animFrameRef.current)
+    return () => {
+      cancelAnimationFrame(animFrameRef.current)
+      window.clearTimeout(scrollCueTimerRef.current)
+    }
   }, [])
+
+  /* Gentle peek to prove the page is scrollable once the cue appears. */
+  useEffect(() => {
+    if (!scrollCue) return
+
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reduced) return
+
+    let cancelPeek = false
+    const peekDown = window.setTimeout(() => {
+      if (cancelPeek) return
+      if (lenis) {
+        lenis.scrollTo(SCROLL_PEEK_PX, { duration: 1.05, easing: (t) => 1 - (1 - t) ** 3 })
+      } else {
+        window.scrollTo({ top: SCROLL_PEEK_PX, behavior: 'smooth' })
+      }
+    }, 120)
+
+    const peekBack = window.setTimeout(() => {
+      if (cancelPeek) return
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 0.95, easing: (t) => 1 - (1 - t) ** 3 })
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+    }, 1500)
+
+    return () => {
+      cancelPeek = true
+      window.clearTimeout(peekDown)
+      window.clearTimeout(peekBack)
+    }
+  }, [scrollCue, lenis])
+
+  /* Hide the cue once the guest scrolls on their own. */
+  useEffect(() => {
+    if (!scrollCue) return
+
+    const dismiss = () => {
+      const y = lenis?.scroll ?? window.scrollY
+      if (y > SCROLL_PEEK_PX + 24) setScrollCue(false)
+    }
+
+    if (lenis) {
+      lenis.on('scroll', dismiss)
+      return () => {
+        lenis.off('scroll', dismiss)
+      }
+    }
+
+    window.addEventListener('scroll', dismiss, { passive: true })
+    return () => window.removeEventListener('scroll', dismiss)
+  }, [scrollCue, lenis])
 
   useEffect(() => {
     if (phase !== 'unrolling' && phase !== 'open') return
@@ -383,12 +459,16 @@ export function InvitationCover({
         Pull the golden tab
       </p>
 
-      <p
-        className={`scroll-continue ${opened ? 'scroll-continue--visible' : ''}`}
-        aria-hidden={!opened}
+      <div
+        className={`scroll-continue ${scrollCue ? 'scroll-continue--visible' : ''}`}
+        aria-hidden={!scrollCue}
       >
-        Swipe up to continue
-      </p>
+        <span className="scroll-continue-chevrons" aria-hidden>
+          <span className="scroll-continue-chevron" />
+          <span className="scroll-continue-chevron" />
+        </span>
+        <span className="scroll-continue-label">Scroll to explore</span>
+      </div>
 
       <CarpetBorder className="cover-carpet" />
     </section>

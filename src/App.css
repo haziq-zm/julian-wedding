@@ -703,10 +703,26 @@ select {
   right: 0;
   bottom: max(1.1rem, env(safe-area-inset-bottom));
   z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
   margin: 0;
   padding: 0 1.25rem;
   opacity: 0;
   pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+}
+
+.scroll-continue--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-continue-label {
   font-family: var(--font-label);
   font-size: 0.62rem;
   letter-spacing: 0.2em;
@@ -714,12 +730,47 @@ select {
   color: var(--ivory);
   text-align: center;
   text-shadow: 0 1px 8px rgba(20, 22, 14, 0.45);
-  transition: none;
 }
 
-.scroll-continue--visible {
-  opacity: 1;
+.scroll-continue--visible .scroll-continue-label {
   animation: continue-nudge 2.4s ease-in-out infinite;
+}
+
+.scroll-continue-chevrons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.scroll-continue-chevron {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-right: 1.5px solid var(--gold-bright, #c9ab6a);
+  border-bottom: 1.5px solid var(--gold-bright, #c9ab6a);
+  transform: rotate(45deg);
+  opacity: 0.35;
+}
+
+.scroll-continue--visible .scroll-continue-chevron {
+  animation: scroll-chevron-pulse 1.35s ease-in-out infinite;
+}
+
+.scroll-continue--visible .scroll-continue-chevron:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+@keyframes scroll-chevron-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: rotate(45deg) translate(-2px, -2px);
+  }
+  45% {
+    opacity: 1;
+    transform: rotate(45deg) translate(2px, 2px);
+  }
 }
 
 .scroll-shadow {
@@ -1316,6 +1367,109 @@ select {
   margin: 1.25rem auto 0.25rem;
   text-align: center;
   will-change: transform, opacity;
+}
+
+.kahwa-scroll,
+.event-model-scroll {
+  position: relative;
+  z-index: 2;
+  max-width: min(88vw, 18rem);
+  margin: 1.5rem auto 0.15rem;
+  text-align: center;
+  will-change: opacity;
+}
+
+.kahwa-scroll--placeholder,
+.event-model-scroll--placeholder {
+  min-height: 20rem;
+  opacity: 0.2;
+}
+
+.kahwa-scroll-eyebrow,
+.event-model-eyebrow {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.kahwa-scroll-divider,
+.event-model-divider {
+  width: 6rem;
+  margin: 0.65rem auto 0;
+  color: var(--gold);
+}
+
+.kahwa-scroll-stage,
+.event-model-stage {
+  position: relative;
+  margin: 0.25rem auto 0;
+  width: 100%;
+  aspect-ratio: 3 / 4.2;
+  height: auto;
+  min-height: 20rem;
+  max-height: 26rem;
+  overflow: visible;
+}
+
+.kahwa-scroll-glow,
+.event-model-glow {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.28) 48%,
+    transparent 74%
+  );
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.event-model-room {
+  position: absolute;
+  inset: 8% 6% 10%;
+  border-radius: 42% / 36%;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 72%),
+    linear-gradient(180deg, rgba(250, 250, 250, 0.55) 0%, rgba(243, 243, 243, 0.25) 100%);
+  pointer-events: none;
+}
+
+.kahwa-scroll-canvas,
+.event-model-canvas {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  touch-action: none;
+}
+
+.kahwa-scroll-r3f,
+.kahwa-scroll-canvas canvas,
+.event-model-r3f,
+.event-model-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.kahwa-scroll-caption,
+.event-model-caption {
+  margin: 0.55rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 4.2vw, 1.15rem);
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.45;
+}
+
+.event-model-scroll + .event-model-scroll {
+  margin-top: 2rem;
 }
 
 .feast-scroll-eyebrow {

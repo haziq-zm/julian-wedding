@@ -7,19 +7,7 @@ import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
 
-type Props = {
-  partnerOne: string
-  partnerTwo: string
-  venue: string
-  address: string
-}
-
-export function WeddingHero({
-  partnerOne,
-  partnerTwo,
-  venue,
-  address,
-}: Props) {
+export function WeddingHero() {
   return (
     <section id="home" className="welcome section-band section-band--olive">
       <JaliPattern className="welcome-jali" />
@@ -33,16 +21,11 @@ export function WeddingHero({
         <EightPointStar className="welcome-star" />
         <p className="eyebrow eyebrow--light">Bismillah</p>
         <GeometricRosette className="welcome-rosette" />
-        <h2 className="welcome-title">You are most welcome</h2>
+        <h2 className="welcome-title">Join Us in Celebration</h2>
         <GoldDivider className="ornament-divider ornament-divider--light" />
         <p className="welcome-lead">
-          Into a celebration of faith, family, and the joining of{' '}
-          {partnerOne} & {partnerTwo}
-        </p>
-        <p className="welcome-place">
-          <span>{venue}</span>
-          <span className="welcome-place-dot" aria-hidden />
-          <span>{address}</span>
+          with the blessings of our families and the duas of those who have
+          loved and guided us
         </p>
         <a className="welcome-link" href="#story">
           Continue to our story

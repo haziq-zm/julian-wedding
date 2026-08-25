@@ -1,28 +1,32 @@
-import { FeastPlatterScroll } from './FeastPlatterScroll'
-import { LenisScrollElement } from '../lenis/LenisScrollElement'
+import { Suspense, lazy } from 'react'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { EightPointStar } from '../ornaments/EightPointStar'
-import { FloralCorner } from '../ornaments/FloralCorner'
-import { GoldDivider } from '../ornaments/GoldDivider'
-import { IslamicArch } from '../ornaments/IslamicArch'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
 import { SectionHeader } from '../ornaments/SectionHeader'
 
-type EventItem = {
-  id: string
-  label: string
-  time: string
-  detail: string
-  accent: 'olive' | 'burgundy'
+const KahwaSamovarScroll = lazy(() =>
+  import('./KahwaSamovarScroll').then((module) => ({
+    default: module.KahwaSamovarScroll,
+  })),
+)
+
+const TashnaerScroll = lazy(() =>
+  import('./TashnaerScroll').then((module) => ({
+    default: module.TashnaerScroll,
+  })),
+)
+
+const TumbaknariScroll = lazy(() =>
+  import('./TumbaknariScroll').then((module) => ({
+    default: module.TumbaknariScroll,
+  })),
+)
+
+function ModelFallback() {
+  return <div className="event-model-scroll event-model-scroll--placeholder" aria-hidden />
 }
 
-type Props = {
-  events: readonly EventItem[]
-  dateLabel: string
-}
-
-export function EventsSection({ events, dateLabel }: Props) {
+export function EventsSection() {
   return (
     <section id="events" className="events section-band section-band--parchment">
       <JaliPattern className="events-jali" />
@@ -31,34 +35,17 @@ export function EventsSection({ events, dateLabel }: Props) {
 
       <SectionHeader eyebrow="The Celebrations" title="Events" />
 
-      <FeastPlatterScroll />
+      <Suspense fallback={<ModelFallback />}>
+        <KahwaSamovarScroll />
+      </Suspense>
 
-      <div className="events-grid">
-        {events.map((event) => (
-          <LenisScrollElement
-            key={event.id}
-            as="article"
-            effect="fade-up"
-            className={`event-card event-card--${event.accent}`}
-          >
-            <IslamicArch className="event-arch event-arch--sil" variant="silhouette" />
-            <IslamicArch className="event-arch event-arch--line" />
-            <EightPointStar className="event-medallion" />
-            <FloralCorner className="event-floral event-floral--tl" corner="tl" />
-            <FloralCorner className="event-floral event-floral--tr" corner="tr" />
-            <FloralCorner className="event-floral event-floral--bl" corner="bl" />
-            <FloralCorner className="event-floral event-floral--br" corner="br" />
-            <span className="event-card-border" aria-hidden />
-            <div className="event-inner">
-              <p className="event-label">{event.label}</p>
-              <p className="event-time">{event.time}</p>
-              <GoldDivider className="event-divider" />
-              <p className="event-date">{dateLabel}</p>
-              <p className="event-detail">{event.detail}</p>
-            </div>
-          </LenisScrollElement>
-        ))}
-      </div>
+      <Suspense fallback={<ModelFallback />}>
+        <TashnaerScroll />
+      </Suspense>
+
+      <Suspense fallback={<ModelFallback />}>
+        <TumbaknariScroll />
+      </Suspense>
 
       <CarpetBorder className="events-carpet" />
     </section>
