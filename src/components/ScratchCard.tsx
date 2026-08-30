@@ -34,6 +34,32 @@ export function ScratchCard({ location }: Props) {
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, w, h)
 
+    // Tooled lattice so the foil reads as stamped gold leaf, not a flat gradient.
+    const cell = Math.max(26, Math.round(Math.min(w, h) / 7))
+    ctx.strokeStyle = 'rgba(244, 239, 228, 0.16)'
+    ctx.lineWidth = 1
+    for (let y = -cell; y < h + cell; y += cell) {
+      for (let x = -cell; x < w + cell; x += cell) {
+        const cx = x + cell / 2
+        const cy = y + cell / 2
+        const r = cell * 0.36
+        ctx.beginPath()
+        for (let p = 0; p < 8; p++) {
+          const a = (Math.PI / 4) * p
+          const radius = p % 2 === 0 ? r : r * 0.45
+          const px = cx + Math.cos(a) * radius
+          const py = cy + Math.sin(a) * radius
+          if (p === 0) ctx.moveTo(px, py)
+          else ctx.lineTo(px, py)
+        }
+        ctx.closePath()
+        ctx.stroke()
+      }
+    }
+
+    ctx.strokeStyle = 'rgba(244, 239, 228, 0.35)'
+    ctx.strokeRect(6.5, 6.5, w - 13, h - 13)
+
     for (let i = 0; i < 90; i++) {
       ctx.fillStyle = `rgba(244,239,228,${0.06 + Math.random() * 0.16})`
       ctx.beginPath()

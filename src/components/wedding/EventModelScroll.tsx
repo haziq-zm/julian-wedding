@@ -11,26 +11,36 @@ import {
   type MeshStandardMaterial,
   type Object3D,
 } from 'three'
-import { GoldDivider } from '../ornaments/GoldDivider'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
+import { FloralBranch } from '../ornaments/FloralBranch'
+import { GeometricRosette } from '../ornaments/GeometricRosette'
+import { JaliPattern } from '../ornaments/JaliPattern'
+import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { Reveal } from '../ui/Reveal'
 import { usePrefersReducedMotion } from '../lenis/usePrefersReducedMotion'
 
 /** Gentle turn while scrolling — not a full spin. */
 const SPIN_TURNS = 0.42
 
+type Variant = 'light' | 'deep'
+
 type Props = {
   modelUrl: string
   title: string
   caption: string
-  /** Extra yaw applied before scroll spin (radians). */
+  variant?: Variant
   initialYaw?: number
   scale?: number
-  /** Tone-mapping exposure; lower = slightly darker. */
   exposure?: number
   className?: string
+  index?: string
+  eyebrow?: string
+  note?: string
+  plaque?: string
 }
 
 function applyModelMotion(
-  wrap: HTMLDivElement,
+  wrap: HTMLElement,
   scroll: number,
   rotationRef: RefObject<number>,
   initialYaw: number,
@@ -54,7 +64,7 @@ function applyModelMotion(
     rotationRef.current = initialYaw
   }
 
-  wrap.style.opacity = String(0.94 + progress * 0.06)
+  wrap.style.opacity = String(0.88 + progress * 0.12)
 }
 
 function prepareStudioMaterials(root: Object3D) {
@@ -124,71 +134,17 @@ function StudioLights() {
     <>
       <hemisphereLight intensity={0.85} color="#ffffff" groundColor="#e8e8e8" />
       <ambientLight intensity={0.7} color="#f7f7f7" />
-
-      <directionalLight
-        position={[2.5, 5, 4]}
-        intensity={1.35}
-        color="#ffffff"
-      />
-      <directionalLight
-        position={[-3.5, 3, 2.5]}
-        intensity={0.85}
-        color="#ffffff"
-      />
-      <directionalLight
-        position={[0, 1.5, 6]}
-        intensity={1.05}
-        color="#ffffff"
-      />
-      <directionalLight
-        position={[0, -3, 2]}
-        intensity={0.45}
-        color="#f0f0f0"
-      />
-      <directionalLight
-        position={[0, 2, -4]}
-        intensity={0.55}
-        color="#ffffff"
-      />
-
+      <directionalLight position={[2.5, 5, 4]} intensity={1.35} color="#ffffff" />
+      <directionalLight position={[-3.5, 3, 2.5]} intensity={0.85} color="#ffffff" />
+      <directionalLight position={[0, 1.5, 6]} intensity={1.05} color="#ffffff" />
+      <directionalLight position={[0, -3, 2]} intensity={0.45} color="#f0f0f0" />
+      <directionalLight position={[0, 2, -4]} intensity={0.55} color="#ffffff" />
       <Environment resolution={256} environmentIntensity={0.55}>
-        <Lightformer
-          form="rect"
-          intensity={2.2}
-          color="#ffffff"
-          scale={[10, 4, 1]}
-          position={[0, 5, 0]}
-          rotation-x={-Math.PI / 2}
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.2}
-          color="#ffffff"
-          scale={[6, 6, 1]}
-          position={[-5, 1, 2]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.2}
-          color="#ffffff"
-          scale={[6, 6, 1]}
-          position={[5, 1, 2]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={0.8}
-          color="#f5f5f5"
-          scale={[8, 4, 1]}
-          position={[0, -3, 1]}
-          rotation-x={Math.PI / 2}
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.4}
-          color="#ffffff"
-          scale={[10, 8, 1]}
-          position={[0, 1, -5]}
-        />
+        <Lightformer form="rect" intensity={2.2} color="#ffffff" scale={[10, 4, 1]} position={[0, 5, 0]} rotation-x={-Math.PI / 2} />
+        <Lightformer form="rect" intensity={1.2} color="#ffffff" scale={[6, 6, 1]} position={[-5, 1, 2]} />
+        <Lightformer form="rect" intensity={1.2} color="#ffffff" scale={[6, 6, 1]} position={[5, 1, 2]} />
+        <Lightformer form="rect" intensity={0.8} color="#f5f5f5" scale={[8, 4, 1]} position={[0, -3, 1]} rotation-x={Math.PI / 2} />
+        <Lightformer form="rect" intensity={1.4} color="#ffffff" scale={[10, 8, 1]} position={[0, 1, -5]} />
       </Environment>
     </>
   )
@@ -225,11 +181,7 @@ function ModelCanvas({
     >
       <StudioLights />
       <Suspense fallback={null}>
-        <ModelMesh
-          modelUrl={modelUrl}
-          scale={scale}
-          rotationRef={rotationRef}
-        />
+        <ModelMesh modelUrl={modelUrl} scale={scale} rotationRef={rotationRef} />
       </Suspense>
     </Canvas>
   )
@@ -239,12 +191,17 @@ export function EventModelScroll({
   modelUrl,
   title,
   caption,
+  variant = 'light',
   initialYaw = 0,
   scale = 0.78,
   exposure = 1.05,
   className = '',
+  index = 'I',
+  eyebrow = 'A Kashmiri Ritual',
+  note,
+  plaque,
 }: Props) {
-  const wrapRef = useRef<HTMLDivElement>(null)
+  const wrapRef = useRef<HTMLElement>(null)
   const rotationRef = useRef(initialYaw)
   const reducedMotion = usePrefersReducedMotion()
 
@@ -261,35 +218,82 @@ export function EventModelScroll({
   useEffect(() => {
     const wrap = wrapRef.current
     if (!wrap) return
-    applyModelMotion(
-      wrap,
-      window.scrollY,
-      rotationRef,
-      initialYaw,
-      reducedMotion,
-    )
+    applyModelMotion(wrap, window.scrollY, rotationRef, initialYaw, reducedMotion)
   }, [initialYaw, reducedMotion])
 
   return (
-    <div
+    <article
       ref={wrapRef}
-      className={`event-model-scroll lenis-scroll-el lenis-scroll-el--parallax ${className}`.trim()}
+      id={title === 'Food' ? 'food' : undefined}
+      className={`feast-chapter feast-chapter--${variant} lenis-scroll-el lenis-scroll-el--parallax ${className}`.trim()}
     >
-      <p className="event-model-eyebrow">{title}</p>
-      <GoldDivider className="event-model-divider" />
-      <div className="event-model-stage">
-        <div className="event-model-room" aria-hidden />
-        <div className="event-model-glow" aria-hidden />
-        <div className="event-model-canvas" aria-hidden>
-          <ModelCanvas
-            modelUrl={modelUrl}
-            scale={scale}
-            exposure={exposure}
-            rotationRef={rotationRef}
-          />
-        </div>
+      <div className="feast-chapter__backdrop" aria-hidden>
+        <JaliPattern className="feast-chapter__screen" />
+        <span className="feast-chapter__wash" />
       </div>
-      <p className="event-model-caption">{caption}</p>
-    </div>
+
+      <FloralBranch
+        position={variant === 'deep' ? 'top-right' : 'top-left'}
+        size="large"
+        className={`botanical-reveal botanical-reveal--${variant === 'deep' ? 'right' : 'left'}`}
+      />
+      <FloralBranch
+        position={variant === 'deep' ? 'bottom-left' : 'bottom-right'}
+        size="medium"
+        className="feast-chapter__sprig"
+      />
+
+      <div className="feast-chapter__composition">
+        <Reveal
+          variant={variant === 'deep' ? 'right' : 'left'}
+          className="feast-chapter__copy"
+        >
+          <span className="feast-chapter__index" aria-hidden>
+            {index}
+          </span>
+          <p className="inv-label">{eyebrow}</p>
+          <h3 className="feast-chapter__title">{title}</h3>
+          <AnimatedDivider light={variant === 'deep'} />
+          <p className="feast-chapter__caption">{caption}</p>
+          {note && <p className="feast-chapter__note">{note}</p>}
+        </Reveal>
+
+        <Reveal variant="clip" className="feast-chapter__shrine">
+          <MughalArchFrame
+            size="fluid"
+            tone={variant === 'deep' ? 'deep' : 'parchment'}
+            variant={title === 'Food' ? 'onion' : title === 'Music' ? 'cusped' : 'pointed'}
+            crest={<GeometricRosette className="feast-chapter__crest" />}
+          >
+            <div className="feast-chapter__niche">
+              <div className="feast-chapter__halo" aria-hidden />
+              {title === 'Food' && (
+                <img
+                  className="feast-chapter__platter"
+                  src="/images/feast-platter.png"
+                  alt="Traditional Kashmiri wedding feast arranged on an ornate platter"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+              <div className="feast-chapter__canvas" aria-hidden>
+                <ModelCanvas
+                  modelUrl={modelUrl}
+                  scale={scale}
+                  exposure={exposure}
+                  rotationRef={rotationRef}
+                />
+              </div>
+              <span className="feast-chapter__pedestal" aria-hidden />
+            </div>
+          </MughalArchFrame>
+          <div className="feast-chapter__plaque">
+            <span>✦</span>
+            {plaque ?? `The Art of ${title}`}
+            <span>✦</span>
+          </div>
+        </Reveal>
+      </div>
+    </article>
   )
 }

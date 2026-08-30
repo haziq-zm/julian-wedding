@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { wedding } from './config'
 import { InvitationCover } from './components/wedding/InvitationCover'
+import { SiteNavigation } from './components/wedding/SiteNavigation'
 import { WeddingHero } from './components/wedding/WeddingHero'
 import { CoupleSection } from './components/wedding/CoupleSection'
 import { CountdownSection } from './components/wedding/CountdownSection'
@@ -8,12 +9,15 @@ import { EventsSection } from './components/wedding/EventsSection'
 import { VenueSection } from './components/wedding/VenueSection'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
+import { RsvpSection } from './components/wedding/RsvpSection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
-import { SectionScallop } from './components/ornaments/SectionScallop'
+import { SectionVeil } from './components/ornaments/SectionVeil'
 import { LenisScrollProvider } from './components/lenis/LenisScrollProvider'
 import './App.css'
+import './styles/motion.css'
 import './ornate.css'
 import './mobile.css'
+import './styles/invitation.css'
 import './lenis-scroll.css'
 
 export default function App() {
@@ -38,7 +42,7 @@ export default function App() {
 
   return (
     <LenisScrollProvider enabled={opened}>
-      <div className={`page ${opened ? 'page--open' : 'page--sealed'}`}>
+      <div className={`page luxury-page ${opened ? 'page--open' : 'page--sealed'}`}>
         <div className="paper-grain" aria-hidden />
 
         <InvitationCover
@@ -49,68 +53,82 @@ export default function App() {
         onOpened={handleOpened}
         />
 
-        <div
-          className={`details ${opened ? 'details--visible' : ''}`}
+        <main
+          className={`details inv-page ${opened ? 'details--visible' : ''}`}
           aria-hidden={!opened}
           {...(!opened ? { inert: true as const } : {})}
         >
-          <WeddingHero />
+          <SiteNavigation visible={opened} />
 
-        <SectionScallop className="scallop--to-ivory" />
+          <WeddingHero
+            partnerOne={wedding.partnerOne}
+            partnerTwo={wedding.partnerTwo}
+            dateLabel={wedding.dateLabel}
+            venue={wedding.location.venue}
+            address={wedding.location.address}
+            tagline={wedding.tagline}
+          />
 
-        <CoupleSection
-          title={wedding.story.title}
-          lead={wedding.story.lead}
-          body={wedding.story.body}
-          dateLabel={wedding.dateLabel}
-        />
+          <SectionVeil from="olive" to="parchment" />
 
-        <SectionScallop className="scallop--to-olive" flip />
+          <CoupleSection
+            title={wedding.story.title}
+            lead={wedding.story.lead}
+            body={wedding.story.body}
+            dateLabel={wedding.dateLabel}
+          />
 
-        <CountdownSection
-          target={wedding.date}
-          dateLabel={wedding.dateLabel}
-          timeLabel={wedding.timeLabel}
-        />
+          <SectionVeil from="parchment" to="olive" />
 
-        <SectionScallop className="scallop--to-parchment" flip />
+          <CountdownSection
+            target={wedding.date}
+            dateLabel={wedding.dateLabel}
+            timeLabel={wedding.timeLabel}
+          />
 
-        <EventsSection />
+          <SectionVeil from="olive" to="parchment" />
 
-        <SectionScallop className="scallop--to-olive" flip />
+          <EventsSection
+            schedule={wedding.schedule}
+            dateLabel={wedding.dateLabel}
+          />
 
-        <VenueSection location={wedding.location} />
+          <SectionVeil from="parchment" to="olive" />
 
-        <SectionScallop className="scallop--to-deep" flip />
+          <VenueSection location={wedding.location} />
 
-        <InvitationCardSection
-          partnerOne={wedding.partnerOne}
-          partnerTwo={wedding.partnerTwo}
-          dateLabel={wedding.dateLabel}
-          timeLabel={wedding.timeLabel}
-          venue={wedding.location.venue}
-          address={wedding.location.address}
-          blessing={wedding.blessing}
-        />
+          <SectionVeil from="olive" to="deep" />
 
-        <SectionScallop className="scallop--to-ivory" flip />
+          <InvitationCardSection
+            partnerOne={wedding.partnerOne}
+            partnerTwo={wedding.partnerTwo}
+            dateLabel={wedding.dateLabel}
+            timeLabel={wedding.timeLabel}
+            venue={wedding.location.venue}
+            address={wedding.location.address}
+            blessing={wedding.blessing}
+          />
 
-        <GallerySection
-          dateLabel={wedding.dateLabel}
-          venue={wedding.location.venue}
-          address={wedding.location.address}
-          partnerOne={wedding.partnerOne}
-          partnerTwo={wedding.partnerTwo}
-        />
+          <SectionVeil from="deep" to="parchment" />
 
-        <SectionScallop className="scallop--to-deep" flip />
+          <GallerySection
+            dateLabel={wedding.dateLabel}
+            venue={wedding.location.venue}
+            address={wedding.location.address}
+            partnerOne={wedding.partnerOne}
+            partnerTwo={wedding.partnerTwo}
+          />
 
-        <WeddingFooter
-          partnerOne={wedding.partnerOne}
-          partnerTwo={wedding.partnerTwo}
-          year={year}
-        />
-      </div>
+          <SectionVeil from="parchment" to="olive" />
+
+          <RsvpSection deadlineLabel={wedding.rsvpDeadline} />
+
+          <WeddingFooter
+            partnerOne={wedding.partnerOne}
+            partnerTwo={wedding.partnerTwo}
+            year={year}
+          />
+        </main>
       </div>
     </LenisScrollProvider>
   )

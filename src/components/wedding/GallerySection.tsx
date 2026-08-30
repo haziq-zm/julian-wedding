@@ -1,12 +1,12 @@
-import { LenisScrollElement } from '../lenis/LenisScrollElement'
-import { CarpetBorder } from '../ornaments/CarpetBorder'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { EightPointStar } from '../ornaments/EightPointStar'
-import { FloralCorner } from '../ornaments/FloralCorner'
+import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { GoldDivider } from '../ornaments/GoldDivider'
-import { IslamicArch } from '../ornaments/IslamicArch'
+import { InvitationSurface } from '../ornaments/InvitationSurface'
 import { JaliPattern } from '../ornaments/JaliPattern'
-import { SectionHeader } from '../ornaments/SectionHeader'
+import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { Reveal } from '../ui/Reveal'
+
 type Props = {
   dateLabel: string
   venue: string
@@ -23,84 +23,61 @@ export function GallerySection({
   partnerTwo,
 }: Props) {
   return (
-    <section id="gallery" className="gallery section-band section-band--ivory">
-      <JaliPattern className="gallery-jali" />
+    <InvitationSurface id="gallery" tone="cream" className="editorial-suite">
+      <JaliPattern className="editorial-suite__screen" />
+      <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
+      <FloralBranch position="bottom-right" size="medium" className="botanical-reveal botanical-reveal--right" />
 
-      <SectionHeader eyebrow="Stationery" title="Invitation Suite" />
+      <Reveal as="header" variant="up" className="editorial-suite__header">
+        <p className="inv-label inv-label--dark">Pieces of the Celebration</p>
+        <h2 className="inv-title">An Invitation Suite</h2>
+        <AnimatedDivider />
+        <p className="inv-prose">
+          Every piece hand-set in gold, olive, and paper the colour of old letters
+        </p>
+      </Reveal>
 
-      <div className="gallery-grid">
-        <LenisScrollElement
-          as="article"
-          effect="scale-in"
-          speed={0.14}
-          className="gallery-piece gallery-piece--hero"
-        >
-          <IslamicArch className="gallery-arch gallery-arch--sil" variant="silhouette" />
-          <IslamicArch className="gallery-arch gallery-arch--line" />
-          <FloralCorner className="gallery-floral gallery-floral--tl" corner="tl" />
-          <FloralCorner className="gallery-floral gallery-floral--br" corner="br" />
-          <GeometricRosette className="gallery-rosette" />
-          <div className="gallery-piece-inner">
-            <GeometricRosette className="gallery-rosette gallery-rosette--inner" />
-            <p className="gallery-label">The Cover</p>
-            <p className="gallery-names">
-              {partnerOne} & {partnerTwo}
-            </p>
-          </div>
-        </LenisScrollElement>
+      <div className="editorial-suite__collage">
+        <span className="editorial-suite__mat" aria-hidden />
 
-        <LenisScrollElement
-          as="article"
-          effect="fade-up"
-          className="gallery-piece gallery-piece--detail"
-        >
-          <EightPointStar className="gallery-star" />
-          <GeometricRosette className="gallery-mini-rosette" />
-          <p className="gallery-label">The Date</p>
-          <p className="gallery-text">{dateLabel}</p>
-        </LenisScrollElement>
+        <Reveal variant="clip" className="editorial-suite__piece editorial-suite__piece--arch">
+          <MughalArchFrame
+            size="fluid"
+            tone="parchment"
+            variant="cusped"
+            crest={<GeometricRosette className="editorial-suite__crest" />}
+          >
+            <span className="editorial-suite__monogram">J <i>&amp;</i> J</span>
+            <span className="editorial-suite__rule" aria-hidden />
+            <p className="editorial-suite__caption">The Cover</p>
+          </MughalArchFrame>
+          <span className="editorial-suite__tab" aria-hidden>No. 01</span>
+        </Reveal>
 
-        <LenisScrollElement
-          as="article"
-          effect="fade-up"
-          speed={0.22}
-          className="gallery-piece gallery-piece--detail gallery-piece--wine"
-        >
-          <EightPointStar className="gallery-star" />
-          <GeometricRosette className="gallery-mini-rosette" />
-          <p className="gallery-label">The Venue</p>
-          <p className="gallery-text">{venue}</p>
-          <p className="gallery-sub">{address}</p>
-        </LenisScrollElement>
+        <Reveal variant="right" className="editorial-suite__piece editorial-suite__piece--date" delay={100}>
+          <span className="editorial-suite__corner" aria-hidden />
+          <p className="editorial-suite__label">Save the date</p>
+          <p className="editorial-suite__text">{dateLabel}</p>
+          <EightPointStar className="editorial-suite__pip" />
+        </Reveal>
 
-        <LenisScrollElement
-          as="article"
-          effect="parallax"
-          speed={0.1}
-          className="gallery-piece gallery-piece--tall"
-        >
-          <FloralCorner className="gallery-floral gallery-floral--tl" corner="tl" />
-          <FloralCorner className="gallery-floral gallery-floral--br" corner="br" />
-          <EightPointStar className="gallery-star gallery-star--tall" />
-          <p className="gallery-label">The Couple</p>
-          <p className="gallery-quote">
-            {partnerOne} & {partnerTwo}
-          </p>
-        </LenisScrollElement>
+        <Reveal variant="left" className="editorial-suite__piece editorial-suite__piece--venue" delay={160}>
+          <span className="editorial-suite__corner" aria-hidden />
+          <p className="editorial-suite__label">The gathering</p>
+          <p className="editorial-suite__text">{venue}</p>
+          <p className="editorial-suite__sub">{address}</p>
+          <EightPointStar className="editorial-suite__pip" />
+        </Reveal>
 
-        <LenisScrollElement
-          as="article"
-          effect="fade-up"
-          className="gallery-piece gallery-piece--wide"
-        >
-          <CarpetBorder className="gallery-carpet" />
-          <GoldDivider className="ornament-divider" />
-          <p className="gallery-label">With Gratitude</p>
-          <p className="gallery-quote">
-            Your presence is the greatest gift as we begin our life together.
-          </p>
-        </LenisScrollElement>
+        <Reveal variant="scale" className="editorial-suite__piece editorial-suite__piece--quote" delay={220}>
+          <span className="editorial-suite__wax" aria-hidden>❦</span>
+          <blockquote>
+            Your presence is the greatest gift as {partnerOne} &amp; {partnerTwo} begin
+            their life together.
+          </blockquote>
+          <p className="editorial-suite__signoff">With love, both families</p>
+        </Reveal>
       </div>
-    </section>
+    </InvitationSurface>
   )
 }

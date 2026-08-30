@@ -67,7 +67,7 @@ export function LenisScrollElement({
     update()
     const id = requestAnimationFrame(update)
     return () => cancelAnimationFrame(id)
-  }, [effect, speed])
+  }, [effect, ref, speed])
 
   const classNames = `lenis-scroll-el lenis-scroll-el--${effect} ${className}`.trim()
 

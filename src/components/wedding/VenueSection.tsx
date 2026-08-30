@@ -1,13 +1,12 @@
-import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { FloralCorner } from '../ornaments/FloralCorner'
-import { FloralSpray } from '../ornaments/FloralSpray'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
+import { DecorativeStars } from '../ornaments/DecorativeStars'
+import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { GoldDivider } from '../ornaments/GoldDivider'
-import { IslamicArch } from '../ornaments/IslamicArch'
-import { JaliPattern } from '../ornaments/JaliPattern'
+import { InvitationSurface } from '../ornaments/InvitationSurface'
 import { Lantern } from '../ornaments/Lantern'
-import { OrnamentalFrame } from '../ornaments/OrnamentalFrame'
-import { SectionHeader } from '../ornaments/SectionHeader'
+import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { PalaceSkyline } from '../ornaments/PalaceSkyline'
+import { Reveal } from '../ui/Reveal'
 import { ScratchCard } from '../ScratchCard'
 
 type LocationInfo = {
@@ -23,36 +22,47 @@ type Props = {
 
 export function VenueSection({ location }: Props) {
   return (
-    <section id="venue" className="venue section-band section-band--olive">
-      <JaliPattern className="venue-jali" />
-      <div className="venue-vignette" aria-hidden />
-      <FloralSpray className="venue-spray venue-spray--l" side="left" />
-      <FloralSpray className="venue-spray venue-spray--r" side="right" />
-      <Lantern className="venue-lantern venue-lantern--l" size="md" />
-      <Lantern className="venue-lantern venue-lantern--r" size="md" />
+    <InvitationSurface id="venue" tone="olive" className="palace-venue">
+      <DecorativeStars count={10} />
+      <PalaceSkyline className="palace-venue__skyline" />
+      <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
+      <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
 
-      <SectionHeader eyebrow="The Place" title="The Venue" light />
-
-      <p className="venue-intro">
-        A little surprise awaits — scratch the golden foil to reveal where we gather.
-      </p>
-
-      <OrnamentalFrame variant="olive" className="venue-frame">
-        <IslamicArch className="venue-arch" variant="silhouette" />
-        <GeometricRosette className="venue-rosette" />
-        <FloralCorner className="venue-floral venue-floral--tl" corner="tl" />
-        <FloralCorner className="venue-floral venue-floral--tr" corner="tr" />
-        <FloralCorner className="venue-floral venue-floral--bl" corner="bl" />
-        <FloralCorner className="venue-floral venue-floral--br" corner="br" />
-        <ScratchCard location={location} />
-      </OrnamentalFrame>
-
-      <div className="venue-note-panel">
-        <GoldDivider className="ornament-divider ornament-divider--light" />
-        <p>{location.note}</p>
+      <div className="palace-venue__colonnade" aria-hidden>
+        <span /><span /><span /><span /><span />
       </div>
 
-      <CarpetBorder className="venue-carpet" />
-    </section>
+      <div className="palace-venue__lanterns" aria-hidden>
+        <span><Lantern size="lg" /></span>
+        <span><Lantern size="lg" /></span>
+      </div>
+
+      <Reveal as="header" variant="up" className="palace-venue__header">
+        <p className="inv-label">The Place</p>
+        <h2 className="inv-title inv-title--light">Where We Gather</h2>
+        <AnimatedDivider light />
+        <p className="inv-prose inv-prose--light">
+          Scratch the gilded veil to reveal the garden that awaits.
+        </p>
+      </Reveal>
+
+      <Reveal variant="clip" className="palace-venue__reveal">
+        <MughalArchFrame
+          size="fluid"
+          tone="deep"
+          variant="cusped"
+          crest={<GeometricRosette className="palace-venue__crest" />}
+        >
+          <div className="palace-venue__scratch">
+            <ScratchCard location={location} />
+          </div>
+        </MughalArchFrame>
+      </Reveal>
+
+      <Reveal variant="up" className="palace-venue__note">
+        <span aria-hidden>❦</span>
+        <p>{location.note}</p>
+      </Reveal>
+    </InvitationSurface>
   )
 }

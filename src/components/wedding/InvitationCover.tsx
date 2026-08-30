@@ -8,7 +8,6 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from 'react'
-import confetti from 'canvas-confetti'
 import { useLenis } from 'lenis/react'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
@@ -34,41 +33,6 @@ const MAX_PULL_PX = 320
 const SETTLE_MS = 900
 const SCROLL_CUE_DELAY_MS = 2000
 const SCROLL_PEEK_PX = 88
-const CONFETTI_COLORS = ['#4B5135', '#B59655', '#641F24', '#F4EFE4', '#C9AB6A']
-
-function celebrateOpen() {
-  const defaults = {
-    colors: CONFETTI_COLORS,
-    disableForReducedMotion: true,
-  }
-
-  confetti({
-    ...defaults,
-    particleCount: 55,
-    spread: 62,
-    startVelocity: 38,
-    origin: { x: 0.18, y: 0.55 },
-    angle: 60,
-  })
-  confetti({
-    ...defaults,
-    particleCount: 55,
-    spread: 62,
-    startVelocity: 38,
-    origin: { x: 0.82, y: 0.55 },
-    angle: 120,
-  })
-  window.setTimeout(() => {
-    confetti({
-      ...defaults,
-      particleCount: 40,
-      spread: 80,
-      startVelocity: 28,
-      origin: { x: 0.5, y: 0.35 },
-      scalar: 0.95,
-    })
-  }, 180)
-}
 
 export function InvitationCover({
   partnerOne,
@@ -81,7 +45,6 @@ export function InvitationCover({
   const [pull, setPull] = useState(0)
   const [scrollCue, setScrollCue] = useState(false)
   const openedRef = useRef(false)
-  const confettiFiredRef = useRef(false)
   const scrollCueStartedRef = useRef(false)
   const pullRef = useRef(0)
   const animFrameRef = useRef(0)
@@ -102,12 +65,6 @@ export function InvitationCover({
     setPull(next)
   }, [])
 
-  const fireConfetti = useCallback(() => {
-    if (confettiFiredRef.current) return
-    confettiFiredRef.current = true
-    celebrateOpen()
-  }, [])
-
   const scheduleScrollCue = useCallback(() => {
     if (scrollCueStartedRef.current) return
     scrollCueStartedRef.current = true
@@ -126,10 +83,6 @@ export function InvitationCover({
     scheduleScrollCue()
 
     const from = pullRef.current
-    if (from >= 0.92) {
-      fireConfetti()
-    }
-
     const start = performance.now()
     const duration = Math.max(280, (1 - from) * 700)
 
@@ -144,12 +97,11 @@ export function InvitationCover({
       }
 
       setPullValue(1)
-      fireConfetti()
       window.setTimeout(() => setPhase('open'), SETTLE_MS)
     }
 
     animFrameRef.current = requestAnimationFrame(tick)
-  }, [phase, setPullValue, fireConfetti, scheduleScrollCue])
+  }, [phase, setPullValue, scheduleScrollCue])
 
   useEffect(() => {
     return () => {

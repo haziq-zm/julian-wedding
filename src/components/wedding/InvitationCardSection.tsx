@@ -1,12 +1,12 @@
-import { LenisScrollElement } from '../lenis/LenisScrollElement'
-import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { FloralCorner } from '../ornaments/FloralCorner'
-import { FloralSpray } from '../ornaments/FloralSpray'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
+import { DecorativeStars } from '../ornaments/DecorativeStars'
+import { EightPointStar } from '../ornaments/EightPointStar'
+import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { GoldDivider } from '../ornaments/GoldDivider'
-import { IslamicArch } from '../ornaments/IslamicArch'
-import { JaliPattern } from '../ornaments/JaliPattern'
-import { SectionHeader } from '../ornaments/SectionHeader'
+import { InvitationSurface } from '../ornaments/InvitationSurface'
+import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { Reveal } from '../ui/Reveal'
+
 type Props = {
   partnerOne: string
   partnerTwo: string
@@ -27,40 +27,49 @@ export function InvitationCardSection({
   blessing,
 }: Props) {
   return (
-    <section id="invitation" className="card-sec section-band section-band--deep">
-      <JaliPattern className="card-sec-jali" />
-      <FloralSpray className="card-sec-spray card-sec-spray--l" side="left" />
-      <FloralSpray className="card-sec-spray card-sec-spray--r" side="right" />
+    <InvitationSurface id="invitation" tone="olive-deep" className="keepsake-scene">
+      <DecorativeStars count={10} />
+      <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
+      <FloralBranch position="bottom-left" size="large" className="botanical-reveal botanical-reveal--left" />
 
-      <SectionHeader eyebrow="Keepsake" title="The Invitation" light />
+      <Reveal as="header" variant="up" className="keepsake-scene__header">
+        <p className="inv-label">A Keepsake</p>
+        <h2 className="inv-title inv-title--light">The Invitation</h2>
+        <AnimatedDivider light />
+      </Reveal>
 
-      <LenisScrollElement as="article" effect="scale-in" speed={0.22} className="invite-card">
-        <IslamicArch className="invite-arch invite-arch--sil" variant="silhouette" />
-        <IslamicArch className="invite-arch invite-arch--line" />
-        <FloralCorner className="invite-floral invite-floral--tl" corner="tl" />
-        <FloralCorner className="invite-floral invite-floral--tr" corner="tr" />
-        <FloralCorner className="invite-floral invite-floral--bl" corner="bl" />
-        <FloralCorner className="invite-floral invite-floral--br" corner="br" />
-        <span className="invite-card-gilt" aria-hidden />
+      <div className="keepsake-scene__table">
+        <div className="keepsake-scene__cloth" aria-hidden />
 
-        <div className="invite-inner">
-          <GeometricRosette className="invite-rosette" />
-          <p className="invite-kicker">You Are Cordially Invited</p>
-          <h3 className="invite-names">
-            {partnerOne} <span>&</span> {partnerTwo}
-          </h3>
-          <GoldDivider className="invite-divider" />
-          <p className="invite-blessing">{blessing}</p>
-          <div className="invite-details">
-            <p className="invite-date">{dateLabel}</p>
-            <p className="invite-time">{timeLabel}</p>
-            <p className="invite-venue">{venue}</p>
-            <p className="invite-address">{address}</p>
-          </div>
-        </div>
-      </LenisScrollElement>
+        <Reveal variant="left" className="keepsake-scene__envelope" delay={120}>
+          <span className="keepsake-scene__flap" aria-hidden />
+          <span className="keepsake-scene__seal" aria-hidden>J &amp; J</span>
+          <span className="keepsake-scene__stamp" aria-hidden>
+            <EightPointStar />
+          </span>
+        </Reveal>
 
-      <CarpetBorder className="card-sec-carpet" />
-    </section>
+        <Reveal as="article" variant="clip" className="keepsake-scene__card">
+          <MughalArchFrame
+            size="fluid"
+            tone="olive"
+            variant="onion"
+            crest={<GeometricRosette className="keepsake-scene__crest" />}
+          >
+            <p className="keepsake-scene__kicker">You Are Cordially Invited</p>
+            <h3 className="keepsake-scene__names">
+              {partnerOne} <i>&amp;</i> {partnerTwo}
+            </h3>
+            <AnimatedDivider light />
+            <p className="keepsake-scene__blessing">{blessing}</p>
+            <div className="keepsake-scene__details">
+              <p>{dateLabel}</p>
+              <p>{timeLabel}</p>
+              <p>{venue} · {address}</p>
+            </div>
+          </MughalArchFrame>
+        </Reveal>
+      </div>
+    </InvitationSurface>
   )
 }

@@ -1,38 +1,131 @@
-import { LenisScrollElement } from '../lenis/LenisScrollElement'
-import { CarpetBorder } from '../ornaments/CarpetBorder'
+import { useRef, type PointerEvent } from 'react'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
+import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { EightPointStar } from '../ornaments/EightPointStar'
-import { FloralSpray } from '../ornaments/FloralSpray'
+import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
+import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { PalaceSkyline } from '../ornaments/PalaceSkyline'
+import { Reveal } from '../ui/Reveal'
 
-export function WeddingHero() {
+type Props = {
+  partnerOne: string
+  partnerTwo: string
+  dateLabel: string
+  venue: string
+  address: string
+  tagline: string
+}
+
+export function WeddingHero({
+  partnerOne,
+  partnerTwo,
+  dateLabel,
+  venue,
+  address,
+  tagline,
+}: Props) {
+  const heroRef = useRef<HTMLElement>(null)
+
+  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType === 'touch') return
+    const rect = event.currentTarget.getBoundingClientRect()
+    const x = (event.clientX - rect.left) / rect.width - 0.5
+    const y = (event.clientY - rect.top) / rect.height - 0.5
+    heroRef.current?.style.setProperty('--hero-x', x.toFixed(3))
+    heroRef.current?.style.setProperty('--hero-y', y.toFixed(3))
+  }
+
   return (
-    <section id="home" className="welcome section-band section-band--olive">
-      <JaliPattern className="welcome-jali" />
-      <div className="welcome-vignette" aria-hidden />
-      <FloralSpray className="welcome-spray welcome-spray--l" side="left" />
-      <FloralSpray className="welcome-spray welcome-spray--r" side="right" />
-      <Lantern className="welcome-lantern welcome-lantern--l" size="md" />
-      <Lantern className="welcome-lantern welcome-lantern--r" size="md" />
+    <section
+      ref={heroRef}
+      id="home"
+      className="lux-hero"
+      onPointerMove={handlePointerMove}
+    >
+      <div className="lux-hero__paper" aria-hidden />
+      <JaliPattern className="lux-hero__jali" />
+      <div className="lux-hero__geometry" aria-hidden />
+      <div className="lux-hero__horizon" aria-hidden />
+      <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--far" />
+      <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--near" arcade={false} />
+      <DecorativeStars count={18} className="lux-hero__dust" />
 
-      <LenisScrollElement className="welcome-inner" effect="fade-up">
-        <EightPointStar className="welcome-star" />
-        <p className="eyebrow eyebrow--light">Bismillah</p>
-        <GeometricRosette className="welcome-rosette" />
-        <h2 className="welcome-title">Join Us in Celebration</h2>
-        <GoldDivider className="ornament-divider ornament-divider--light" />
-        <p className="welcome-lead">
-          with the blessings of our families and the duas of those who have
-          loved and guided us
-        </p>
-        <a className="welcome-link" href="#story">
-          Continue to our story
-        </a>
-      </LenisScrollElement>
+      <div className="lux-hero__lanterns" aria-hidden>
+        <span className="lux-hero__lantern lux-hero__lantern--one">
+          <Lantern size="lg" />
+        </span>
+        <span className="lux-hero__lantern lux-hero__lantern--two">
+          <Lantern size="md" />
+        </span>
+        <span className="lux-hero__lantern lux-hero__lantern--three">
+          <Lantern size="md" />
+        </span>
+        <span className="lux-hero__lantern lux-hero__lantern--four">
+          <Lantern size="lg" />
+        </span>
+      </div>
 
-      <CarpetBorder className="welcome-carpet" />
+      <FloralBranch position="top-left" size="large" className="lux-hero__branch lux-hero__branch--far" />
+      <FloralBranch position="top-right" size="large" className="lux-hero__branch lux-hero__branch--far" />
+      <FloralBranch position="bottom-left" size="large" className="lux-hero__branch lux-hero__branch--near" />
+      <FloralBranch position="bottom-right" size="large" className="lux-hero__branch lux-hero__branch--near" />
+
+      <Reveal variant="clip" className="lux-hero__stage">
+        <MughalArchFrame
+          size="monument"
+          tone="deep"
+          variant="cusped"
+          className="lux-hero__arch"
+          crest={
+            <>
+              <GeometricRosette className="lux-hero__rosette" />
+              <span className="lux-hero__bismillah">Bismillāh ir-Raḥmān ir-Raḥīm</span>
+            </>
+          }
+        >
+          <div className="lux-hero__content">
+            <p className="lux-hero__kicker">
+              <EightPointStar className="lux-hero__kicker-star" />
+              The Wedding Celebration Of
+              <EightPointStar className="lux-hero__kicker-star" />
+            </p>
+
+            <h1 className="lux-hero__names" aria-label={`${partnerOne} and ${partnerTwo}`}>
+              <span className="lux-hero__name lux-hero__name--one">{partnerOne}</span>
+              <span className="lux-hero__amp" aria-hidden>
+                <span className="lux-hero__amp-rule" />
+                <i>&amp;</i>
+                <span className="lux-hero__amp-rule" />
+              </span>
+              <span className="lux-hero__name lux-hero__name--two">{partnerTwo}</span>
+            </h1>
+
+            <AnimatedDivider light className="lux-hero__divider" />
+
+            <time className="lux-hero__date" dateTime="2026-10-10">
+              {dateLabel}
+            </time>
+            <p className="lux-hero__place">{venue} · {address}</p>
+            <p className="lux-hero__tagline">{tagline}</p>
+          </div>
+        </MughalArchFrame>
+
+        <span className="lux-hero__plinth-shadow" aria-hidden />
+      </Reveal>
+
+      <span className="lux-hero__bracket lux-hero__bracket--tl" aria-hidden />
+      <span className="lux-hero__bracket lux-hero__bracket--tr" aria-hidden />
+      <span className="lux-hero__bracket lux-hero__bracket--bl" aria-hidden />
+      <span className="lux-hero__bracket lux-hero__bracket--br" aria-hidden />
+
+      <a className="lux-hero__scroll" href="#story">
+        <span className="lux-hero__scroll-star" aria-hidden>✦</span>
+        <span>Scroll to explore</span>
+        <span className="lux-hero__scroll-line" aria-hidden />
+      </a>
     </section>
   )
 }
