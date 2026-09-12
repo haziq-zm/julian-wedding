@@ -1,19 +1,11 @@
-import { Suspense, lazy } from 'react'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { MughalArchFrame } from '../ornaments/MughalArchFrame'
 import { PalaceSkyline } from '../ornaments/PalaceSkyline'
 import { Reveal } from '../ui/Reveal'
-
-const StoryGateScroll = lazy(() =>
-  import('./StoryGateScroll').then((module) => ({
-    default: module.StoryGateScroll,
-  })),
-)
 
 type Props = {
   title: string
@@ -25,9 +17,7 @@ type Props = {
 export function CoupleSection({ title, lead, body, dateLabel }: Props) {
   return (
     <InvitationSurface id="story" tone="parchment-soft" className="editorial-story">
-      <JaliPattern className="editorial-story__screen" />
       <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
-      <FloralBranch position="top-right" size="medium" className="botanical-reveal botanical-reveal--right" />
       <FloralBranch position="bottom-right" size="large" className="botanical-reveal botanical-reveal--right" />
 
       <Reveal as="header" variant="up" className="editorial-story__header">
@@ -47,19 +37,21 @@ export function CoupleSection({ title, lead, body, dateLabel }: Props) {
             variant="onion"
             crest={<GeometricRosette className="editorial-story__crest-rosette" />}
           >
-                  <div className="editorial-story__miniature" aria-hidden>
-                    <span className="editorial-story__sky" />
-                    <span className="editorial-story__sun" />
-                    <span className="editorial-story__birds" />
-                    <span className="editorial-story__range editorial-story__range--far" />
-                    <span className="editorial-story__range editorial-story__range--mid" />
-                    <PalaceSkyline className="editorial-story__far-palace" arcade={false} />
-                    <span className="editorial-story__lake" />
-                    <span className="editorial-story__shikara" />
-                    <span className="editorial-story__chinar editorial-story__chinar--left" />
-                    <span className="editorial-story__chinar editorial-story__chinar--right" />
-                    <span className="editorial-story__couple">J <i>&amp;</i> J</span>
-                  </div>
+            <div className="editorial-story__miniature" aria-hidden>
+              <span className="editorial-story__sky" />
+              <span className="editorial-story__sun" />
+              <span className="editorial-story__birds" />
+              <span className="editorial-story__range editorial-story__range--far" />
+              <span className="editorial-story__range editorial-story__range--mid" />
+              <PalaceSkyline className="editorial-story__far-palace" arcade={false} />
+              <span className="editorial-story__lake" />
+              <span className="editorial-story__shikara" />
+              <span className="editorial-story__chinar editorial-story__chinar--left" />
+              <span className="editorial-story__chinar editorial-story__chinar--right" />
+              <span className="editorial-story__couple">
+                J <i>&amp;</i> J
+              </span>
+            </div>
           </MughalArchFrame>
 
           <p className="editorial-story__caption">
@@ -75,23 +67,19 @@ export function CoupleSection({ title, lead, body, dateLabel }: Props) {
           <span className="editorial-story__margin-rule" />
         </div>
 
-        <Suspense
-          fallback={<div className="editorial-story__gate-fallback" aria-hidden />}
-        >
-          <StoryGateScroll>
-            <Reveal variant="right" className="editorial-story__manuscript">
-              <span className="editorial-story__folio" aria-hidden>i</span>
-              <p className="editorial-story__quote">“{lead}”</p>
-              <p className="editorial-story__body">{body}</p>
-              <AnimatedDivider />
-              <p className="editorial-story__date-label">The next chapter begins</p>
-              <p className="editorial-story__date">{dateLabel}</p>
-              <span className="editorial-story__seal" aria-hidden>
-                <EightPointStar />
-              </span>
-            </Reveal>
-          </StoryGateScroll>
-        </Suspense>
+        <Reveal variant="right" className="editorial-story__manuscript">
+          <span className="editorial-story__folio" aria-hidden>
+            i
+          </span>
+          <p className="editorial-story__quote">“{lead}”</p>
+          <p className="editorial-story__body">{body}</p>
+          <AnimatedDivider />
+          <p className="editorial-story__date-label">The next chapter begins</p>
+          <p className="editorial-story__date">{dateLabel}</p>
+          <span className="editorial-story__seal" aria-hidden>
+            <EightPointStar />
+          </span>
+        </Reveal>
       </div>
     </InvitationSurface>
   )

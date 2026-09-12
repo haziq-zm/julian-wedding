@@ -1,5 +1,4 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
@@ -28,7 +27,6 @@ export function InvitationCardSection({
 }: Props) {
   return (
     <InvitationSurface id="invitation" tone="olive-deep" className="keepsake-scene">
-      <DecorativeStars count={10} />
       <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
       <FloralBranch position="bottom-left" size="large" className="botanical-reveal botanical-reveal--left" />
 

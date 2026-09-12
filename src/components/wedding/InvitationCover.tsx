@@ -8,7 +8,6 @@ import {
   type KeyboardEvent,
   type PointerEvent,
 } from 'react'
-import { useLenis } from 'lenis/react'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
@@ -32,7 +31,6 @@ const PULL_THRESHOLD = 0.34
 const MAX_PULL_PX = 320
 const SETTLE_MS = 900
 const SCROLL_CUE_DELAY_MS = 2000
-const SCROLL_PEEK_PX = 88
 
 export function InvitationCover({
   partnerOne,
@@ -57,12 +55,17 @@ export function InvitationCover({
     moved: boolean
   }>({ active: false, startY: 0, startPull: 0, startTime: 0, moved: false })
   const titleId = useId()
-  const lenis = useLenis()
+
+  const pullRafRef = useRef(0)
 
   const setPullValue = useCallback((value: number) => {
     const next = Math.min(1, Math.max(0, value))
     pullRef.current = next
-    setPull(next)
+    if (pullRafRef.current) return
+    pullRafRef.current = requestAnimationFrame(() => {
+      pullRafRef.current = 0
+      setPull(pullRef.current)
+    })
   }, [])
 
   const scheduleScrollCue = useCallback(() => {
@@ -106,65 +109,22 @@ export function InvitationCover({
   useEffect(() => {
     return () => {
       cancelAnimationFrame(animFrameRef.current)
+      cancelAnimationFrame(pullRafRef.current)
       window.clearTimeout(scrollCueTimerRef.current)
     }
   }, [])
-
-  /* Gentle peek to prove the page is scrollable once the cue appears. */
-  useEffect(() => {
-    if (!scrollCue) return
-
-    const reduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (reduced) return
-
-    let cancelPeek = false
-    const peekDown = window.setTimeout(() => {
-      if (cancelPeek) return
-      if (lenis) {
-        lenis.scrollTo(SCROLL_PEEK_PX, { duration: 1.05, easing: (t) => 1 - (1 - t) ** 3 })
-      } else {
-        window.scrollTo({ top: SCROLL_PEEK_PX, behavior: 'smooth' })
-      }
-    }, 120)
-
-    const peekBack = window.setTimeout(() => {
-      if (cancelPeek) return
-      if (lenis) {
-        lenis.scrollTo(0, { duration: 0.95, easing: (t) => 1 - (1 - t) ** 3 })
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' })
-      }
-    }, 1500)
-
-    return () => {
-      cancelPeek = true
-      window.clearTimeout(peekDown)
-      window.clearTimeout(peekBack)
-    }
-  }, [scrollCue, lenis])
 
   /* Hide the cue once the guest scrolls on their own. */
   useEffect(() => {
     if (!scrollCue) return
 
     const dismiss = () => {
-      const y = lenis?.scroll ?? window.scrollY
-      if (y > SCROLL_PEEK_PX + 24) setScrollCue(false)
-    }
-
-    if (lenis) {
-      lenis.on('scroll', dismiss)
-      return () => {
-        lenis.off('scroll', dismiss)
-      }
+      if (window.scrollY > 40) setScrollCue(false)
     }
 
     window.addEventListener('scroll', dismiss, { passive: true })
     return () => window.removeEventListener('scroll', dismiss)
-  }, [scrollCue, lenis])
+  }, [scrollCue])
 
   useEffect(() => {
     if (phase !== 'unrolling' && phase !== 'open') return

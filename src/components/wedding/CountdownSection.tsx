@@ -1,9 +1,7 @@
 import { Countdown } from '../Countdown'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { Reveal } from '../ui/Reveal'
 
 type Props = {
@@ -15,20 +13,9 @@ type Props = {
 export function CountdownSection({ target, dateLabel, timeLabel }: Props) {
   return (
     <InvitationSurface id="countdown" tone="olive" className="ceremony-countdown">
-      <DecorativeStars count={14} />
-      <JaliPattern className="ceremony-countdown__screen" />
       <div className="ceremony-countdown__glow" aria-hidden />
       <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
       <FloralBranch position="bottom-left" size="large" className="botanical-reveal botanical-reveal--left" />
-
-      <div className="ceremony-countdown__grilles" aria-hidden>
-        <span className="ceremony-countdown__grille">
-          <JaliPattern />
-        </span>
-        <span className="ceremony-countdown__grille">
-          <JaliPattern />
-        </span>
-      </div>
 
       <Reveal as="header" variant="up" className="ceremony-countdown__header">
         <p className="inv-label">Counting the Days</p>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EightPointStar } from '../ornaments/EightPointStar'
 
 const LINKS = [
@@ -17,6 +17,7 @@ export function SiteNavigation({ visible }: Props) {
   const [open, setOpen] = useState(false)
   const [compact, setCompact] = useState(false)
   const [active, setActive] = useState('')
+  const frameRef = useRef(0)
 
   useEffect(() => {
     if (!open) return
@@ -28,10 +29,10 @@ export function SiteNavigation({ visible }: Props) {
   }, [open])
 
   useEffect(() => {
-    const onScroll = () => {
+    const update = () => {
+      frameRef.current = 0
       setCompact(window.scrollY > 120)
 
-      // The section owning the upper third of the viewport reads as "current".
       const marker = window.innerHeight * 0.35
       let current = ''
       for (const link of LINKS) {
@@ -42,9 +43,17 @@ export function SiteNavigation({ visible }: Props) {
       setActive(current)
     }
 
-    onScroll()
+    const onScroll = () => {
+      if (frameRef.current) return
+      frameRef.current = requestAnimationFrame(update)
+    }
+
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      cancelAnimationFrame(frameRef.current)
+    }
   }, [])
 
   if (!visible) return null
@@ -72,10 +81,16 @@ export function SiteNavigation({ visible }: Props) {
           className={`artifact-nav__menu ${open ? 'artifact-nav__menu--open' : ''}`}
           aria-label="Page sections"
         >
-          <span className="artifact-nav__flourish" aria-hidden>❦</span>
+          <span className="artifact-nav__flourish" aria-hidden>
+            ❦
+          </span>
           {LINKS.map((link, index) => (
             <span className="artifact-nav__item" key={link.href}>
-              {index > 0 && <span className="artifact-nav__dot" aria-hidden>·</span>}
+              {index > 0 && (
+                <span className="artifact-nav__dot" aria-hidden>
+                  ·
+                </span>
+              )}
               <a
                 className={`artifact-nav__link ${active === link.href ? 'is-active' : ''}`.trim()}
                 href={link.href}
@@ -86,7 +101,9 @@ export function SiteNavigation({ visible }: Props) {
               </a>
             </span>
           ))}
-          <span className="artifact-nav__flourish" aria-hidden>❦</span>
+          <span className="artifact-nav__flourish" aria-hidden>
+            ❦
+          </span>
         </nav>
       </div>
     </header>

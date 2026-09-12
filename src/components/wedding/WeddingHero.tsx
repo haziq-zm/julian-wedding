@@ -1,6 +1,4 @@
-import { useRef, type PointerEvent } from 'react'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
@@ -27,51 +25,34 @@ export function WeddingHero({
   address,
   tagline,
 }: Props) {
-  const heroRef = useRef<HTMLElement>(null)
-
-  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
-    if (event.pointerType === 'touch') return
-    const rect = event.currentTarget.getBoundingClientRect()
-    const x = (event.clientX - rect.left) / rect.width - 0.5
-    const y = (event.clientY - rect.top) / rect.height - 0.5
-    heroRef.current?.style.setProperty('--hero-x', x.toFixed(3))
-    heroRef.current?.style.setProperty('--hero-y', y.toFixed(3))
-  }
-
   return (
-    <section
-      ref={heroRef}
-      id="home"
-      className="lux-hero"
-      onPointerMove={handlePointerMove}
-    >
+    <section id="home" className="lux-hero">
       <div className="lux-hero__paper" aria-hidden />
       <JaliPattern className="lux-hero__jali" />
       <div className="lux-hero__geometry" aria-hidden />
       <div className="lux-hero__horizon" aria-hidden />
       <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--far" />
       <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--near" arcade={false} />
-      <DecorativeStars count={18} className="lux-hero__dust" />
 
       <div className="lux-hero__lanterns" aria-hidden>
         <span className="lux-hero__lantern lux-hero__lantern--one">
           <Lantern size="lg" />
-        </span>
-        <span className="lux-hero__lantern lux-hero__lantern--two">
-          <Lantern size="md" />
-        </span>
-        <span className="lux-hero__lantern lux-hero__lantern--three">
-          <Lantern size="md" />
         </span>
         <span className="lux-hero__lantern lux-hero__lantern--four">
           <Lantern size="lg" />
         </span>
       </div>
 
-      <FloralBranch position="top-left" size="large" className="lux-hero__branch lux-hero__branch--far" />
-      <FloralBranch position="top-right" size="large" className="lux-hero__branch lux-hero__branch--far" />
-      <FloralBranch position="bottom-left" size="large" className="lux-hero__branch lux-hero__branch--near" />
-      <FloralBranch position="bottom-right" size="large" className="lux-hero__branch lux-hero__branch--near" />
+      <FloralBranch
+        position="top-left"
+        size="large"
+        className="lux-hero__branch lux-hero__branch--far"
+      />
+      <FloralBranch
+        position="top-right"
+        size="large"
+        className="lux-hero__branch lux-hero__branch--far"
+      />
 
       <Reveal variant="clip" className="lux-hero__stage">
         <MughalArchFrame
@@ -108,7 +89,9 @@ export function WeddingHero({
             <time className="lux-hero__date" dateTime="2026-10-10">
               {dateLabel}
             </time>
-            <p className="lux-hero__place">{venue} · {address}</p>
+            <p className="lux-hero__place">
+              {venue} · {address}
+            </p>
             <p className="lux-hero__tagline">{tagline}</p>
           </div>
         </MughalArchFrame>
@@ -122,7 +105,9 @@ export function WeddingHero({
       <span className="lux-hero__bracket lux-hero__bracket--br" aria-hidden />
 
       <a className="lux-hero__scroll" href="#story">
-        <span className="lux-hero__scroll-star" aria-hidden>✦</span>
+        <span className="lux-hero__scroll-star" aria-hidden>
+          ✦
+        </span>
         <span>Scroll to explore</span>
         <span className="lux-hero__scroll-line" aria-hidden />
       </a>

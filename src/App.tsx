@@ -12,20 +12,21 @@ import { GallerySection } from './components/wedding/GallerySection'
 import { RsvpSection } from './components/wedding/RsvpSection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { SectionVeil } from './components/ornaments/SectionVeil'
-import { LenisScrollProvider } from './components/lenis/LenisScrollProvider'
+import { ScrollProvider } from './components/ui/ScrollProvider'
 import './App.css'
 import './styles/motion.css'
 import './ornate.css'
 import './mobile.css'
 import './styles/invitation.css'
-import './lenis-scroll.css'
 
 export default function App() {
   const year = wedding.date.getFullYear()
   const [opened, setOpened] = useState(false)
+  const [mountDetails, setMountDetails] = useState(false)
 
   const handleOpened = useCallback(() => {
     setOpened(true)
+    setMountDetails(true)
   }, [])
 
   useEffect(() => {
@@ -41,16 +42,14 @@ export default function App() {
   }, [opened])
 
   return (
-    <LenisScrollProvider enabled={opened}>
+    <ScrollProvider enabled={opened}>
       <div className={`page luxury-page ${opened ? 'page--open' : 'page--sealed'}`}>
-        <div className="paper-grain" aria-hidden />
-
         <InvitationCover
-        partnerOne={wedding.partnerOne}
-        partnerTwo={wedding.partnerTwo}
-        dateLabel={wedding.dateLabel}
-        blessing={wedding.blessing}
-        onOpened={handleOpened}
+          partnerOne={wedding.partnerOne}
+          partnerTwo={wedding.partnerTwo}
+          dateLabel={wedding.dateLabel}
+          blessing={wedding.blessing}
+          onOpened={handleOpened}
         />
 
         <main
@@ -58,78 +57,82 @@ export default function App() {
           aria-hidden={!opened}
           {...(!opened ? { inert: true as const } : {})}
         >
-          <SiteNavigation visible={opened} />
+          {mountDetails && (
+            <>
+              <SiteNavigation visible={opened} />
 
-          <WeddingHero
-            partnerOne={wedding.partnerOne}
-            partnerTwo={wedding.partnerTwo}
-            dateLabel={wedding.dateLabel}
-            venue={wedding.location.venue}
-            address={wedding.location.address}
-            tagline={wedding.tagline}
-          />
+              <WeddingHero
+                partnerOne={wedding.partnerOne}
+                partnerTwo={wedding.partnerTwo}
+                dateLabel={wedding.dateLabel}
+                venue={wedding.location.venue}
+                address={wedding.location.address}
+                tagline={wedding.tagline}
+              />
 
-          <SectionVeil from="olive" to="parchment" />
+              <SectionVeil from="olive" to="parchment" />
 
-          <CoupleSection
-            title={wedding.story.title}
-            lead={wedding.story.lead}
-            body={wedding.story.body}
-            dateLabel={wedding.dateLabel}
-          />
+              <CoupleSection
+                title={wedding.story.title}
+                lead={wedding.story.lead}
+                body={wedding.story.body}
+                dateLabel={wedding.dateLabel}
+              />
 
-          <SectionVeil from="parchment" to="olive" />
+              <SectionVeil from="parchment" to="olive" />
 
-          <CountdownSection
-            target={wedding.date}
-            dateLabel={wedding.dateLabel}
-            timeLabel={wedding.timeLabel}
-          />
+              <CountdownSection
+                target={wedding.date}
+                dateLabel={wedding.dateLabel}
+                timeLabel={wedding.timeLabel}
+              />
 
-          <SectionVeil from="olive" to="parchment" />
+              <SectionVeil from="olive" to="parchment" />
 
-          <EventsSection
-            schedule={wedding.schedule}
-            dateLabel={wedding.dateLabel}
-          />
+              <EventsSection
+                schedule={wedding.schedule}
+                dateLabel={wedding.dateLabel}
+              />
 
-          <SectionVeil from="parchment" to="olive" />
+              <SectionVeil from="parchment" to="olive" />
 
-          <VenueSection location={wedding.location} />
+              <VenueSection location={wedding.location} />
 
-          <SectionVeil from="olive" to="deep" />
+              <SectionVeil from="olive" to="deep" />
 
-          <InvitationCardSection
-            partnerOne={wedding.partnerOne}
-            partnerTwo={wedding.partnerTwo}
-            dateLabel={wedding.dateLabel}
-            timeLabel={wedding.timeLabel}
-            venue={wedding.location.venue}
-            address={wedding.location.address}
-            blessing={wedding.blessing}
-          />
+              <InvitationCardSection
+                partnerOne={wedding.partnerOne}
+                partnerTwo={wedding.partnerTwo}
+                dateLabel={wedding.dateLabel}
+                timeLabel={wedding.timeLabel}
+                venue={wedding.location.venue}
+                address={wedding.location.address}
+                blessing={wedding.blessing}
+              />
 
-          <SectionVeil from="deep" to="parchment" />
+              <SectionVeil from="deep" to="parchment" />
 
-          <GallerySection
-            dateLabel={wedding.dateLabel}
-            venue={wedding.location.venue}
-            address={wedding.location.address}
-            partnerOne={wedding.partnerOne}
-            partnerTwo={wedding.partnerTwo}
-          />
+              <GallerySection
+                dateLabel={wedding.dateLabel}
+                venue={wedding.location.venue}
+                address={wedding.location.address}
+                partnerOne={wedding.partnerOne}
+                partnerTwo={wedding.partnerTwo}
+              />
 
-          <SectionVeil from="parchment" to="olive" />
+              <SectionVeil from="parchment" to="olive" />
 
-          <RsvpSection deadlineLabel={wedding.rsvpDeadline} />
+              <RsvpSection deadlineLabel={wedding.rsvpDeadline} />
 
-          <WeddingFooter
-            partnerOne={wedding.partnerOne}
-            partnerTwo={wedding.partnerTwo}
-            year={year}
-          />
+              <WeddingFooter
+                partnerOne={wedding.partnerOne}
+                partnerTwo={wedding.partnerTwo}
+                year={year}
+              />
+            </>
+          )}
         </main>
       </div>
-    </LenisScrollProvider>
+    </ScrollProvider>
   )
 }

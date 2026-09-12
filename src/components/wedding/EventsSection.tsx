@@ -1,35 +1,10 @@
-import { Suspense, lazy } from 'react'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { OrnateTimeline, type TimelineEvent } from '../ornaments/OrnateTimeline'
-import { PalaceSkyline } from '../ornaments/PalaceSkyline'
 import { Reveal } from '../ui/Reveal'
-
-const KahwaSamovarScroll = lazy(() =>
-  import('./KahwaSamovarScroll').then((module) => ({
-    default: module.KahwaSamovarScroll,
-  })),
-)
-
-const TashnaerScroll = lazy(() =>
-  import('./TashnaerScroll').then((module) => ({
-    default: module.TashnaerScroll,
-  })),
-)
-
-const TumbaknariScroll = lazy(() =>
-  import('./TumbaknariScroll').then((module) => ({
-    default: module.TumbaknariScroll,
-  })),
-)
-
-function ModelFallback() {
-  return <div className="event-model-scroll event-model-scroll--placeholder" aria-hidden />
-}
+import { FeastChapter } from './FeastChapter'
 
 type Props = {
   schedule: readonly TimelineEvent[]
@@ -40,7 +15,6 @@ export function EventsSection({ schedule, dateLabel }: Props) {
   return (
     <>
       <InvitationSurface id="events" tone="parchment" className="ceremonial-events">
-        <DecorativeStars count={8} />
         <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
         <FloralBranch position="bottom-right" size="medium" className="botanical-reveal botanical-reveal--right" />
 
@@ -62,10 +36,7 @@ export function EventsSection({ schedule, dateLabel }: Props) {
       </InvitationSurface>
 
       <section className="wazwan-experience" aria-labelledby="wazwan-title">
-        <JaliPattern className="wazwan-experience__screen" />
         <div className="wazwan-experience__pattern" aria-hidden />
-        <PalaceSkyline className="wazwan-experience__skyline" arcade={false} />
-        <DecorativeStars count={10} />
         <FloralBranch position="top-left" size="medium" className="botanical-reveal botanical-reveal--left" />
         <FloralBranch position="bottom-right" size="large" className="botanical-reveal botanical-reveal--right" />
         <Reveal as="header" variant="clip" className="wazwan-experience__header">
@@ -77,17 +48,36 @@ export function EventsSection({ schedule, dateLabel }: Props) {
         </Reveal>
 
         <div className="wazwan-experience__chapters">
-        <Suspense fallback={<ModelFallback />}>
-          <KahwaSamovarScroll />
-        </Suspense>
-
-        <Suspense fallback={<ModelFallback />}>
-          <TashnaerScroll />
-        </Suspense>
-
-        <Suspense fallback={<ModelFallback />}>
-          <TumbaknariScroll />
-        </Suspense>
+          <FeastChapter
+            motif="kahwa"
+            title="Kahwa"
+            caption="Saffron steam, cardamom warmth, poured with welcome"
+            variant="light"
+            index="I"
+            eyebrow="The Welcome"
+            note="Poured from the copper samovar"
+            plaque="The Art of Kahwa"
+          />
+          <FeastChapter
+            motif="feast"
+            title="Food"
+            caption="Copper gleam and ritual welcome, ready for the feast"
+            variant="deep"
+            index="II"
+            eyebrow="The Feast"
+            note="Served on the shared trami"
+            plaque="The Wazwan Table"
+          />
+          <FeastChapter
+            motif="music"
+            title="Music"
+            caption="The heartbeat of celebration, calling guests to joy"
+            variant="light"
+            index="III"
+            eyebrow="The Celebration"
+            note="Wanvun sung late into the night"
+            plaque="The Art of Music"
+          />
         </div>
       </section>
     </>

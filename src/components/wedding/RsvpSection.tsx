@@ -1,10 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
 import { MughalArchFrame } from '../ornaments/MughalArchFrame'
 import { PalaceSkyline } from '../ornaments/PalaceSkyline'
@@ -26,13 +24,9 @@ export function RsvpSection({ deadlineLabel }: Props) {
   return (
     <section id="rsvp" className="grand-rsvp">
       <div className="grand-rsvp__geometry" aria-hidden />
-      <JaliPattern className="grand-rsvp__screen" />
       <PalaceSkyline className="grand-rsvp__skyline" arcade={false} />
-      <DecorativeStars count={12} />
       <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
       <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
-      <FloralBranch position="bottom-left" size="medium" />
-      <FloralBranch position="bottom-right" size="medium" />
 
       <div className="grand-rsvp__lanterns" aria-hidden>
         <span><Lantern size="md" /></span>

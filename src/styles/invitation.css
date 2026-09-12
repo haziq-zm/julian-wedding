@@ -1569,8 +1569,7 @@ body {
   transform: rotate(45deg);
   background: var(--inv-gold-muted);
   opacity: 0.22;
-  animation: gold-drift calc(10s + (var(--particle-index) % 5) * 2s) ease-in-out infinite alternate;
-  animation-delay: calc(var(--particle-index) * -0.8s);
+  animation: none;
 }
 
 @keyframes gold-drift {
@@ -1579,13 +1578,12 @@ body {
 }
 
 .botanical-reveal {
-  animation: botanical-breathe 12s ease-in-out infinite alternate;
+  animation: none;
   transform-origin: bottom left;
 }
 
 .botanical-reveal--right {
   transform-origin: bottom right;
-  animation-delay: -4s;
 }
 
 @keyframes botanical-breathe {
@@ -1863,7 +1861,7 @@ body {
   display: block;
   color: rgba(197, 165, 102, 0.6);
   transform-origin: top center;
-  animation: lantern-sway 7s ease-in-out infinite alternate;
+  animation: none;
 }
 
 .lux-hero__lantern::before {
@@ -2026,7 +2024,7 @@ body {
   margin: -0.4rem auto 0;
   border-radius: 50%;
   background: radial-gradient(ellipse at center, rgba(8, 11, 4, 0.5), transparent 70%);
-  filter: blur(9px);
+  filter: none; opacity: 0.55;
 }
 
 .lux-hero__arch .inv-arch__content {
@@ -2045,7 +2043,7 @@ body {
   height: auto;
   color: var(--inv-gold-muted);
   opacity: 0.9;
-  animation: crest-turn 68s linear infinite;
+  animation: none;
 }
 
 @keyframes crest-turn {
@@ -2349,7 +2347,7 @@ body {
   height: 55%;
   translate: 50% 0;
   background: linear-gradient(180deg, rgba(232, 207, 148, 0.4), transparent);
-  filter: blur(4px);
+  filter: none;
 }
 
 .editorial-story__shikara {
@@ -3231,7 +3229,7 @@ body {
   translate: -50% 0;
   border-radius: 50%;
   background: radial-gradient(ellipse at center, rgba(15, 18, 8, 0.4), transparent 72%);
-  filter: blur(5px);
+  filter: none;
 }
 
 .feast-chapter--light .feast-chapter__pedestal {
@@ -3267,16 +3265,24 @@ body {
   position: absolute;
   inset: 0 0 6%;
   z-index: 2;
-  animation: vessel-float 6s ease-in-out infinite alternate;
+}
+
+.feast-chapter__canvas--static {
+  display: grid;
+  place-items: center;
+  color: var(--inv-gold-muted, #c5a566);
+  animation: none;
+}
+
+.feast-motif {
+  width: min(62%, 9.5rem);
+  height: auto;
+  filter: drop-shadow(0 12px 18px rgba(10, 13, 5, 0.25));
 }
 
 .feast-chapter__canvas .event-model-r3f {
   width: 100% !important;
   height: 100% !important;
-}
-
-@keyframes vessel-float {
-  to { transform: translateY(-7px); }
 }
 
 .feast-chapter__plaque {

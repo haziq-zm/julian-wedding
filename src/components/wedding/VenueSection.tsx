@@ -1,5 +1,4 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { DecorativeStars } from '../ornaments/DecorativeStars'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
@@ -23,7 +22,6 @@ type Props = {
 export function VenueSection({ location }: Props) {
   return (
     <InvitationSurface id="venue" tone="olive" className="palace-venue">
-      <DecorativeStars count={10} />
       <PalaceSkyline className="palace-venue__skyline" />
       <FloralBranch position="top-left" size="large" className="botanical-reveal botanical-reveal--left" />
       <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
