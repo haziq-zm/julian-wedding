@@ -14,10 +14,10 @@ body {
 
 /* —— Default spacing: phone —— */
 .section-band {
-  padding-top: 3.25rem;
-  padding-bottom: 3.25rem;
-  padding-left: max(1rem, env(safe-area-inset-left));
-  padding-right: max(1rem, env(safe-area-inset-right));
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+  padding-left: max(1.25rem, env(safe-area-inset-left));
+  padding-right: max(1.25rem, env(safe-area-inset-right));
 }
 
 .section-heading {
@@ -49,6 +49,13 @@ body {
 .scroll-pull-hint {
   margin-top: 5.25rem;
   font-size: 0.58rem;
+  opacity: 0.8;
+  animation: hint-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
 }
 
 .scroll-pull-handle {

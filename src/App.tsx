@@ -9,7 +9,6 @@ import { EventsSection } from './components/wedding/EventsSection'
 import { VenueSection } from './components/wedding/VenueSection'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
-import { RsvpSection } from './components/wedding/RsvpSection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { SectionVeil } from './components/ornaments/SectionVeil'
 import { ScrollProvider } from './components/ui/ScrollProvider'
@@ -119,10 +118,6 @@ export default function App() {
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
               />
-
-              <SectionVeil from="parchment" to="olive" />
-
-              <RsvpSection deadlineLabel={wedding.rsvpDeadline} />
 
               <WeddingFooter
                 partnerOne={wedding.partnerOne}

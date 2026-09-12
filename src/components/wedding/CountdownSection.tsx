@@ -29,9 +29,12 @@ export function CountdownSection({ target, dateLabel, timeLabel }: Props) {
         <span className="ceremony-countdown__medallion" aria-hidden />
         <div className="ceremony-countdown__content">
           <Countdown target={target} />
-          <p className="ceremony-countdown__date">{dateLabel}</p>
-          <p className="ceremony-countdown__time">{timeLabel}</p>
         </div>
+      </Reveal>
+
+      <Reveal as="footer" variant="up" className="ceremony-countdown__footer">
+        <p className="ceremony-countdown__date">{dateLabel}</p>
+        <p className="ceremony-countdown__time">{timeLabel}</p>
       </Reveal>
     </InvitationSurface>
   )

@@ -6,7 +6,6 @@ const LINKS = [
   { href: '#events', label: 'Events' },
   { href: '#food', label: 'Food' },
   { href: '#venue', label: 'Venue' },
-  { href: '#rsvp', label: 'RSVP' },
 ] as const
 
 type Props = {

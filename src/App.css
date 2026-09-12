@@ -1,26 +1,27 @@
 :root {
   --olive: #4b5135;
-  --olive-deep: #343a25;
+  --olive-deep: #2a301e;
   --sage: #858b6b;
-  --ivory: #f4efe4;
-  --parchment: #e8decc;
+  --ivory: #f8f5ee;
+  --parchment: #ebe1ce;
   --cream: #faf7ef;
   --sand: #c9bda5;
-  --gold: #b59655;
-  --gold-dark: #806633;
+  --gold: #c2a562;
+  --gold-dark: #8c7335;
   --burgundy: #641f24;
   --wine: #42171b;
-  --ink: #2a2d22;
-  --ink-soft: #4a4e3f;
+  --ink: #1c1e16;
+  --ink-soft: #3d4233;
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-label: 'Cinzel', 'Times New Roman', serif;
-  --font-body: 'Libre Baskerville', Georgia, serif;
+  --font-display: 'Bodoni Moda', Georgia, serif;
+  --font-label: 'Marcellus', 'Times New Roman', serif;
+  --font-body: 'EB Garamond', Georgia, serif;
 
   color: var(--ink);
   font-family: var(--font-body);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
+  letter-spacing: 0.015em;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -118,8 +119,9 @@ select {
   margin: 0.7rem 0 0;
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 6vw, 3.1rem);
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--olive-deep);
 }
 
@@ -150,14 +152,14 @@ select {
 
 .section-band--olive {
   background:
-    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(181, 150, 85, 0.12), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(194, 165, 98, 0.1), transparent 65%),
     var(--olive);
   color: var(--ivory);
 }
 
 .section-band--deep {
   background:
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(100, 31, 36, 0.28), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(100, 31, 36, 0.22), transparent 60%),
     var(--olive-deep);
   color: var(--ivory);
 }
@@ -178,9 +180,9 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0.85rem 1.6rem;
-  margin-top: 1.5rem;
+  min-height: 56px;
+  padding: 1rem 1.85rem;
+  margin-top: 1.75rem;
   border: 1px solid var(--gold);
   background: transparent;
   color: var(--ivory);
@@ -192,13 +194,15 @@ select {
   text-transform: uppercase;
   cursor: pointer;
   touch-action: manipulation;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .btn-invite:hover,
 .btn-invite:focus-visible {
-  background: rgba(181, 150, 85, 0.18);
-  border-color: #c9ab6a;
+  background: rgba(194, 165, 98, 0.12);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-invite--solid {
@@ -211,6 +215,9 @@ select {
 .btn-invite--solid:hover,
 .btn-invite--solid:focus-visible {
   background: var(--olive);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(20, 22, 14, 0.35);
 }
 
 /* —— Monogram —— */
@@ -782,7 +789,7 @@ select {
   border-radius: 50%;
   background: radial-gradient(
     ellipse,
-    rgba(0, 0, 0, 0.45) 0%,
+    rgba(20, 22, 14, 0.55) 0%,
     transparent 70%
   );
   transform: translateZ(-40px) scaleX(0.6);
