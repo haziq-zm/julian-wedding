@@ -9,7 +9,7 @@ type Props = {
   variant?: RevealVariant
   delay?: number
   trigger?: number
-  as?: 'div' | 'article' | 'header' | 'footer' | 'li' | 'figure'
+  as?: 'div' | 'article' | 'header' | 'li' | 'figure'
 }
 
 export function Reveal({

@@ -7,10 +7,9 @@ import { Reveal } from '../ui/Reveal'
 type Props = {
   target: Date
   dateLabel: string
-  timeLabel: string
 }
 
-export function CountdownSection({ target, dateLabel, timeLabel }: Props) {
+export function CountdownSection({ target, dateLabel }: Props) {
   return (
     <InvitationSurface id="countdown" tone="olive" className="ceremony-countdown">
       <div className="ceremony-countdown__glow" aria-hidden />
@@ -34,7 +33,6 @@ export function CountdownSection({ target, dateLabel, timeLabel }: Props) {
 
       <Reveal as="footer" variant="up" className="ceremony-countdown__footer">
         <p className="ceremony-countdown__date">{dateLabel}</p>
-        <p className="ceremony-countdown__time">{timeLabel}</p>
       </Reveal>
     </InvitationSurface>
   )

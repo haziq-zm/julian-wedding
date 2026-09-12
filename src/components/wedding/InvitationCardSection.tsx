@@ -10,9 +10,6 @@ type Props = {
   partnerOne: string
   partnerTwo: string
   dateLabel: string
-  timeLabel: string
-  venue: string
-  address: string
   blessing: string
 }
 
@@ -20,9 +17,6 @@ export function InvitationCardSection({
   partnerOne,
   partnerTwo,
   dateLabel,
-  timeLabel,
-  venue,
-  address,
   blessing,
 }: Props) {
   return (
@@ -62,8 +56,6 @@ export function InvitationCardSection({
             <p className="keepsake-scene__blessing">{blessing}</p>
             <div className="keepsake-scene__details">
               <p>{dateLabel}</p>
-              <p>{timeLabel}</p>
-              <p>{venue} · {address}</p>
             </div>
           </MughalArchFrame>
         </Reveal>

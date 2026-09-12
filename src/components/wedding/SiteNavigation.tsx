@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { EightPointStar } from '../ornaments/EightPointStar'
 
 const LINKS = [
-  { href: '#story', label: 'Our Story' },
   { href: '#events', label: 'Events' },
   { href: '#food', label: 'Food' },
   { href: '#venue', label: 'Venue' },

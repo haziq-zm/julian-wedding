@@ -3,7 +3,7 @@ import { wedding } from './config'
 import { InvitationCover } from './components/wedding/InvitationCover'
 import { SiteNavigation } from './components/wedding/SiteNavigation'
 import { WeddingHero } from './components/wedding/WeddingHero'
-import { CoupleSection } from './components/wedding/CoupleSection'
+
 import { CountdownSection } from './components/wedding/CountdownSection'
 import { EventsSection } from './components/wedding/EventsSection'
 import { VenueSection } from './components/wedding/VenueSection'
@@ -69,21 +69,11 @@ export default function App() {
                 tagline={wedding.tagline}
               />
 
-              <SectionVeil from="olive" to="parchment" />
 
-              <CoupleSection
-                title={wedding.story.title}
-                lead={wedding.story.lead}
-                body={wedding.story.body}
-                dateLabel={wedding.dateLabel}
-              />
-
-              <SectionVeil from="parchment" to="olive" />
 
               <CountdownSection
                 target={wedding.date}
                 dateLabel={wedding.dateLabel}
-                timeLabel={wedding.timeLabel}
               />
 
               <SectionVeil from="olive" to="parchment" />
@@ -103,9 +93,6 @@ export default function App() {
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
                 dateLabel={wedding.dateLabel}
-                timeLabel={wedding.timeLabel}
-                venue={wedding.location.venue}
-                address={wedding.location.address}
                 blessing={wedding.blessing}
               />
 

@@ -86,13 +86,11 @@ export function WeddingHero({
 
             <AnimatedDivider light className="lux-hero__divider" />
 
-            <time className="lux-hero__date" dateTime="2026-10-10">
+            <time className="lux-hero__date" dateTime="2026-10-11">
               {dateLabel}
             </time>
-            <p className="lux-hero__place">
-              {venue} · {address}
-            </p>
-            <p className="lux-hero__tagline">{tagline}</p>
+
+            <p className="lux-hero__tagline" dangerouslySetInnerHTML={{ __html: tagline }} />
           </div>
         </MughalArchFrame>
 

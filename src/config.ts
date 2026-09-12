@@ -1,13 +1,12 @@
 export const wedding = {
-  partnerOne: 'Jennifer',
-  partnerTwo: 'Jauhar',
+  partnerOne: 'Jauhar',
+  partnerTwo: 'Jennifer',
   tagline:
-    'Together with their families, invite you to celebrate their marriage',
+    '<b>Mrs and Mr Mohammad Hussain Malik</b> <span class="lux-hero__tagline-sub">solicit your gracious presence & blessings on the auspicious occasion of marriage ceremony of their beloved son</span>',
   blessing:
     'With the blessings of our families, we invite you to share in our joy',
-  date: new Date('2026-10-10T16:00:00'),
-  dateLabel: 'Saturday, October 10, 2026',
-  timeLabel: 'Ceremony begins at 4:00 in the afternoon',
+  date: new Date('2026-10-11T16:00:00'),
+  dateLabel: 'Sunday, October 11, 2026',
   rsvpDeadline: 'Kindly respond by Friday, September 18, 2026',
   story: {
     title: 'Our Story',
@@ -24,18 +23,20 @@ export const wedding = {
     {
       id: 'mehendiraat',
       label: 'Mehendiraat',
-      time: '4:00 PM',
+      date: 'Saturday, October 10, 2026',
+      time: '6:00 PM',
       location: 'The Walnut Courtyard',
       detail:
         'Henna, song, and an intimate gathering beneath the willows.',
     },
     {
       id: 'wedding-ceremony',
-      label: 'Wedding Ceremony',
-      time: '6:30 PM',
+      label: 'Masnandnishini',
+      date: 'Sunday, October 11, 2026',
+      time: '2:00 PM',
       location: 'Hanji Danter, Anantnag',
       detail:
-        'The nikah, shared tramis, and dinner beneath a canopy of lanterns.',
+        'Shared tramis, and dinner beneath a canopy of lanterns.',
     },
   ],
 } as const

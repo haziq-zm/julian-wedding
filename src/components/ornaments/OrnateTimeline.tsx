@@ -8,6 +8,7 @@ export type TimelineEvent = {
   id: string
   label: string
   time: string
+  date?: string
   location?: string
   detail: string
 }
@@ -53,7 +54,7 @@ export function OrnateTimeline({ events, dateLabel }: Props) {
                   <h3 className="inv-program__label">{event.label}</h3>
                   <span className="inv-program__rule" aria-hidden />
                   <p className="inv-program__time">{event.time}</p>
-                  <p className="inv-program__date">{dateLabel}</p>
+                  <p className="inv-program__date">{event.date ?? dateLabel}</p>
                   {event.location && (
                     <p className="inv-program__location">{event.location}</p>
                   )}

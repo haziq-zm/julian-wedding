@@ -27,12 +27,6 @@ export function EventsSection({ schedule, dateLabel }: Props) {
 
         <OrnateTimeline events={schedule} dateLabel={dateLabel} />
 
-        <Reveal variant="up" className="ceremonial-events__coda">
-          <CarpetBorder className="ceremonial-events__carpet" />
-          <p className="ceremonial-events__coda-text">
-            Guests are welcome from the afternoon onward
-          </p>
-        </Reveal>
       </InvitationSurface>
 
       <section className="wazwan-experience" aria-labelledby="wazwan-title">
