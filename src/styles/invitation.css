@@ -1545,8 +1545,16 @@ body {
   background: var(--inv-parchment);
 }
 
+body:has(.page--sealed) {
+  background: var(--inv-olive-deep);
+}
+
 .luxury-page {
   background: var(--inv-parchment);
+}
+
+.luxury-page.page--sealed {
+  background: var(--inv-olive-deep);
 }
 
 .inv-surface__inner {
