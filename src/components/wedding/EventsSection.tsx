@@ -1,5 +1,4 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
 import { OrnateTimeline, type TimelineEvent } from '../ornaments/OrnateTimeline'
