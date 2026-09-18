@@ -86,8 +86,10 @@
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  clip-path: inset(0 0 0 0);
+  /* Must be `none` — identity transforms / will-change break backdrop-filter glass */
+  transform: none;
+  clip-path: none;
+  will-change: auto;
 }
 
 .animated-divider {

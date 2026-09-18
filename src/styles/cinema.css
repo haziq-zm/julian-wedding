@@ -109,8 +109,26 @@
   border-radius: 40% 40% 1.1rem 1.1rem / 18% 18% 1.1rem 1.1rem;
 }
 
-.cinema-hero .lux-hero__stage.reveal {
+/* Keep hero glass working — parent transforms break backdrop-filter */
+.cinema-hero .lux-hero__stage.reveal,
+.cinema-hero .lux-hero__stage.reveal--up,
+.cinema-hero .lux-hero__stage.reveal.is-visible {
+  transform: none;
   clip-path: none;
+  will-change: opacity;
+}
+
+/* Glass cards that are themselves Reveals: fade only, no transform */
+.reveal.glass-card,
+.reveal.glass-card.reveal--up,
+.reveal.glass-card.reveal--left,
+.reveal.glass-card.reveal--right,
+.reveal.glass-card.reveal--scale,
+.reveal.glass-card.reveal--clip,
+.reveal.glass-card.is-visible {
+  transform: none;
+  clip-path: none;
+  will-change: opacity;
 }
 
 .cinema-hero .lux-hero__arch {
