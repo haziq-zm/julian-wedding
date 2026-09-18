@@ -1,5 +1,3 @@
-import { EightPointStar } from './EightPointStar'
-
 type Props = {
   light?: boolean
   className?: string
@@ -12,7 +10,7 @@ export function AnimatedDivider({ light = false, className = '' }: Props) {
       aria-hidden
     >
       <span className="animated-divider__line animated-divider__line--left" />
-      <EightPointStar className="animated-divider__star" />
+      <span className="animated-divider__mark" />
       <span className="animated-divider__line animated-divider__line--right" />
     </div>
   )

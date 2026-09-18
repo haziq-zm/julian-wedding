@@ -1,9 +1,6 @@
-import { CarpetBorder } from '../ornaments/CarpetBorder'
-import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { JaliPattern } from '../ornaments/JaliPattern'
-import { PalaceSkyline } from '../ornaments/PalaceSkyline'
+import { SparkleField } from '../ornaments/SparkleField'
 
 type Props = {
   partnerOne: string
@@ -13,29 +10,28 @@ type Props = {
 
 export function WeddingFooter({ partnerOne, partnerTwo, year }: Props) {
   return (
-    <footer className="manuscript-footer">
-      <JaliPattern className="manuscript-footer__screen" />
-      <PalaceSkyline className="manuscript-footer__skyline" arcade={false} />
+    <footer className="manuscript-footer cinema-close">
+      <div className="manuscript-footer__photo" aria-hidden />
+      <div className="manuscript-footer__veil" aria-hidden />
+      <SparkleField count={12} />
       <FloralBranch position="top-left" size="medium" />
       <FloralBranch position="top-right" size="medium" />
 
-      <CarpetBorder className="manuscript-footer__carpet" />
-
-      <div className="manuscript-footer__seal">
+      <div className="manuscript-footer__card glass-card glass-card--arch">
         <GeometricRosette className="manuscript-footer__rosette" />
-        <EightPointStar className="manuscript-footer__star" />
+        <blockquote className="manuscript-footer__quote">
+          “May our story be a source of kindness, joy and inspiration for all who witness it.”
+        </blockquote>
+        <p className="manuscript-footer__mono">J &amp; J</p>
+        <p className="manuscript-footer__soon">See you soon</p>
+        <p className="manuscript-footer__names">
+          {partnerOne} <i>&amp;</i> {partnerTwo}
+        </p>
+        <p className="manuscript-footer__note">With love — {year}</p>
+        <p className="manuscript-footer__colophon">
+          Hanji Danter · Anantnag · Kashmir
+        </p>
       </div>
-
-      <p className="manuscript-footer__names">
-        {partnerOne} <i>&amp;</i> {partnerTwo}
-      </p>
-      <p className="manuscript-footer__note">With love — {year}</p>
-
-      <p className="manuscript-footer__colophon">
-        <span aria-hidden>❦</span>
-        Hanji Danter · Anantnag · Kashmir
-        <span aria-hidden>❦</span>
-      </p>
     </footer>
   )
 }

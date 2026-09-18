@@ -11,7 +11,6 @@ import {
 import { CarpetBorder } from '../ornaments/CarpetBorder'
 import { FloralCorner } from '../ornaments/FloralCorner'
 import { FloralSpray } from '../ornaments/FloralSpray'
-import { EightPointStar } from '../ornaments/EightPointStar'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
@@ -281,9 +280,7 @@ export function InvitationCover({
               <div className="scroll-cylinder-body">
                 <div className="scroll-cylinder-shine" />
                 <div className="scroll-cylinder-texture" />
-                <div className="scroll-seal" style={sealStyle}>
-                  <EightPointStar className="scroll-seal-star" />
-                </div>
+                <div className="scroll-seal" style={sealStyle} />
               </div>
               <div className="scroll-cylinder-edge" />
             </div>
@@ -357,7 +354,6 @@ export function InvitationCover({
             <span className="scroll-pull-ring scroll-pull-ring--bottom" aria-hidden />
             <span className="scroll-pull-handle">
               <span className="scroll-pull-handle-shine" aria-hidden />
-              <EightPointStar className="scroll-pull-star" />
               <span className="scroll-pull-label">Pull</span>
             </span>
           </button>

@@ -1,5 +1,4 @@
 import { type ReactNode } from 'react'
-import { EightPointStar } from './EightPointStar'
 
 type Props = {
   children: ReactNode
@@ -72,8 +71,6 @@ export function MughalArchFrame({
             <span className="inv-arch__finial-stem" />
           </span>
         )}
-        <EightPointStar className="inv-arch__spandrel inv-arch__spandrel--l" />
-        <EightPointStar className="inv-arch__spandrel inv-arch__spandrel--r" />
         {crest && <div className="inv-arch__crest">{crest}</div>}
       </div>
 

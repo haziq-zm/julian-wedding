@@ -1,33 +1,36 @@
 import { type ReactNode } from 'react'
-import { JaliPattern } from './JaliPattern'
+import { SparkleField } from './SparkleField'
 
 type Tone = 'parchment' | 'parchment-soft' | 'olive' | 'olive-deep' | 'cream'
+type Scene = 'dusk' | 'lantern'
 
 type Props = {
   children: ReactNode
   tone?: Tone
+  scene?: Scene
   className?: string
   id?: string
   fullBleed?: boolean
 }
 
-/** Section wrapper with layered parchment / olive surfaces */
 export function InvitationSurface({
   children,
   tone = 'parchment',
+  scene,
   className = '',
   id,
   fullBleed = true,
 }: Props) {
+  const cinematic = scene ?? (tone === 'parchment' || tone === 'cream' || tone === 'parchment-soft' ? 'lantern' : 'dusk')
+
   return (
     <section
       id={id}
-      className={`inv-surface inv-surface--${tone} ${fullBleed ? 'inv-surface--bleed' : ''} ${className}`.trim()}
+      className={`inv-surface inv-surface--${tone} inv-surface--cinematic inv-surface--${cinematic} ${fullBleed ? 'inv-surface--bleed' : ''} ${className}`.trim()}
     >
-      <div className="inv-surface__grain" aria-hidden />
-      <div className="inv-surface__geometry" aria-hidden />
-      <JaliPattern className="inv-surface__jali" />
-      <div className="inv-surface__botanical" aria-hidden />
+      <div className="inv-surface__photo" aria-hidden />
+      <div className="inv-surface__veil" aria-hidden />
+      <SparkleField count={10} />
       <div className="inv-surface__inner">{children}</div>
     </section>
   )

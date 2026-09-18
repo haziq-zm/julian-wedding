@@ -1,23 +1,17 @@
 import type { ReactNode } from 'react'
-import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { MughalArchFrame } from '../ornaments/MughalArchFrame'
 import { Reveal } from '../ui/Reveal'
 
-type Variant = 'light' | 'deep'
 type Motif = 'kahwa' | 'feast' | 'music'
 
 type Props = {
   title: string
   caption: string
   motif: Motif
-  variant?: Variant
   index?: string
   eyebrow?: string
   note?: string
-  plaque?: string
   className?: string
 }
 
@@ -108,69 +102,41 @@ export function FeastChapter({
   title,
   caption,
   motif,
-  variant = 'light',
   index = 'I',
   eyebrow = 'A Kashmiri Ritual',
   note,
-  plaque,
   className = '',
 }: Props) {
   const Motif = MOTIFS[motif]
   const archVariant = title === 'Food' ? 'onion' : title === 'Music' ? 'cusped' : 'pointed'
 
   return (
-    <article
-      id={title === 'Food' ? 'food' : undefined}
-      className={`feast-chapter feast-chapter--${variant} ${className}`.trim()}
+    <Reveal
+      as="article"
+      variant="up"
+      className={`feast-card glass-card ${className}`.trim()}
     >
-      <div className="feast-chapter__backdrop" aria-hidden>
-        <JaliPattern className="feast-chapter__screen" />
-        <span className="feast-chapter__wash" />
-      </div>
+      <span className="feast-card__index" aria-hidden>
+        {index}
+      </span>
+      <p className="feast-card__eyebrow">{eyebrow}</p>
+      <h3 className="feast-card__title">{title}</h3>
 
-      <FloralBranch
-        position={variant === 'deep' ? 'top-right' : 'top-left'}
-        size="large"
-        className={`botanical-reveal botanical-reveal--${variant === 'deep' ? 'right' : 'left'}`}
-      />
-
-      <div className="feast-chapter__composition">
-        <Reveal
-          variant={variant === 'deep' ? 'right' : 'left'}
-          className="feast-chapter__copy"
+      <div className="feast-card__niche" aria-hidden>
+        <MughalArchFrame
+          size="fluid"
+          tone="parchment"
+          variant={archVariant}
+          crest={<GeometricRosette className="feast-card__crest" />}
         >
-          <span className="feast-chapter__index" aria-hidden>
-            {index}
-          </span>
-          <p className="inv-label">{eyebrow}</p>
-          <h3 className="feast-chapter__title">{title}</h3>
-          <AnimatedDivider light={variant === 'deep'} />
-          <p className="feast-chapter__caption">{caption}</p>
-          {note && <p className="feast-chapter__note">{note}</p>}
-        </Reveal>
-
-        <Reveal variant="clip" className="feast-chapter__shrine">
-          <MughalArchFrame
-            size="fluid"
-            tone={variant === 'deep' ? 'deep' : 'parchment'}
-            variant={archVariant}
-            crest={<GeometricRosette className="feast-chapter__crest" />}
-          >
-            <div className="feast-chapter__niche">
-              <div className="feast-chapter__halo" aria-hidden />
-              <div className="feast-chapter__canvas feast-chapter__canvas--static" aria-hidden>
-                <Motif />
-              </div>
-              <span className="feast-chapter__pedestal" aria-hidden />
-            </div>
-          </MughalArchFrame>
-          <div className="feast-chapter__plaque">
-            <span>✦</span>
-            {plaque ?? `The Art of ${title}`}
-            <span>✦</span>
+          <div className="feast-card__motif">
+            <Motif />
           </div>
-        </Reveal>
+        </MughalArchFrame>
       </div>
-    </article>
+
+      <p className="feast-card__caption">{caption}</p>
+      {note && <p className="feast-card__note">{note}</p>}
+    </Reveal>
   )
 }

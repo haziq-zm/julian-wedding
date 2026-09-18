@@ -1,11 +1,8 @@
-import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
 import { MughalArchFrame } from '../ornaments/MughalArchFrame'
-import { PalaceSkyline } from '../ornaments/PalaceSkyline'
+import { SparkleField } from '../ornaments/SparkleField'
 import { Reveal } from '../ui/Reveal'
 
 type Props = {
@@ -26,35 +23,37 @@ export function WeddingHero({
   tagline,
 }: Props) {
   return (
-    <section id="home" className="lux-hero">
-      <div className="lux-hero__paper" aria-hidden />
-      <JaliPattern className="lux-hero__jali" />
-      <div className="lux-hero__geometry" aria-hidden />
-      <div className="lux-hero__horizon" aria-hidden />
-      <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--far" />
-      <PalaceSkyline className="lux-hero__skyline lux-hero__skyline--near" arcade={false} />
+    <section id="home" className="lux-hero cinema-hero">
+      <div className="lux-hero__photo" aria-hidden />
+      <div className="lux-hero__veil" aria-hidden />
+      <SparkleField count={16} />
 
-      <div className="lux-hero__lanterns" aria-hidden>
-        <span className="lux-hero__lantern lux-hero__lantern--one">
-          <Lantern size="lg" />
-        </span>
-        <span className="lux-hero__lantern lux-hero__lantern--four">
-          <Lantern size="lg" />
-        </span>
-      </div>
+      <p className="lux-hero__side-text" aria-hidden>
+        Two souls, a more beautiful tomorrow
+      </p>
 
       <FloralBranch
         position="top-left"
         size="large"
-        className="lux-hero__branch lux-hero__branch--far"
+        className="lux-hero__branch lux-hero__branch--tl"
       />
       <FloralBranch
         position="top-right"
         size="large"
-        className="lux-hero__branch lux-hero__branch--far"
+        className="lux-hero__branch lux-hero__branch--tr"
+      />
+      <FloralBranch
+        position="bottom-left"
+        size="large"
+        className="lux-hero__branch lux-hero__branch--bl"
+      />
+      <FloralBranch
+        position="bottom-right"
+        size="large"
+        className="lux-hero__branch lux-hero__branch--br"
       />
 
-      <Reveal variant="clip" className="lux-hero__stage">
+      <Reveal variant="up" className="lux-hero__stage">
         <MughalArchFrame
           size="monument"
           tone="deep"
@@ -63,28 +62,22 @@ export function WeddingHero({
           crest={
             <>
               <GeometricRosette className="lux-hero__rosette" />
-              <span className="lux-hero__bismillah">Bismillāh ir-Raḥmān ir-Raḥīm</span>
+              <span className="lux-hero__bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</span>
             </>
           }
         >
           <div className="lux-hero__content">
-            <p className="lux-hero__kicker">
-              <EightPointStar className="lux-hero__kicker-star" />
-              The Wedding Celebration Of
-              <EightPointStar className="lux-hero__kicker-star" />
-            </p>
+            <p className="lux-hero__kicker">The Wedding Celebration Of</p>
 
             <h1 className="lux-hero__names" aria-label={`${partnerOne} and ${partnerTwo}`}>
-              <span className="lux-hero__name lux-hero__name--one">{partnerOne}</span>
+              <span className="lux-hero__name">{partnerOne}</span>
               <span className="lux-hero__amp" aria-hidden>
                 <span className="lux-hero__amp-rule" />
                 <i>&amp;</i>
                 <span className="lux-hero__amp-rule" />
               </span>
-              <span className="lux-hero__name lux-hero__name--two">{partnerTwo}</span>
+              <span className="lux-hero__name">{partnerTwo}</span>
             </h1>
-
-            <AnimatedDivider light className="lux-hero__divider" />
 
             <time className="lux-hero__date" dateTime="2026-10-11">
               {dateLabel}
@@ -92,24 +85,28 @@ export function WeddingHero({
             <p className="lux-hero__place">
               {venue} · {address}
             </p>
-            <p className="lux-hero__tagline" dangerouslySetInnerHTML={{ __html: tagline }} />
+
+            <div className="lux-hero__glass">
+              <p
+                className="lux-hero__tagline"
+                dangerouslySetInnerHTML={{ __html: tagline }}
+              />
+              <p className="lux-hero__destiny">
+                A journey of two hearts, one beautiful destiny.
+              </p>
+            </div>
           </div>
         </MughalArchFrame>
-
-        <span className="lux-hero__plinth-shadow" aria-hidden />
       </Reveal>
 
-      <span className="lux-hero__bracket lux-hero__bracket--tl" aria-hidden />
-      <span className="lux-hero__bracket lux-hero__bracket--tr" aria-hidden />
-      <span className="lux-hero__bracket lux-hero__bracket--bl" aria-hidden />
-      <span className="lux-hero__bracket lux-hero__bracket--br" aria-hidden />
-
-      <a className="lux-hero__scroll" href="#story">
-        <span className="lux-hero__scroll-star" aria-hidden>
-          ✦
+      <a className="lux-hero__scroll" href="#countdown">
+        <Lantern size="sm" className="lux-hero__scroll-lantern" />
+        <span className="lux-hero__scroll-orb" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M6 10l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </span>
         <span>Scroll to explore</span>
-        <span className="lux-hero__scroll-line" aria-hidden />
       </a>
     </section>
   )

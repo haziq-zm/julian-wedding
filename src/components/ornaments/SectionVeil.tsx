@@ -35,11 +35,6 @@ export function SectionVeil({
              C180,48 180,68 120,68 C60,68 60,48 0,48 Z"
         />
       </svg>
-      <span className="inv-veil__stars">
-        <span>✦</span>
-        <span>✦</span>
-        <span>✦</span>
-      </span>
     </div>
   )
 }

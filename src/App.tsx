@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { wedding } from './config'
 import { InvitationCover } from './components/wedding/InvitationCover'
-import { SiteNavigation } from './components/wedding/SiteNavigation'
 import { WeddingHero } from './components/wedding/WeddingHero'
 
 import { CountdownSection } from './components/wedding/CountdownSection'
@@ -10,13 +9,13 @@ import { VenueSection } from './components/wedding/VenueSection'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
-import { SectionVeil } from './components/ornaments/SectionVeil'
 import { ScrollProvider } from './components/ui/ScrollProvider'
 import './App.css'
 import './styles/motion.css'
 import './ornate.css'
 import './mobile.css'
 import './styles/invitation.css'
+import './styles/cinema.css'
 
 export default function App() {
   const year = wedding.date.getFullYear()
@@ -58,8 +57,6 @@ export default function App() {
         >
           {mountDetails && (
             <>
-              <SiteNavigation visible={opened} />
-
               <WeddingHero
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
@@ -76,18 +73,12 @@ export default function App() {
                 dateLabel={wedding.dateLabel}
               />
 
-              <SectionVeil from="olive" to="parchment" />
-
               <EventsSection
                 schedule={wedding.schedule}
                 dateLabel={wedding.dateLabel}
               />
 
-              <SectionVeil from="parchment" to="olive" />
-
               <VenueSection location={wedding.location} />
-
-              <SectionVeil from="olive" to="deep" />
 
               <InvitationCardSection
                 partnerOne={wedding.partnerOne}
@@ -95,8 +86,6 @@ export default function App() {
                 dateLabel={wedding.dateLabel}
                 blessing={wedding.blessing}
               />
-
-              <SectionVeil from="deep" to="parchment" />
 
               <GallerySection
                 dateLabel={wedding.dateLabel}

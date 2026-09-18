@@ -1,5 +1,4 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
@@ -58,7 +57,6 @@ export function GallerySection({
           <span className="editorial-suite__corner" aria-hidden />
           <p className="editorial-suite__label">Save the date</p>
           <p className="editorial-suite__text">{dateLabel}</p>
-          <EightPointStar className="editorial-suite__pip" />
         </Reveal>
 
         <Reveal variant="left" className="editorial-suite__piece editorial-suite__piece--venue" delay={160}>
@@ -66,7 +64,6 @@ export function GallerySection({
           <p className="editorial-suite__label">The gathering</p>
           <p className="editorial-suite__text">{venue}</p>
           <p className="editorial-suite__sub">{address}</p>
-          <EightPointStar className="editorial-suite__pip" />
         </Reveal>
 
         <Reveal variant="scale" className="editorial-suite__piece editorial-suite__piece--quote" delay={220}>

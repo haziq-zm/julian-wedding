@@ -1132,13 +1132,7 @@
 }
 
 .inv-program__rule::after {
-  content: '✦';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  translate: -50% -55%;
-  color: var(--inv-gold-dark);
-  font-size: 0.45rem;
+  content: none;
 }
 
 .inv-program__time {
@@ -1715,14 +1709,7 @@ body {
 }
 
 .artifact-nav__link.is-active::before {
-  content: '✦';
-  position: absolute;
-  top: -0.35rem;
-  left: 50%;
-  translate: -50% 0;
-  color: var(--inv-gold);
-  font-size: 0.4rem;
-  animation: nav-mark-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  content: none;
 }
 
 @keyframes nav-mark-in {
@@ -2795,11 +2782,7 @@ body {
 
 .ceremony-countdown__ring::before,
 .ceremony-countdown__ring::after {
-  content: '✦';
-  position: absolute;
-  left: 50%;
-  color: var(--inv-gold-muted);
-  translate: -50% 0;
+  content: none;
 }
 
 .ceremony-countdown__ring::before {
@@ -2884,13 +2867,7 @@ body {
 
 .ceremony-countdown__content::before,
 .ceremony-countdown__content::after {
-  content: '✦';
-  position: absolute;
-  left: 50%;
-  color: var(--inv-gold);
-  font-size: 0.6rem;
-  opacity: 0.7;
-  translate: -50% 0;
+  content: none;
 }
 
 .ceremony-countdown__content::before {
@@ -3069,9 +3046,122 @@ body {
   font-weight: 400;
 }
 
+.wazwan-experience__lead {
+  margin: 1.1rem auto 0;
+  max-width: 28rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(248, 242, 227, 0.82);
+}
+
 .wazwan-experience__chapters {
   position: relative;
   z-index: 2;
+}
+
+.wazwan-experience__trio {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 1.25rem;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0 1rem clamp(3.5rem, 8vw, 5.5rem);
+  grid-template-columns: 1fr;
+}
+
+.feast-card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.55rem;
+  padding: 1.5rem 1.15rem 1.65rem;
+  text-align: center;
+  color: var(--inv-ink);
+  background:
+    linear-gradient(180deg, rgba(248, 242, 227, 0.96), rgba(232, 221, 195, 0.92));
+  border: 1px solid rgba(197, 165, 102, 0.42);
+}
+
+.feast-card__index {
+  font-family: var(--font-label);
+  font-size: 0.55rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--inv-copper, #9a5f3d);
+}
+
+.feast-card__eyebrow {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--inv-gold-dark, #8a6a32);
+}
+
+.feast-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 5vw, 2.35rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--inv-olive-deep, #343b20);
+}
+
+.feast-card__niche {
+  width: min(100%, 10.5rem);
+  margin: 0.35rem 0 0.15rem;
+  aspect-ratio: 4 / 5;
+}
+
+.feast-card__niche .inv-arch {
+  width: 100%;
+  height: 100%;
+}
+
+.feast-card__niche .inv-arch__content {
+  display: grid;
+  place-items: center;
+  padding: 18% 16% 12%;
+}
+
+.feast-card__motif {
+  width: 72%;
+  color: var(--inv-gold-dark, #8a6a32);
+}
+
+.feast-card__crest {
+  width: 0.85rem;
+  height: 0.85rem;
+  color: var(--inv-gold-dark, #8a6a32);
+}
+
+.feast-motif {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.feast-card__caption {
+  margin: 0.25rem 0 0;
+  max-width: 16rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.98rem, 2.8vw, 1.1rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--inv-ink-soft, #716754);
+}
+
+.feast-card__note {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.52rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--inv-gold-dark, #8a6a32);
 }
 
 .feast-chapter {
@@ -3867,14 +3957,7 @@ body {
 
 .editorial-suite__corner::before,
 .editorial-suite__corner::after {
-  content: '✦';
-  position: absolute;
-  top: -.55rem;
-  color: var(--inv-gold-dark);
-  font-size: .5rem;
-  line-height: 1;
-  background: var(--inv-cream);
-  padding: 0 .2rem;
+  content: none;
 }
 
 .editorial-suite__corner::before {
@@ -4402,6 +4485,12 @@ body {
 
   .artifact-nav__toggle {
     display: none;
+  }
+
+  .wazwan-experience__trio {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.35rem;
+    align-items: stretch;
   }
 
   .feast-chapter__composition {

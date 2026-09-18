@@ -13,9 +13,9 @@
   --ink: #1c1e16;
   --ink-soft: #3d4233;
 
-  --font-display: 'Bodoni Moda', Georgia, serif;
-  --font-label: 'Marcellus', 'Times New Roman', serif;
-  --font-body: 'EB Garamond', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-label: 'Jost', 'Helvetica Neue', sans-serif;
+  --font-body: 'Cormorant Garamond', Georgia, serif;
 
   color: var(--ink);
   font-family: var(--font-body);

@@ -1,5 +1,4 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
-import { EightPointStar } from '../ornaments/EightPointStar'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
@@ -36,9 +35,7 @@ export function InvitationCardSection({
         <Reveal variant="left" className="keepsake-scene__envelope" delay={120}>
           <span className="keepsake-scene__flap" aria-hidden />
           <span className="keepsake-scene__seal" aria-hidden>J &amp; J</span>
-          <span className="keepsake-scene__stamp" aria-hidden>
-            <EightPointStar />
-          </span>
+          <span className="keepsake-scene__stamp" aria-hidden />
         </Reveal>
 
         <Reveal as="article" variant="clip" className="keepsake-scene__card">

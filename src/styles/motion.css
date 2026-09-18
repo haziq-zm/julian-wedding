@@ -117,17 +117,19 @@
   background: linear-gradient(90deg, currentColor, transparent);
 }
 
-.animated-divider__star {
-  width: 0.7rem;
-  height: 0.7rem;
+.animated-divider__mark {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 50%;
+  background: currentColor;
   color: var(--inv-gold, #b08a45);
   opacity: 0;
-  transform: scale(0.55) rotate(-22deg);
+  transform: scale(0.55);
   animation: ornament-bloom 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
 }
 
 .animated-divider--light .animated-divider__line,
-.animated-divider--light .animated-divider__star {
+.animated-divider--light .animated-divider__mark {
   color: var(--inv-gold-muted, #c5a566);
 }
 
@@ -157,7 +159,7 @@
   }
 
   .animated-divider__line,
-  .animated-divider__star {
+  .animated-divider__mark {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
