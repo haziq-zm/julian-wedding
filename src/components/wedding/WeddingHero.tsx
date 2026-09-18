@@ -53,7 +53,8 @@ export function WeddingHero({
         className="lux-hero__branch lux-hero__branch--br"
       />
 
-      <Reveal variant="up" className="lux-hero__stage">
+      {/* No Reveal/opacity/transform wrapper — Chrome empties backdrop-filter behind those */}
+      <div className="lux-hero__stage">
         <MughalArchFrame
           size="monument"
           tone="deep"
@@ -67,24 +68,26 @@ export function WeddingHero({
           }
         >
           <div className="lux-hero__content">
-            <p className="lux-hero__kicker">The Wedding Celebration Of</p>
+            <Reveal variant="up">
+              <p className="lux-hero__kicker">The Wedding Celebration Of</p>
 
-            <h1 className="lux-hero__names" aria-label={`${partnerOne} and ${partnerTwo}`}>
-              <span className="lux-hero__name">{partnerOne}</span>
-              <span className="lux-hero__amp" aria-hidden>
-                <span className="lux-hero__amp-rule" />
-                <i>&amp;</i>
-                <span className="lux-hero__amp-rule" />
-              </span>
-              <span className="lux-hero__name">{partnerTwo}</span>
-            </h1>
+              <h1 className="lux-hero__names" aria-label={`${partnerOne} and ${partnerTwo}`}>
+                <span className="lux-hero__name">{partnerOne}</span>
+                <span className="lux-hero__amp" aria-hidden>
+                  <span className="lux-hero__amp-rule" />
+                  <i>&amp;</i>
+                  <span className="lux-hero__amp-rule" />
+                </span>
+                <span className="lux-hero__name">{partnerTwo}</span>
+              </h1>
 
-            <time className="lux-hero__date" dateTime="2026-10-11">
-              {dateLabel}
-            </time>
-            <p className="lux-hero__place">
-              {venue} · {address}
-            </p>
+              <time className="lux-hero__date" dateTime="2026-10-11">
+                {dateLabel}
+              </time>
+              <p className="lux-hero__place">
+                {venue} · {address}
+              </p>
+            </Reveal>
 
             <div className="lux-hero__glass">
               <p
@@ -97,7 +100,7 @@ export function WeddingHero({
             </div>
           </div>
         </MughalArchFrame>
-      </Reveal>
+      </div>
 
       <a className="lux-hero__scroll" href="#countdown">
         <Lantern size="sm" className="lux-hero__scroll-lantern" />

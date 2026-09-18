@@ -16,6 +16,35 @@ import { GoldDivider } from '../ornaments/GoldDivider'
 import { JaliPattern } from '../ornaments/JaliPattern'
 import { Lantern } from '../ornaments/Lantern'
 
+function ScrollFiligree({ className = '' }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 360 44"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden
+    >
+      <path
+        d="M14 42 C20 18 40 16 58 16 C76 16 86 5 110 5 C134 5 144 16 162 16 C176 16 180 8 180 8 C180 8 184 16 198 16 C216 16 226 5 250 5 C274 5 284 16 302 16 C320 16 340 18 346 42"
+        stroke="currentColor"
+        strokeWidth="1.15"
+      />
+      <path
+        d="M28 42 C34 24 50 24 68 24 C86 24 96 14 110 14 C128 14 138 24 156 24 C168 24 176 16 180 16 C184 16 192 24 204 24 C222 24 232 14 250 14 C264 14 274 24 292 24 C310 24 326 24 332 42"
+        stroke="currentColor"
+        strokeWidth="0.65"
+        opacity="0.55"
+      />
+      <path
+        d="M180 6 L183 12 L189 14 L183 16 L180 22 L177 16 L171 14 L177 12 Z"
+        fill="currentColor"
+        opacity="0.85"
+      />
+    </svg>
+  )
+}
+
 type Phase = 'sealed' | 'pulling' | 'unrolling' | 'open'
 
 type Props = {
@@ -280,7 +309,9 @@ export function InvitationCover({
               <div className="scroll-cylinder-body">
                 <div className="scroll-cylinder-shine" />
                 <div className="scroll-cylinder-texture" />
-                <div className="scroll-seal" style={sealStyle} />
+                <div className="scroll-seal" style={sealStyle}>
+                  <span>J&amp;J</span>
+                </div>
               </div>
               <div className="scroll-cylinder-edge" />
             </div>
@@ -290,7 +321,14 @@ export function InvitationCover({
                 <div className="scroll-sheet" style={parchmentStyle}>
                   <div className="scroll-parchment">
                     <div className="scroll-parchment-texture" aria-hidden />
-                    <span className="scroll-parchment-border" aria-hidden />
+                    <ScrollFiligree className="scroll-filigree scroll-filigree--top" />
+                    <ScrollFiligree className="scroll-filigree scroll-filigree--bottom" />
+                    <span className="scroll-frame scroll-frame--outer" aria-hidden />
+                    <span className="scroll-frame scroll-frame--inner" aria-hidden />
+                    <span className="scroll-gem scroll-gem--tl" aria-hidden />
+                    <span className="scroll-gem scroll-gem--tr" aria-hidden />
+                    <span className="scroll-gem scroll-gem--bl" aria-hidden />
+                    <span className="scroll-gem scroll-gem--br" aria-hidden />
                     <FloralCorner className="scroll-floral scroll-floral--tl" corner="tl" />
                     <FloralCorner className="scroll-floral scroll-floral--tr" corner="tr" />
                     <FloralCorner className="scroll-floral scroll-floral--bl" corner="bl" />
@@ -298,6 +336,7 @@ export function InvitationCover({
 
                     <div className="scroll-content" style={contentStyle}>
                       <GeometricRosette className="scroll-content-rosette" />
+                      <p className="scroll-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
                       <p className="scroll-eyebrow">The Wedding Of</p>
                       <h1 id={titleId} className="scroll-names">
                         <span>{partnerOne}</span>

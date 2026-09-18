@@ -84,6 +84,10 @@ select {
 
 .page--sealed {
   overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  background: var(--olive-deep);
 }
 
 .page--open {
@@ -274,6 +278,9 @@ select {
 .cover {
   position: relative;
   z-index: 5;
+  isolation: isolate;
+  overflow: clip;
+  min-height: 100vh;
   min-height: 100svh;
   min-height: 100dvh;
   display: flex;
@@ -296,9 +303,8 @@ select {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 50% 35%, rgba(75, 81, 53, 0.55), transparent 70%),
-    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(100, 31, 36, 0.2), transparent 60%),
-    linear-gradient(180deg, #2a2f1c 0%, var(--olive-deep) 45%, #3a4128 100%);
+    linear-gradient(180deg, rgba(16, 20, 10, 0.32) 0%, rgba(16, 20, 10, 0.12) 38%, rgba(12, 16, 8, 0.4) 100%),
+    url('/images/kashmir-terrace-dusk.jpg') center 38% / cover no-repeat;
   transition: opacity 1s ease 0.2s;
 }
 
@@ -306,28 +312,11 @@ select {
   opacity: 0.92;
 }
 
-.cover-jali {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--gold);
-  opacity: 0.07;
-}
-
-.cover-lantern {
-  position: absolute;
-  top: max(1.5rem, env(safe-area-inset-top));
-  z-index: 1;
-  opacity: 0.7;
-}
-
-.cover-lantern--l {
-  left: 4%;
-}
-
-.cover-lantern--r {
-  right: 4%;
+.cover-jali,
+.cover-dust,
+.cover-lantern,
+.cover-spray {
+  display: none;
 }
 
 /* —— 3D Scroll —— */

@@ -1,142 +1,106 @@
-import type { ReactNode } from 'react'
-import { GeometricRosette } from '../ornaments/GeometricRosette'
-import { MughalArchFrame } from '../ornaments/MughalArchFrame'
+import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { Reveal } from '../ui/Reveal'
 
-type Motif = 'kahwa' | 'feast' | 'music'
-
-type Props = {
+type Ritual = {
+  id: string
+  index: string
+  eyebrow: string
   title: string
   caption: string
-  motif: Motif
-  index?: string
-  eyebrow?: string
-  note?: string
-  className?: string
+  note: string
 }
 
-function KahwaMotif() {
+const rituals: Ritual[] = [
+  {
+    id: 'kahwa',
+    index: 'I',
+    eyebrow: 'The Welcome',
+    title: 'Kahwa',
+    caption: 'Saffron steam, cardamom warmth, poured with welcome',
+    note: 'Poured from the copper samovar',
+  },
+  {
+    id: 'food',
+    index: 'II',
+    eyebrow: 'The Feast',
+    title: 'Food',
+    caption: 'Copper gleam and ritual welcome, ready for the feast',
+    note: 'Served on the shared trami',
+  },
+  {
+    id: 'music',
+    index: 'III',
+    eyebrow: 'The Celebration',
+    title: 'Music',
+    caption: 'The heartbeat of celebration, calling guests to joy',
+    note: 'Wanvun sung late into the night',
+  },
+]
+
+function RitualMark({ id }: { id: string }) {
+  if (id === 'kahwa') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden>
+        <path d="M10 22c0 4 2.5 6 6 6s6-2 6-6v-8H10v8Z" fill="currentColor" />
+        <path d="M9 14h14v2H9z" fill="currentColor" opacity="0.75" />
+        <path d="M22 16c3 0 5 2 5 4.5S25 25 22 25" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M13 8c1-2 2-3 2.5-4M16 8c.6-2.2 1.6-3.2 2-4.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      </svg>
+    )
+  }
+
+  if (id === 'music') {
+    return (
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden>
+        <circle cx="12" cy="22" r="3.5" fill="currentColor" />
+        <path d="M15.5 22V9l8-2v13" stroke="currentColor" strokeWidth="1.6" />
+        <circle cx="23.5" cy="20" r="3.5" fill="currentColor" />
+      </svg>
+    )
+  }
+
   return (
-    <svg className="feast-motif" viewBox="0 0 200 240" fill="none" aria-hidden>
-      <ellipse cx="100" cy="214" rx="56" ry="10" fill="currentColor" opacity="0.1" />
-      <path
-        d="M64 172c0 24 16 36 36 36s36-12 36-36V98H64v74Z"
-        fill="currentColor"
-        opacity="0.5"
-      />
-      <path
-        d="M58 98h84c5 0 9-4 9-9s-4-9-9-9H58c-5 0-9 4-9 9s4 9 9 9Z"
-        fill="currentColor"
-        opacity="0.78"
-      />
-      <path
-        d="M78 80h44c3 0 6-3 6-7V58c0-14-10-22-28-22S72 44 72 58v15c0 4 3 7 6 7Z"
-        fill="currentColor"
-        opacity="0.62"
-      />
-      <path
-        d="M140 120c18 0 32 12 32 30s-14 30-32 30"
-        stroke="currentColor"
-        strokeWidth="5"
-        strokeLinecap="round"
-        opacity="0.72"
-      />
-      <path
-        d="M86 46c5-12 12-18 14-26M100 44c3-14 10-20 12-28M114 46c4-10 9-18 10-24"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        opacity="0.42"
-      />
+    <svg viewBox="0 0 32 32" fill="none" aria-hidden>
+      <ellipse cx="16" cy="22" rx="9" ry="4" fill="currentColor" opacity="0.85" />
+      <path d="M9 20c2 4 4.5 6 7 6s5-2 7-6" stroke="currentColor" strokeWidth="1.4" />
+      <ellipse cx="16" cy="16" rx="3" ry="2.2" fill="currentColor" />
     </svg>
   )
 }
 
-function FeastMotif() {
-  return (
-    <svg className="feast-motif" viewBox="0 0 200 240" fill="none" aria-hidden>
-      <ellipse cx="100" cy="212" rx="60" ry="11" fill="currentColor" opacity="0.1" />
-      <ellipse cx="100" cy="156" rx="66" ry="24" fill="currentColor" opacity="0.16" />
-      <path
-        d="M44 152c10 30 30 48 56 48s46-18 56-48c-16 10-36 14-56 14s-40-4-56-14Z"
-        fill="currentColor"
-        opacity="0.52"
-      />
-      <path
-        d="M68 134c10-22 20-32 32-32s22 10 32 32"
-        stroke="currentColor"
-        strokeWidth="5"
-        strokeLinecap="round"
-        opacity="0.72"
-      />
-      <ellipse cx="100" cy="118" rx="14" ry="10" fill="currentColor" opacity="0.7" />
-    </svg>
-  )
-}
-
-function MusicMotif() {
-  return (
-    <svg className="feast-motif" viewBox="0 0 200 240" fill="none" aria-hidden>
-      <ellipse cx="100" cy="214" rx="52" ry="10" fill="currentColor" opacity="0.1" />
-      <ellipse cx="100" cy="152" rx="50" ry="56" fill="currentColor" opacity="0.48" />
-      <ellipse cx="100" cy="152" rx="30" ry="34" fill="currentColor" opacity="0.2" />
-      <path
-        d="M100 96V66c0-8 6-12 14-10l26 7"
-        stroke="currentColor"
-        strokeWidth="5.5"
-        strokeLinecap="round"
-        opacity="0.78"
-      />
-      <circle cx="140" cy="62" r="11" fill="currentColor" opacity="0.72" />
-    </svg>
-  )
-}
-
-const MOTIFS: Record<Motif, () => ReactNode> = {
-  kahwa: KahwaMotif,
-  feast: FeastMotif,
-  music: MusicMotif,
-}
-
-export function FeastChapter({
-  title,
-  caption,
-  motif,
-  index = 'I',
-  eyebrow = 'A Kashmiri Ritual',
-  note,
-  className = '',
-}: Props) {
-  const Motif = MOTIFS[motif]
-  const archVariant = title === 'Food' ? 'onion' : title === 'Music' ? 'cusped' : 'pointed'
-
+export function FeastChapter() {
   return (
     <Reveal
       as="article"
       variant="up"
-      className={`feast-card glass-card ${className}`.trim()}
+      className="feast-suite glass-card glass-card--arch"
+      aria-labelledby="wazwan-title"
     >
-      <span className="feast-card__index" aria-hidden>
-        {index}
-      </span>
-      <p className="feast-card__eyebrow">{eyebrow}</p>
-      <h3 className="feast-card__title">{title}</h3>
+      <p className="inv-label">The Kashmiri Table</p>
+      <h2 id="wazwan-title" className="feast-suite__title">
+        Welcome, feast <em>&amp; music</em>
+      </h2>
+      <AnimatedDivider light />
+      <p className="feast-suite__lead">
+        Three gestures of hospitality gathered as one welcome.
+      </p>
 
-      <div className="feast-card__niche" aria-hidden>
-        <MughalArchFrame
-          size="fluid"
-          tone="parchment"
-          variant={archVariant}
-          crest={<GeometricRosette className="feast-card__crest" />}
-        >
-          <div className="feast-card__motif">
-            <Motif />
-          </div>
-        </MughalArchFrame>
-      </div>
-
-      <p className="feast-card__caption">{caption}</p>
-      {note && <p className="feast-card__note">{note}</p>}
+      <ul className="feast-suite__list">
+        {rituals.map((ritual) => (
+          <li className="feast-suite__item" key={ritual.id}>
+            <span className="feast-suite__badge" aria-hidden>
+              <RitualMark id={ritual.id} />
+            </span>
+            <div className="feast-suite__copy">
+              <span className="feast-suite__index">{ritual.index}</span>
+              <p className="feast-suite__eyebrow">{ritual.eyebrow}</p>
+              <h3 className="feast-suite__name">{ritual.title}</h3>
+              <p className="feast-suite__caption">{ritual.caption}</p>
+              <p className="feast-suite__note">{ritual.note}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
     </Reveal>
   )
 }

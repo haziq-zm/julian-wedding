@@ -26,7 +26,8 @@
 
 /* —— Photographic sections —— */
 .inv-surface--cinematic {
-  isolation: isolate;
+  /* isolation breaks nested backdrop-filter sampling in Chrome */
+  isolation: auto;
   color: var(--inv-cream);
 }
 
@@ -91,12 +92,26 @@
   position: relative;
   z-index: 3;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   box-shadow:
     0 24px 60px rgba(8, 11, 4, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+.lux-hero__glass {
+  width: min(100%, 22.5rem);
+  margin: 1.1rem auto 0;
+  padding: 0.95rem 1.15rem 1.05rem;
+  border-radius: 0.95rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 16px 40px rgba(8, 11, 4, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
 }
 
 .glass-card--cream {
@@ -109,31 +124,20 @@
   border-radius: 40% 40% 1.1rem 1.1rem / 18% 18% 1.1rem 1.1rem;
 }
 
-/* Keep hero glass working — parent transforms break backdrop-filter */
-.cinema-hero .lux-hero__stage.reveal,
-.cinema-hero .lux-hero__stage.reveal--up,
-.cinema-hero .lux-hero__stage.reveal.is-visible {
-  transform: none;
-  clip-path: none;
-  will-change: opacity;
-}
-
-/* Glass cards that are themselves Reveals: fade only, no transform */
-.reveal.glass-card,
-.reveal.glass-card.reveal--up,
-.reveal.glass-card.reveal--left,
-.reveal.glass-card.reveal--right,
-.reveal.glass-card.reveal--scale,
-.reveal.glass-card.reveal--clip,
-.reveal.glass-card.is-visible {
-  transform: none;
-  clip-path: none;
-  will-change: opacity;
+/* Hero stage must not create a Chrome backdrop root */
+.cinema-hero .lux-hero__stage,
+.cinema-hero .lux-hero__arch,
+.cinema-hero .lux-hero__arch .inv-arch__shaft,
+.cinema-hero .lux-hero__arch .inv-arch__content {
+  transform: none !important;
+  filter: none !important;
+  clip-path: none !important;
+  opacity: 1 !important;
+  animation: none !important;
 }
 
 .cinema-hero .lux-hero__arch {
-  filter: none;
-  transform: none;
+  transition: none;
 }
 
 .lux-hero__arch.inv-arch--deep {
@@ -151,8 +155,10 @@
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07)),
     rgba(24, 28, 16, 0.22) !important;
-  backdrop-filter: blur(20px) saturate(1.25);
-  -webkit-backdrop-filter: blur(20px) saturate(1.25);
+  /* No backdrop-filter on the shaft — it becomes a Chrome backdrop root and
+     empties blur for nested .lux-hero__glass */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-left: 1px solid rgba(255, 255, 255, 0.34);
   border-right: 1px solid rgba(255, 255, 255, 0.34);
   border-bottom: 1px solid rgba(255, 255, 255, 0.28);
@@ -200,8 +206,9 @@
 .cinema-hero.lux-hero {
   position: relative;
   min-height: 100svh;
-  isolation: isolate;
-  overflow: clip;
+  /* Avoid isolation/overflow roots that empty Chrome's backdrop-filter sample */
+  isolation: auto;
+  overflow: visible;
   display: grid;
   place-items: center;
   padding: clamp(3.5rem, 8vw, 5.5rem) 1rem 6rem;
@@ -237,20 +244,6 @@
   color: rgba(214, 186, 128, 0.72);
   filter: none;
   opacity: 0.8;
-}
-
-.lux-hero__glass {
-  width: min(100%, 22.5rem);
-  margin: 1.1rem auto 0;
-  padding: 0.95rem 1.15rem 1.05rem;
-  border-radius: 0.95rem;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 16px 40px rgba(8, 11, 4, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.32);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
 }
 
 .lux-hero__destiny {
@@ -512,6 +505,22 @@
   width: 1px;
   border-left: 1px dashed rgba(197, 165, 102, 0.55);
   pointer-events: none;
+  z-index: 0;
+}
+
+.inv-program__pill-wrap {
+  position: relative;
+  z-index: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 186, 128, 0.42);
+  background:
+    linear-gradient(165deg, rgba(90, 98, 58, 0.46), rgba(42, 48, 30, 0.4)),
+    rgba(75, 81, 53, 0.38);
+  box-shadow:
+    0 18px 44px rgba(8, 11, 4, 0.28),
+    inset 0 1px 0 rgba(236, 214, 160, 0.22);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  backdrop-filter: blur(18px) saturate(1.25);
 }
 
 .inv-program__pill {
@@ -520,8 +529,9 @@
   gap: 0.85rem;
   align-items: center;
   padding: 0.85rem 1rem;
-  border-radius: 999px;
+  border-radius: inherit;
   text-align: left;
+  color: var(--inv-cream);
 }
 
 .inv-program__badge {
@@ -532,9 +542,10 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  border: 1px solid rgba(197, 165, 102, 0.55);
-  background: rgba(36, 44, 20, 0.45);
+  border: 1px solid rgba(214, 186, 128, 0.55);
+  background: rgba(26, 34, 16, 0.45);
   color: var(--inv-gold-muted);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .inv-program__badge svg {
@@ -552,29 +563,31 @@
   font-size: 0.5rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--inv-gold-dark);
+  color: var(--inv-gold-muted);
 }
 
 .inv-program__pill .inv-program__label {
   margin: 0.15rem 0 0;
   font-size: clamp(1.05rem, 3vw, 1.25rem);
+  color: var(--inv-cream);
 }
 
 .inv-program__pill .inv-program__detail {
   margin: 0.15rem 0 0;
   font-size: 0.82rem;
   line-height: 1.35;
-  color: var(--inv-ink-soft);
+  color: rgba(248, 242, 227, 0.78);
 }
 
 .inv-program__chevron {
-  color: var(--inv-gold-dark);
+  color: rgba(236, 214, 160, 0.85);
   font-size: 1.35rem;
   line-height: 1;
 }
 
 .inv-surface--lantern .inv-program__badge {
-  background: rgba(248, 242, 227, 0.55);
+  background: rgba(26, 34, 16, 0.4);
+  color: var(--inv-gold-muted);
 }
 
 /* —— Feast glass —— */
@@ -589,25 +602,120 @@
   display: none;
 }
 
-.wazwan-experience__header {
-  max-width: 36rem;
-  margin-inline: auto;
+.wazwan-experience {
+  display: grid;
+  place-items: center;
+  padding-block: clamp(2.5rem, 7vw, 4.5rem);
 }
 
-.feast-card.glass-card {
-  background: rgba(255, 255, 255, 0.1);
+.feast-suite {
+  width: min(92vw, 28rem);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 1.4rem;
+  text-align: center;
+  color: var(--inv-cream);
+  background: rgba(36, 44, 20, 0.38);
+}
+
+.feast-suite__title {
+  margin: 0.45rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 5vw, 2.1rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.feast-suite__title em {
+  color: var(--inv-gold-muted);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.feast-suite__lead {
+  margin: 0.7rem auto 0;
+  max-width: 22rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.45;
+  color: rgba(248, 242, 227, 0.86);
+}
+
+.feast-suite__list {
+  list-style: none;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.feast-suite__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: start;
+  padding: 0.9rem 0.15rem;
+  text-align: left;
+  border-top: 1px solid rgba(236, 214, 160, 0.22);
+}
+
+.feast-suite__badge {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  border: 1px solid rgba(214, 186, 128, 0.5);
+  background: rgba(18, 24, 10, 0.35);
+  color: var(--inv-gold-muted);
+}
+
+.feast-suite__badge svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.feast-suite__index,
+.feast-suite__eyebrow,
+.feast-suite__note {
+  display: block;
+  font-family: var(--font-label);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--inv-gold-muted);
+}
+
+.feast-suite__index {
+  font-size: 0.48rem;
+}
+
+.feast-suite__eyebrow {
+  margin: 0.15rem 0 0;
+  font-size: 0.5rem;
+}
+
+.feast-suite__name {
+  margin: 0.12rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  font-weight: 500;
   color: var(--inv-cream);
 }
 
-.feast-card.glass-card .feast-card__title,
-.feast-card.glass-card .feast-card__caption,
-.feast-card.glass-card .feast-card__note,
-.feast-card.glass-card .feast-card__eyebrow {
-  color: inherit;
+.feast-suite__caption {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: rgba(248, 242, 227, 0.82);
 }
 
-.feast-card.glass-card .feast-card__caption {
-  opacity: 0.86;
+.feast-suite__note {
+  margin: 0.35rem 0 0;
+  font-size: 0.48rem;
 }
 
 /* —— Footer close —— */
@@ -676,7 +784,8 @@
 }
 
 @media (max-width: 700px) {
-  .inv-program__pill {
+  .inv-program__pill,
+  .inv-program__pill-wrap {
     border-radius: 1.15rem;
   }
 
@@ -684,5 +793,181 @@
   .inv-surface--dusk .inv-surface__photo,
   .manuscript-footer__photo {
     background-position: center 42%;
+  }
+}
+
+/* —— Cover scroll: Kashmiri manuscript —— */
+.cover .scroll-scene {
+  width: min(92vw, 26rem);
+}
+
+.cover .scroll-bar {
+  height: 22px;
+  background:
+    linear-gradient(180deg,
+      #f0ddb0 0%,
+      #c9a46a 18%,
+      #8a6230 46%,
+      #e4c88a 62%,
+      #6e4a22 86%,
+      #d7b778 100%);
+}
+
+.cover .scroll-knob {
+  width: 32px;
+  height: 32px;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 248, 220, 0.55),
+    0 0 0 2px rgba(176, 138, 69, 0.35),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.cover .scroll-parchment {
+  background:
+    linear-gradient(180deg, #fbf6ea 0%, #f4ead4 52%, #eadcc2 100%);
+  box-shadow:
+    inset 0 0 48px rgba(120, 90, 40, 0.12),
+    inset 10px 0 24px rgba(90, 68, 32, 0.08),
+    inset -10px 0 24px rgba(90, 68, 32, 0.08);
+}
+
+.cover .scroll-filigree {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  z-index: 1;
+  height: 2.35rem;
+  width: auto;
+  color: #b08a45;
+  pointer-events: none;
+  opacity: 0.82;
+}
+
+.cover .scroll-filigree--top {
+  top: 0.55rem;
+}
+
+.cover .scroll-filigree--bottom {
+  bottom: 0.55rem;
+  transform: scaleY(-1);
+}
+
+.cover .scroll-frame {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cover .scroll-frame--outer {
+  inset: 11px;
+  border: 1.5px solid rgba(176, 138, 69, 0.55);
+  box-shadow:
+    inset 0 0 0 5px rgba(248, 242, 227, 0.45),
+    inset 0 0 0 6px rgba(176, 138, 69, 0.28);
+}
+
+.cover .scroll-frame--inner {
+  inset: 22px;
+  border: 1px solid rgba(176, 138, 69, 0.28);
+}
+
+.cover .scroll-gem {
+  position: absolute;
+  z-index: 2;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #f3e2b3, #b08a45);
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(197, 165, 102, 0.55);
+  pointer-events: none;
+}
+
+.cover .scroll-gem--tl { top: 18px; left: 18px; }
+.cover .scroll-gem--tr { top: 18px; right: 18px; }
+.cover .scroll-gem--bl { bottom: 18px; left: 18px; }
+.cover .scroll-gem--br { bottom: 18px; right: 18px; }
+
+.cover .scroll-floral {
+  width: 5.4rem;
+  color: #b08a45;
+  opacity: calc(max(0, var(--scroll-unroll, 0) - 0.45) * 0.9);
+}
+
+.cover .scroll-content {
+  padding: 3.65rem 1.45rem 3.55rem;
+}
+
+.cover .scroll-content-rosette {
+  width: 2.1rem;
+  height: 2.1rem;
+  margin-bottom: 0.35rem;
+  color: #8c7335;
+}
+
+.cover .scroll-bismillah {
+  margin: 0 0 0.7rem;
+  color: #8c7335;
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 3.2vw, 0.88rem);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.cover .scroll-eyebrow {
+  letter-spacing: 0.4em;
+  font-weight: 300;
+  color: #8c7335;
+}
+
+.cover .scroll-names {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.cover .scroll-amp {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+}
+
+.cover .scroll-divider {
+  width: 11rem;
+  color: #b08a45;
+}
+
+.cover .scroll-blessing {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  max-width: 17rem;
+}
+
+.cover .scroll-seal {
+  width: 68px;
+  height: 68px;
+  border: 2px solid rgba(232, 208, 154, 0.45);
+  background:
+    radial-gradient(circle at 32% 28%, #9a4338, #641f24 52%, #2c1010 100%);
+}
+
+.cover .scroll-seal span {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 700px) {
+  .cover .scroll-content {
+    padding: 3.35rem 1.1rem 3.2rem;
+  }
+
+  .cover .scroll-filigree {
+    height: 2.05rem;
+  }
+
+  .cover .scroll-floral {
+    width: 4.35rem;
+  }
+
+  .cover .scroll-names {
+    font-size: clamp(2.15rem, 11vw, 2.85rem);
   }
 }

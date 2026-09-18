@@ -217,6 +217,11 @@
     radial-gradient(ellipse 70% 60% at 50% 40%, transparent 40%, rgba(20, 22, 14, 0.55) 100%);
 }
 
+.cover-vignette {
+  background:
+    radial-gradient(ellipse 78% 70% at 50% 42%, transparent 46%, rgba(12, 16, 8, 0.38) 100%);
+}
+
 .cover-dust {
   position: absolute;
   inset: 0;

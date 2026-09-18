@@ -31,9 +31,13 @@ body {
 
 /* —— Cover / scroll —— */
 .cover {
+  /* Put fill-available FIRST — Chrome treats it as final and collapses
+     the cover to content height when the parent height is indefinite,
+     leaving an empty parchment band under the sealed scroll. */
+  min-height: -webkit-fill-available;
+  min-height: 100vh;
   min-height: 100svh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
   padding-top: max(1rem, env(safe-area-inset-top));
   padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
 }

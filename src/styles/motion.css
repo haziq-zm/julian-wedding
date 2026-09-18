@@ -60,7 +60,8 @@
     opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay),
     clip-path 1.1s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay);
-  will-change: transform, opacity, clip-path;
+  /* Never use will-change here — Chrome promotes a backdrop root and
+     backdrop-filter / glassmorphism samples an empty layer. */
 }
 
 .reveal--up {
@@ -86,10 +87,25 @@
 
 .reveal.is-visible {
   opacity: 1;
-  /* Must be `none` — identity transforms / will-change break backdrop-filter glass */
+  /* Must be `none` — identity transforms break backdrop-filter glass */
   transform: none;
   clip-path: none;
-  will-change: auto;
+}
+
+/*
+ * Glass + Reveal: fade only. Parent opacity/transform/will-change on a
+ * wrapper around glass kills backdrop-filter in Chrome; same-element
+ * opacity is OK once settled, but transform still is not.
+ */
+.reveal.glass-card,
+.reveal.glass-card.reveal--up,
+.reveal.glass-card.reveal--left,
+.reveal.glass-card.reveal--right,
+.reveal.glass-card.reveal--scale,
+.reveal.glass-card.reveal--clip,
+.reveal.glass-card.is-visible {
+  transform: none;
+  clip-path: none;
 }
 
 .animated-divider {

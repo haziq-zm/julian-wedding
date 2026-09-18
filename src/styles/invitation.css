@@ -1536,6 +1536,11 @@ body {
   background: var(--inv-parchment);
 }
 
+.page--sealed.luxury-page,
+.luxury-page.page--sealed {
+  background: var(--inv-olive-deep, #343b20);
+}
+
 .luxury-page {
   background: var(--inv-parchment);
 }
@@ -2099,12 +2104,14 @@ body {
   align-items: center;
   font-family: var(--font-display);
   font-weight: 600;
-  line-height: .82;
+  /* Keep room for Playfair J descenders — .82 clipped them flat */
+  line-height: 1.08;
 }
 
 .lux-hero__name {
   display: block;
-  overflow: hidden;
+  overflow: visible;
+  padding-bottom: 0.06em;
   color: var(--inv-cream);
   font-size: clamp(2.6rem, 10vw, 4.4rem);
   letter-spacing: .02em;

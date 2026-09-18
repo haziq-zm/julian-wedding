@@ -33,43 +33,7 @@ export function EventsSection({ schedule, dateLabel }: Props) {
         <FloralBranch position="top-left" size="medium" className="botanical-reveal botanical-reveal--left" />
         <FloralBranch position="bottom-right" size="large" className="botanical-reveal botanical-reveal--right" />
 
-        <Reveal as="header" variant="clip" className="wazwan-experience__header glass-card glass-card--arch">
-          <p className="inv-label">The Kashmiri Table</p>
-          <h2 id="wazwan-title" className="wazwan-experience__title">
-            Welcome, feast <em>&amp; music</em>
-          </h2>
-          <AnimatedDivider light />
-          <p className="wazwan-experience__lead">
-            Three gestures of hospitality gathered as one welcome.
-          </p>
-        </Reveal>
-
-        <div className="wazwan-experience__trio">
-          <FeastChapter
-            motif="kahwa"
-            title="Kahwa"
-            caption="Saffron steam, cardamom warmth, poured with welcome"
-            index="I"
-            eyebrow="The Welcome"
-            note="Poured from the copper samovar"
-          />
-          <FeastChapter
-            motif="feast"
-            title="Food"
-            caption="Copper gleam and ritual welcome, ready for the feast"
-            index="II"
-            eyebrow="The Feast"
-            note="Served on the shared trami"
-          />
-          <FeastChapter
-            motif="music"
-            title="Music"
-            caption="The heartbeat of celebration, calling guests to joy"
-            index="III"
-            eyebrow="The Celebration"
-            note="Wanvun sung late into the night"
-          />
-        </div>
+        <FeastChapter />
       </InvitationSurface>
     </>
   )
