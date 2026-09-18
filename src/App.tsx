@@ -10,6 +10,7 @@ import { InvitationCardSection } from './components/wedding/InvitationCardSectio
 import { GallerySection } from './components/wedding/GallerySection'
 import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { ScrollProvider } from './components/ui/ScrollProvider'
+import { CinematicBackdrop } from './components/ornaments/CinematicBackdrop'
 import './App.css'
 import './styles/motion.css'
 import './ornate.css'
@@ -41,6 +42,7 @@ export default function App() {
 
   return (
     <ScrollProvider enabled={opened}>
+      <CinematicBackdrop />
       <div className={`page luxury-page ${opened ? 'page--open' : 'page--sealed'}`}>
         <InvitationCover
           partnerOne={wedding.partnerOne}

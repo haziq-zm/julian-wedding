@@ -305,11 +305,11 @@ select {
   background:
     linear-gradient(180deg, rgba(16, 20, 10, 0.32) 0%, rgba(16, 20, 10, 0.12) 38%, rgba(12, 16, 8, 0.4) 100%),
     url('/images/kashmir-terrace-dusk.jpg') center 38% / cover no-repeat;
-  transition: opacity 1s ease 0.2s;
+  transition: opacity 0.9s ease;
 }
 
 .cover--open .cover-bg {
-  opacity: 0.92;
+  opacity: 0;
 }
 
 .cover-jali,
