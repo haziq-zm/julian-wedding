@@ -87,7 +87,7 @@ export default function App() {
               />
 
               <GallerySection
-                dateLabel={wedding.dateLabel}
+                dateLabel={wedding.countdownLabel}
                 venue={wedding.location.venue}
                 address={wedding.location.address}
                 partnerOne={wedding.partnerOne}
