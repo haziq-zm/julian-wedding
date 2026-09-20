@@ -5,10 +5,9 @@ import { SparkleField } from '../ornaments/SparkleField'
 type Props = {
   partnerOne: string
   partnerTwo: string
-  year: number
 }
 
-export function WeddingFooter({ partnerOne, partnerTwo, year }: Props) {
+export function WeddingFooter({ partnerOne, partnerTwo }: Props) {
   return (
     <footer className="manuscript-footer cinema-close">
       <div className="manuscript-footer__photo" aria-hidden />
@@ -27,7 +26,6 @@ export function WeddingFooter({ partnerOne, partnerTwo, year }: Props) {
         <p className="manuscript-footer__names">
           {partnerOne} <i>&amp;</i> {partnerTwo}
         </p>
-        <p className="manuscript-footer__note">With love — {year}</p>
         <p className="manuscript-footer__colophon">
           Hanji Danter · Anantnag · Kashmir
         </p>

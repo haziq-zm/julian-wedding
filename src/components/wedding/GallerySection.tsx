@@ -1,9 +1,7 @@
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { FloralBranch } from '../ornaments/FloralBranch'
-import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
 import { JaliPattern } from '../ornaments/JaliPattern'
-import { MughalArchFrame } from '../ornaments/MughalArchFrame'
 import { Reveal } from '../ui/Reveal'
 
 type Props = {
@@ -31,27 +29,10 @@ export function GallerySection({
         <p className="inv-label inv-label--dark">Pieces of the Celebration</p>
         <h2 className="inv-title">An Invitation Suite</h2>
         <AnimatedDivider />
-        <p className="inv-prose">
-          Every piece hand-set in gold, olive, and paper the colour of old letters
-        </p>
       </Reveal>
 
       <div className="editorial-suite__collage">
         <span className="editorial-suite__mat" aria-hidden />
-
-        <Reveal variant="clip" className="editorial-suite__piece editorial-suite__piece--arch">
-          <MughalArchFrame
-            size="fluid"
-            tone="parchment"
-            variant="cusped"
-            crest={<GeometricRosette className="editorial-suite__crest" />}
-          >
-            <span className="editorial-suite__monogram">J <i>&amp;</i> J</span>
-            <span className="editorial-suite__rule" aria-hidden />
-            <p className="editorial-suite__caption">The Cover</p>
-          </MughalArchFrame>
-          <span className="editorial-suite__tab" aria-hidden>No. 01</span>
-        </Reveal>
 
         <Reveal variant="right" className="editorial-suite__piece editorial-suite__piece--date" delay={100}>
           <span className="editorial-suite__corner" aria-hidden />

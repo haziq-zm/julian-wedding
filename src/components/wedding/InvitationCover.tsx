@@ -51,6 +51,7 @@ type Props = {
   partnerOne: string
   partnerTwo: string
   dateLabel: string
+  datesLabel?: string
   blessing: string
   onOpened: () => void
 }
@@ -64,6 +65,7 @@ export function InvitationCover({
   partnerOne,
   partnerTwo,
   dateLabel,
+  datesLabel,
   blessing,
   onOpened,
 }: Props) {
@@ -344,7 +346,7 @@ export function InvitationCover({
                         <span>{partnerTwo}</span>
                       </h1>
                       <GoldDivider className="scroll-divider" />
-                      <p className="scroll-date">{dateLabel}</p>
+                      <p className="scroll-date">{datesLabel ?? dateLabel}</p>
                       <p className="scroll-blessing">{blessing}</p>
                     </div>
                   </div>

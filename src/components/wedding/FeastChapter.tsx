@@ -17,15 +17,15 @@ const rituals: Ritual[] = [
     eyebrow: 'The Welcome',
     title: 'Kahwa',
     caption: 'Saffron steam, cardamom warmth, poured with welcome',
-    note: 'Poured from the copper samovar',
+    note: 'Poured from the samovar',
   },
   {
     id: 'food',
     index: 'II',
     eyebrow: 'The Feast',
     title: 'Food',
-    caption: 'Copper gleam and ritual welcome, ready for the feast',
-    note: 'Served on the shared trami',
+    caption: 'Ritual welcome, the wazwan',
+    note: 'Served in the trami',
   },
   {
     id: 'music',
@@ -82,7 +82,7 @@ export function FeastChapter() {
       </h2>
       <AnimatedDivider light />
       <p className="feast-suite__lead">
-        Three gestures of hospitality gathered as one welcome.
+        Gestures of hospitality gathered as one welcome.
       </p>
 
       <ul className="feast-suite__list">

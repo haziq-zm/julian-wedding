@@ -14,14 +14,17 @@ export function CinematicBackdrop() {
     const update = () => {
       frame = 0
       if (reducedMotion) {
-        layer.style.transform = 'translate3d(0, 0, 0)'
+        const skip = layer.offsetHeight * 0.18
+        layer.style.transform = `translate3d(0, ${(-skip).toFixed(1)}px, 0)`
         return
       }
 
       const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
       const progress = Math.min(1, Math.max(0, window.scrollY / max))
-      const travel = Math.max(0, layer.offsetHeight - window.innerHeight)
-      layer.style.transform = `translate3d(0, ${(-travel * progress).toFixed(1)}px, 0)`
+      /* Skip the pavilion ceiling so the invitation arch sits in the gateway, not under it. */
+      const skip = layer.offsetHeight * 0.18
+      const travel = Math.max(0, layer.offsetHeight - skip - window.innerHeight)
+      layer.style.transform = `translate3d(0, ${(-(skip + travel * progress)).toFixed(1)}px, 0)`
     }
 
     const onScroll = () => {

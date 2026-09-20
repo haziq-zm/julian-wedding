@@ -56,11 +56,6 @@ export function VenueSection({ location }: Props) {
           </div>
         </MughalArchFrame>
       </Reveal>
-
-      <Reveal variant="up" className="palace-venue__note">
-        <span aria-hidden>❦</span>
-        <p>{location.note}</p>
-      </Reveal>
     </InvitationSurface>
   )
 }

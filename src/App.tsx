@@ -8,7 +8,6 @@ import { EventsSection } from './components/wedding/EventsSection'
 import { VenueSection } from './components/wedding/VenueSection'
 import { InvitationCardSection } from './components/wedding/InvitationCardSection'
 import { GallerySection } from './components/wedding/GallerySection'
-import { WeddingFooter } from './components/wedding/WeddingFooter'
 import { ScrollProvider } from './components/ui/ScrollProvider'
 import { CinematicBackdrop } from './components/ornaments/CinematicBackdrop'
 import './App.css'
@@ -19,7 +18,6 @@ import './styles/invitation.css'
 import './styles/cinema.css'
 
 export default function App() {
-  const year = wedding.date.getFullYear()
   const [opened, setOpened] = useState(false)
   const [mountDetails, setMountDetails] = useState(false)
 
@@ -48,6 +46,7 @@ export default function App() {
           partnerOne={wedding.partnerOne}
           partnerTwo={wedding.partnerTwo}
           dateLabel={wedding.dateLabel}
+          datesLabel={wedding.datesLabel}
           blessing={wedding.blessing}
           onOpened={handleOpened}
         />
@@ -62,17 +61,15 @@ export default function App() {
               <WeddingHero
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
-                dateLabel={wedding.dateLabel}
-                venue={wedding.location.venue}
-                address={wedding.location.address}
+                dateLabel={wedding.datesLabel}
                 tagline={wedding.tagline}
               />
 
 
 
               <CountdownSection
-                target={wedding.date}
-                dateLabel={wedding.dateLabel}
+                target={wedding.countdownTarget}
+                dateLabel={wedding.countdownLabel}
               />
 
               <EventsSection
@@ -85,7 +82,7 @@ export default function App() {
               <InvitationCardSection
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
-                dateLabel={wedding.dateLabel}
+                dateLabel={wedding.datesLabel}
                 blessing={wedding.blessing}
               />
 
@@ -95,12 +92,6 @@ export default function App() {
                 address={wedding.location.address}
                 partnerOne={wedding.partnerOne}
                 partnerTwo={wedding.partnerTwo}
-              />
-
-              <WeddingFooter
-                partnerOne={wedding.partnerOne}
-                partnerTwo={wedding.partnerTwo}
-                year={year}
               />
             </>
           )}

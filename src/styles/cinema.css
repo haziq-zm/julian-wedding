@@ -120,6 +120,12 @@ body {
   color: var(--inv-ink);
 }
 
+.cinema-hero .lux-hero__veil {
+  background:
+    linear-gradient(180deg, rgba(12, 16, 6, 0.16) 0%, rgba(18, 24, 10, 0.22) 48%, rgba(10, 14, 5, 0.58) 100%),
+    radial-gradient(ellipse 70% 50% at 50% 28%, rgba(197, 165, 102, 0.1), transparent 62%);
+}
+
 .inv-surface--cinematic .inv-surface__inner {
   position: relative;
   z-index: 3;
@@ -186,7 +192,11 @@ body {
 }
 
 .lux-hero__arch.inv-arch--deep {
-  --arch-fill: rgba(255, 255, 255, 0.1);
+  --arch-fill: transparent;
+}
+
+.lux-hero__arch .inv-arch__fill {
+  fill: transparent;
 }
 
 .cinema-hero .lux-hero__arch .inv-arch__dome,
@@ -198,8 +208,7 @@ body {
 
 .lux-hero__arch .inv-arch__shaft {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07)),
-    rgba(24, 28, 16, 0.22) !important;
+    linear-gradient(180deg, rgba(18, 22, 14, 0.12) 0%, rgba(18, 22, 14, 0.42) 55%, rgba(18, 22, 14, 0.55) 100%) !important;
   /* No backdrop-filter on the shaft — it becomes a Chrome backdrop root and
      empties blur for nested .lux-hero__glass */
   backdrop-filter: none;
@@ -241,9 +250,20 @@ body {
   50% { opacity: 0.7; transform: rotate(45deg) scale(1); }
 }
 
+.ceremony-countdown .cinema-sparkles__pip {
+  animation-play-state: paused;
+}
+
+.ceremony-countdown.is-spinning .cinema-sparkles__pip {
+  animation-play-state: running;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .cinema-sparkles__pip {
+  .cinema-sparkles__pip,
+  .ceremony-countdown__ring,
+  .ceremony-countdown.is-spinning .ceremony-countdown__ring {
     animation: none;
+    will-change: auto;
   }
 }
 
@@ -255,8 +275,8 @@ body {
   isolation: auto;
   overflow: visible;
   display: grid;
-  place-items: center;
-  padding: clamp(3.5rem, 8vw, 5.5rem) 1rem 6rem;
+  place-items: start center;
+  padding: clamp(1.4rem, 3.5vw, 2.4rem) 1rem 5.5rem;
   background: transparent;
 }
 
@@ -371,13 +391,21 @@ body {
   aspect-ratio: 1;
   margin: 0 auto;
   border-radius: 50%;
+  contain: layout paint;
   border: 1px solid rgba(255, 255, 255, 0.32);
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(92, 80, 64, 0.5), rgba(28, 24, 18, 0.78) 74%);
   box-shadow:
     0 24px 70px rgba(8, 11, 4, 0.32),
     inset 0 0 0 12px rgba(197, 165, 102, 0.12);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.ceremony-countdown__dial::before,
+.ceremony-countdown__dial::after {
+  content: none;
+  animation: none;
 }
 
 .ceremony-countdown__ring {
@@ -385,13 +413,20 @@ body {
   inset: 8%;
   border-radius: 50%;
   border: 1px solid rgba(236, 214, 160, 0.35);
+  border-style: solid;
   pointer-events: none;
-  animation: dial-turn 45s linear infinite;
+  box-shadow: none;
+  animation: dial-turn 48s linear infinite;
+  animation-play-state: paused;
+}
+
+.ceremony-countdown.is-spinning .ceremony-countdown__ring {
+  animation-play-state: running;
+  will-change: transform;
 }
 
 .ceremony-countdown__ring--glow {
   inset: 14%;
-  box-shadow: 0 0 24px rgba(197, 165, 102, 0.35), inset 0 0 18px rgba(197, 165, 102, 0.18);
   animation-duration: 70s;
   animation-direction: reverse;
 }
@@ -407,19 +442,21 @@ body {
   content: '';
   position: absolute;
   left: 50%;
-  width: 7px;
-  height: 7px;
-  background: rgba(236, 214, 160, 0.95);
-  box-shadow: 0 0 10px rgba(236, 214, 160, 0.9);
+  width: 12px;
+  height: 12px;
+  background:
+    linear-gradient(#f0d78a, #f0d78a) center / 6px 6px no-repeat,
+    radial-gradient(circle, rgba(236, 214, 160, 0.9) 0 32%, transparent 70%);
   transform: translateX(-50%) rotate(45deg);
+  box-shadow: none;
 }
 
 .ceremony-countdown__ring::before {
-  top: -3.5px;
+  top: -6px;
 }
 
 .ceremony-countdown__ring::after {
-  bottom: -3.5px;
+  bottom: -6px;
 }
 
 .ceremony-countdown__ring--glow::before,
@@ -430,13 +467,19 @@ body {
 }
 
 .ceremony-countdown__ring--glow::before {
-  left: -3.5px;
+  left: -6px;
   transform: translateY(-50%) rotate(45deg);
 }
 
 .ceremony-countdown__ring--glow::after {
-  right: -3.5px;
+  right: -6px;
   transform: translateY(-50%) rotate(45deg);
+}
+
+@keyframes dial-turn {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .ceremony-countdown__mandala {
@@ -475,6 +518,7 @@ body {
   max-width: 22rem;
   padding: 1.5rem 1.35rem;
   text-align: center;
+  border-radius: 1.25rem;
 }
 
 .ceremony-countdown__quote blockquote {

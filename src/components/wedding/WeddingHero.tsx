@@ -9,8 +9,6 @@ type Props = {
   partnerOne: string
   partnerTwo: string
   dateLabel: string
-  venue: string
-  address: string
   tagline: string
 }
 
@@ -18,8 +16,6 @@ export function WeddingHero({
   partnerOne,
   partnerTwo,
   dateLabel,
-  venue,
-  address,
   tagline,
 }: Props) {
   return (
@@ -81,12 +77,9 @@ export function WeddingHero({
                 <span className="lux-hero__name">{partnerTwo}</span>
               </h1>
 
-              <time className="lux-hero__date" dateTime="2026-10-11">
+              <time className="lux-hero__date" dateTime="2026-10-10/2026-10-11">
                 {dateLabel}
               </time>
-              <p className="lux-hero__place">
-                {venue} · {address}
-              </p>
             </Reveal>
 
             <div className="lux-hero__glass">

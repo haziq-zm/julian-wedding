@@ -6,7 +6,10 @@ export const wedding = {
   blessing:
     'With the blessings of our families, we invite you to share in our joy',
   date: new Date('2026-10-11T16:00:00'),
+  countdownTarget: new Date('2026-10-10T18:00:00'),
   dateLabel: 'Sunday, October 11, 2026',
+  datesLabel: 'October 10–11, 2026',
+  countdownLabel: 'Saturday–Sunday, October 10–11, 2026',
   rsvpDeadline: 'Kindly respond by Friday, September 18, 2026',
   story: {
     title: 'Our Story',
@@ -34,7 +37,7 @@ export const wedding = {
       label: 'Masnandnishini',
       date: 'Sunday, October 11, 2026',
       time: '2:00 PM',
-      location: 'Hanji Danter, Anantnag',
+      location: 'Anantnag',
       detail:
         'Shared tramis, and dinner beneath a canopy of lanterns.',
     },
