@@ -9,22 +9,45 @@ export function CinematicBackdrop() {
     const layer = layerRef.current
     if (!layer) return
 
+    const phoneQuery = window.matchMedia('(hover: none) and (pointer: coarse), (max-width: 820px)')
     let frame = 0
+    let lastY = Number.NaN
+    let viewport = window.innerHeight
+    let maxScroll = 1
+    let desktopSkip = 0
+    let desktopTravel = 0
+    let measuredAt = 0
+
+    const measure = () => {
+      viewport = window.innerHeight || 1
+      maxScroll = Math.max(1, document.documentElement.scrollHeight - viewport)
+      measuredAt = performance.now()
+      if (phoneQuery.matches) return
+      desktopSkip = layer.offsetHeight * 0.18
+      desktopTravel = Math.max(0, layer.offsetHeight - desktopSkip - viewport)
+    }
 
     const update = () => {
       frame = 0
       if (reducedMotion) {
-        const skip = layer.offsetHeight * 0.18
-        layer.style.transform = `translate3d(0, ${(-skip).toFixed(1)}px, 0)`
+        if (lastY !== 0) {
+          lastY = 0
+          layer.style.transform = 'none'
+        }
         return
       }
 
-      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
-      const progress = Math.min(1, Math.max(0, window.scrollY / max))
-      /* Skip the pavilion ceiling so the invitation arch sits in the gateway, not under it. */
-      const skip = layer.offsetHeight * 0.18
-      const travel = Math.max(0, layer.offsetHeight - skip - window.innerHeight)
-      layer.style.transform = `translate3d(0, ${(-(skip + travel * progress)).toFixed(1)}px, 0)`
+      const now = performance.now()
+      if (now - measuredAt > 900) measure()
+
+      const progress = Math.min(1, Math.max(0, window.scrollY / maxScroll))
+      const y = phoneQuery.matches
+        ? -Math.round(viewport * 0.22 * progress)
+        : -Math.round(desktopSkip + desktopTravel * progress)
+
+      if (y === lastY) return
+      lastY = y
+      layer.style.transform = `translate3d(0,${y}px,0)`
     }
 
     const onScroll = () => {
@@ -32,21 +55,15 @@ export function CinematicBackdrop() {
       frame = requestAnimationFrame(update)
     }
 
-    const phone = window.matchMedia('(hover: none) and (pointer: coarse), (max-width: 820px)')
-    if (phone.matches) {
-      layer.style.transform = 'none'
-      return
-    }
-
+    measure()
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', measure)
     window.addEventListener('resize', onScroll)
-    const observer = new ResizeObserver(onScroll)
-    observer.observe(document.body)
     return () => {
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', measure)
       window.removeEventListener('resize', onScroll)
-      observer.disconnect()
       if (frame) cancelAnimationFrame(frame)
     }
   }, [reducedMotion])

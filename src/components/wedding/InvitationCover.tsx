@@ -311,9 +311,7 @@ export function InvitationCover({
               <div className="scroll-cylinder-body">
                 <div className="scroll-cylinder-shine" />
                 <div className="scroll-cylinder-texture" />
-                <div className="scroll-seal" style={sealStyle}>
-                  <span>J&amp;J</span>
-                </div>
+                <div className="scroll-seal" style={sealStyle} />
               </div>
               <div className="scroll-cylinder-edge" />
             </div>

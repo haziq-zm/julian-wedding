@@ -34,7 +34,7 @@ export function InvitationCardSection({
 
         <Reveal variant="left" className="keepsake-scene__envelope" delay={120}>
           <span className="keepsake-scene__flap" aria-hidden />
-          <span className="keepsake-scene__seal" aria-hidden>J &amp; J</span>
+          <span className="keepsake-scene__seal" aria-hidden />
           <span className="keepsake-scene__stamp" aria-hidden />
         </Reveal>
 

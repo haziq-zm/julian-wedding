@@ -1983,6 +1983,11 @@ select {
   cursor: grabbing;
 }
 
+.scratch--revealed .scratch-surface {
+  touch-action: pan-y;
+  overscroll-behavior: auto;
+}
+
 .scratch-hint {
   margin: 1rem 0 0;
   font-family: var(--font-label);

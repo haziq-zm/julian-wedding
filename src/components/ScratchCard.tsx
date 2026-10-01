@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import confetti from 'canvas-confetti'
+import { GoldDivider } from './ornaments/GoldDivider'
 
 type LocationInfo = {
   venue: string
@@ -189,10 +190,15 @@ export function ScratchCard({ location }: Props) {
 
   return (
     <div className={`scratch ${revealed ? 'scratch--revealed' : ''}`}>
-      <div className="scratch-surface" aria-label="Scratch card revealing venue" data-lenis-prevent>
+      <div
+        className="scratch-surface"
+        aria-label="Scratch card revealing venue"
+        {...(!revealed ? { 'data-lenis-prevent': true } : {})}
+      >
         <div className="scratch-prize">
           <p className="scratch-eyebrow">You&apos;re invited to</p>
           <h3 className="scratch-venue">{location.venue}</h3>
+          <GoldDivider className="scratch-divider" />
           <p className="scratch-address">{location.address}</p>
           <p className="scratch-note">{location.note}</p>
           <a

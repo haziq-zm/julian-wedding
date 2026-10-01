@@ -903,7 +903,7 @@ body {
 }
 
 .manuscript-footer__soon {
-  margin: 0.35rem 0 0;
+  margin: 1.1rem 0 0;
   font-family: var(--font-label);
   font-weight: 300;
   font-size: 0.62rem;
@@ -1104,11 +1104,15 @@ body {
 
 /* Phones: a moving 360vh photo plus backdrop-filter reblurs every frame. */
 @media (hover: none) and (pointer: coarse), (max-width: 820px) {
+  .cinema-sky {
+    contain: paint;
+  }
+
   .cinema-sky__layer {
-    height: 100dvh;
+    /* A little taller than the screen so a short shift still covers the viewport. */
+    height: 128dvh;
     background-image: url('/images/kashmir-dusk-lake-mobile.jpg');
-    background-position: center 32%;
-    transform: none !important;
+    background-position: center 30%;
     will-change: auto;
   }
 

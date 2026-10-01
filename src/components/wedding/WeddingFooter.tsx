@@ -21,7 +21,6 @@ export function WeddingFooter({ partnerOne, partnerTwo }: Props) {
         <blockquote className="manuscript-footer__quote">
           “May our story be a source of kindness, joy and inspiration for all who witness it.”
         </blockquote>
-        <p className="manuscript-footer__mono">J &amp; J</p>
         <p className="manuscript-footer__soon">See you soon</p>
         <p className="manuscript-footer__names">
           {partnerOne} <i>&amp;</i> {partnerTwo}
