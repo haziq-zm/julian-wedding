@@ -32,6 +32,12 @@ export function CinematicBackdrop() {
       frame = requestAnimationFrame(update)
     }
 
+    const phone = window.matchMedia('(hover: none) and (pointer: coarse), (max-width: 820px)')
+    if (phone.matches) {
+      layer.style.transform = 'none'
+      return
+    }
+
     update()
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)

@@ -285,8 +285,20 @@ body {
     opacity: 0.28;
   }
 
-  .scroll-pull-tab {
+  .scroll-pull-tab,
+  .scroll-3d--sealed .scroll-cylinder {
     animation: none;
+  }
+
+  .scroll-3d {
+    filter: none;
+  }
+
+  .scroll-scene,
+  .scroll-scene--animating,
+  .scroll-scene--animating .scroll-sheet,
+  .scroll-scene--animating .scroll-cylinder {
+    will-change: auto;
   }
 }
 
