@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { AnimatedDivider } from '../ornaments/AnimatedDivider'
 import { FloralBranch } from '../ornaments/FloralBranch'
 import { GeometricRosette } from '../ornaments/GeometricRosette'
 import { InvitationSurface } from '../ornaments/InvitationSurface'
-import { MughalArchFrame } from '../ornaments/MughalArchFrame'
 import { Reveal } from '../ui/Reveal'
 
 type Props = {
@@ -18,6 +18,8 @@ export function InvitationCardSection({
   dateLabel,
   blessing,
 }: Props) {
+  const [open, setOpen] = useState(false)
+
   return (
     <InvitationSurface id="invitation" tone="olive-deep" className="keepsake-scene">
       <FloralBranch position="top-right" size="large" className="botanical-reveal botanical-reveal--right" />
@@ -29,34 +31,35 @@ export function InvitationCardSection({
         <AnimatedDivider light />
       </Reveal>
 
-      <div className="keepsake-scene__table">
-        <div className="keepsake-scene__cloth" aria-hidden />
-
-        <Reveal variant="left" className="keepsake-scene__envelope" delay={120}>
-          <span className="keepsake-scene__flap" aria-hidden />
-          <span className="keepsake-scene__seal" aria-hidden />
-          <span className="keepsake-scene__stamp" aria-hidden />
-        </Reveal>
-
-        <Reveal as="article" variant="clip" className="keepsake-scene__card">
-          <MughalArchFrame
-            size="fluid"
-            tone="olive"
-            variant="onion"
-            crest={<GeometricRosette className="keepsake-scene__crest" />}
+      <Reveal variant="up" className="keepsake-scene__table">
+        <div className={`keepsake-scene__mail ${open ? 'is-open' : ''}`}>
+          <button
+            type="button"
+            className="keepsake-scene__envelope"
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
           >
-            <p className="keepsake-scene__kicker">You Are Cordially Invited</p>
-            <h3 className="keepsake-scene__names">
-              {partnerOne} <i>&amp;</i> {partnerTwo}
-            </h3>
-            <AnimatedDivider light />
-            <p className="keepsake-scene__blessing">{blessing}</p>
-            <div className="keepsake-scene__details">
-              <p>{dateLabel}</p>
-            </div>
-          </MughalArchFrame>
-        </Reveal>
-      </div>
+            <span className="keepsake-scene__flap" aria-hidden />
+            <span className="keepsake-scene__seal" aria-hidden />
+            <span className="keepsake-scene__hint">
+              {open ? 'Tap to close' : 'Tap to open'}
+            </span>
+          </button>
+
+          <div className="keepsake-scene__letter-wrap">
+            <article className="keepsake-scene__letter" aria-hidden={!open}>
+              <GeometricRosette className="keepsake-scene__crest" />
+              <p className="keepsake-scene__kicker">You Are Cordially Invited</p>
+              <h3 className="keepsake-scene__names">
+                {partnerOne} <i>&amp;</i> {partnerTwo}
+              </h3>
+              <AnimatedDivider />
+              <p className="keepsake-scene__blessing">{blessing}</p>
+              <p className="keepsake-scene__details">{dateLabel}</p>
+            </article>
+          </div>
+        </div>
+      </Reveal>
     </InvitationSurface>
   )
 }
