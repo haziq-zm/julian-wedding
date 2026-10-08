@@ -39,6 +39,7 @@ export function GallerySection({
           <p className="editorial-suite__label">Save the date</p>
           <GoldDivider className="editorial-suite__divider" />
           <p className="editorial-suite__text">{dateLabel}</p>
+          <p className="editorial-suite__sub">Areeba is banned</p>
         </Reveal>
 
         <Reveal variant="up" className="editorial-suite__piece editorial-suite__piece--venue" delay={160}>
